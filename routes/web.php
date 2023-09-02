@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return inertia('homepage');
-});
+    return inertia('shop/homepage');
+})->name('homepage');
+
+// store
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products-data', [ProductController::class, 'data'])->name('products.data');
+
+// options for filters
+Route::get('/options/product-property', [OptionsController::class, 'productPropertyOptions'])
+    ->name('options.product-property');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

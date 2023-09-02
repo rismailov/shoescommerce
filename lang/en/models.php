@@ -1,10 +1,10 @@
 <?php
 
-use App\Enums\ProductCategoryEnum;
+use App\Enums\CategoryEnum;
 
 return [
     'colours' => [
-        'single' => 'Colour',
+        'single'   => 'Colour',
         'multiple' => 'Colours',
 
         'values' => [
@@ -26,10 +26,10 @@ return [
     ],
 
     'categories' => [
-        ProductCategoryEnum::POLO->value       => 'Polo',
-        ProductCategoryEnum::TALL->value       => 'Tall',
-        ProductCategoryEnum::V_NECK->value     => 'V-Neck',
-        ProductCategoryEnum::ACTIVEWEAR->value => 'Activewear',
+        CategoryEnum::POLO->value       => 'Polo',
+        CategoryEnum::TALL->value  => 'Tall',
+        CategoryEnum::V_NECK->value     => 'V-Neck',
+        CategoryEnum::ACTIVEWEAR->value => 'Activewear',
     ],
 
     'sizes' => [

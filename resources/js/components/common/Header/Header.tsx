@@ -1,15 +1,15 @@
 // import useCartStore from '@/lib/store/cart.store'
 import {
-    ActionIcon,
     Container,
     Divider,
     Group,
-    Indicator,
     Header as MantineHeader,
     UnstyledButton,
 } from '@mantine/core'
 // import { IconShoppingCart } from '@tabler/icons-react'
-// import Link from 'next/link'
+import { Link } from '@inertiajs/react'
+import { Logo } from '../Logo'
+import { Menu } from './Menu'
 // import { usePathname } from 'next/navigation'
 // import { AuthDropdown } from './AuthDropdown'
 // import { Logo } from './Logo'
@@ -33,10 +33,10 @@ export const Header = () => {
                         },
                     }}
                 >
-                    {/* <Group spacing="xl">
+                    <Group spacing="xl">
                         <UnstyledButton
                             component={Link}
-                            href="/"
+                            href={route('homepage')}
                             sx={{
                                 display: 'inline-block',
                                 transition: 'opacity 0.2s ease-out',
@@ -54,7 +54,7 @@ export const Header = () => {
                         <Menu />
                     </Group>
 
-                    <Group position="right" spacing="xs">
+                    {/* <Group position="right" spacing="xs">
                         <AuthDropdown />
 
                         {!pathname.includes('admin') && (

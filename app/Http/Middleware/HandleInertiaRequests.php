@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -30,14 +30,22 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return [
+        $payload = [
             ...parent::share($request),
-            'locale' => fn () => $request->session()->get('locale', 'en'),
-            'user'   => $request->user(),
-            // 'ziggy'  => fn () => [
-            //     ...(new Ziggy)->toArray(),
-            //     'location' => $request->url(),
-            // ], // do i need this?
+            'appName' => fn () => config('app.name'),
+            'locale'  => fn () => $request->session()->get('locale', 'en'),
+            'user'    => $request->user(),
         ];
+
+        /*
+         * Product categories needed for links in Header which is only used
+         * in shop routes, e.g. all routes except admin. Here we're checking
+         * if route name has 'admin' in it, and if not, adding categories to payload.
+         */
+        if (! str()->contains($request->route()->getName(), 'admin')) {
+            $payload['categories'] = (new ProductService)->getCategoryOptions();
+        }
+
+        return $payload;
     }
 }

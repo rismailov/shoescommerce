@@ -1,10 +1,12 @@
-import { Nullable } from '.'
+import { Nullable, TOption } from '.'
 
 // Inertia: making types more strict
 type Errors = Record<string, string>
 type ErrorBag = Record<string, Errors>
 export type PageProps<T = {}> = T & {
+    appName: string
     locale: 'en' | 'ru'
+    categories?: TOption[]
     user: {
         fname: string
         lname: string

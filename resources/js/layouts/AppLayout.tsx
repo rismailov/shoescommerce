@@ -1,4 +1,4 @@
-import { Header } from '@/components/common/Header'
+import { Header } from '@/components/common/Header/Header'
 import theme from '@/lib/mantine/theme'
 import { usePage } from '@inertiajs/react'
 import {

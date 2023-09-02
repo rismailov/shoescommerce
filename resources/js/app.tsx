@@ -1,13 +1,13 @@
-import './i18n'
 import '../css/globals.css'
 import './bootstrap'
+import './i18n'
 
 import { createInertiaApp } from '@inertiajs/react'
 import { ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import AdminLayout from './layouts/AdminLayout'
-import AppLayout from './layouts/AppLayout'
 import AuthLayout from './layouts/AuthLayout'
+import ShopLayout from './layouts/ShopLayout'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
@@ -32,7 +32,7 @@ const getPageWithLayout = (name: string) => {
         )
     } else {
         page.default.layout = (module: ReactNode) => (
-            <AppLayout children={module} />
+            <ShopLayout children={module} />
         )
     }
 
@@ -40,7 +40,7 @@ const getPageWithLayout = (name: string) => {
 }
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${title} | ${appName}`,
     resolve: getPageWithLayout,
     setup({ el, App, props }) {
         const root = createRoot(el)
