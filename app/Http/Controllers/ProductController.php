@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GetProductsRequest;
-use App\Http\Resources\ProductResource;
+use App\Http\Requests\StoreReviewRequest;
+use App\Http\Resources\ReviewResource;
+use App\Http\Resources\Shop\Products\IndexProductResource;
+use App\Http\Resources\Shop\Products\ShowProductResource;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -16,7 +18,12 @@ class ProductController extends Controller
      */
     public function index(): \Inertia\Response
     {
-        return inertia('shop/products/index');
+        return inertia('shop/products/index', [
+            'filterOptions' => fn () => [
+                'sizes'   => (new ProductService())->getSizeOptions(),
+                'colours' => (new ProductService())->getColourOptions(),
+            ],
+        ]);
     }
 
     /**
@@ -59,56 +66,62 @@ class ProductController extends Controller
             ->paginate($v('limit'));
 
         return response()->json(
-            ProductResource::collection($products)
+            IndexProductResource::collection($products)
                 ->response()->getData()
         );
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product): \Inertia\Response
     {
-        //
+        // available colours on products from the same category.
+        // this is needed for user to select a different colour
+        $product->availableColours = Product::with('colours')
+            ->select('id', 'nanoid')
+            ->where('category', $product->getRawOriginal('category'))
+            ->get()
+            ->map(function ($product) {
+                return [
+                    // nanoid needed for slug on client side
+                    'nanoid' => $product->nanoid,
+                    'colour' => $product->colour,
+                ];
+            });
+
+        return inertia('shop/products/show', [
+            'product' => ShowProductResource::make($product),
+            'reviews' => ReviewResource::collection(
+                $product->reviews()->latest()->paginate(5)
+            ),
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Store product review.
      */
-    public function edit(string $id)
+    public function storeReview(StoreReviewRequest $request, Product $product)
     {
-        //
+        $product->reviews()->create(
+            $request->validated()
+        );
+
+        return back()->withSuccess('Review posted.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Get available sizes for specific product.
      */
-    public function update(Request $request, string $id)
+    public function getSizes(Product $product) : JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(
+            $product->sizes->map(function ($size) {
+                return [
+                    'value' => (string) $size->id,
+                    'label' => $size->value,
+                ];
+            })
+        );
     }
 }

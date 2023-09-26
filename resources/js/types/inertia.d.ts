@@ -8,14 +8,19 @@ export type PageProps<T = {}> = T & {
     locale: 'en' | 'ru'
     categories?: TOption[]
     user: {
-        fname: string
-        lname: string
-        email: string
+        fullName: {
+            full: string
+            initials: string
+        }
+        email: {
+            full: string
+            excerpt: string
+        }
     } // TODO: move to entity
-    // flash: {
-    //     success: Nullable<string>
-    //     error: Nullable<string>
-    // }
+    flash: {
+        success: Nullable<string>
+        error: Nullable<string>
+    }
     errors: Errors & ErrorBag
     status: Nullable<string>
 }

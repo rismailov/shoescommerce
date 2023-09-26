@@ -9,7 +9,7 @@ type TPriceProductFilter = {
     onSale: boolean
 }
 
-type TFiltersAtom = {
+export type TFiltersAtom = {
     categories: string[]
     sizes: string[]
     colours: string[]

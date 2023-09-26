@@ -21,7 +21,7 @@ class ReviewFactory extends Factory
             'title'       => fake()->title(),
             'text'        => fake()->text(300),
             'credentials' => fake()->firstName().' '.fake()->lastName(),
-            'stars'       => fake()->numberBetween(3, 5),
+            'stars'       => fake()->numberBetween(4, 5),
             'product_id'  => Product::all()->random()->id,
         ];
     }

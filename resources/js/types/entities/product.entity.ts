@@ -1,5 +1,4 @@
-import { TOption, TPaginatedData } from '..'
-import { ReviewEntity } from './review.entity'
+import { TOption } from '..'
 
 interface ProductEntityBase {
     id: number
@@ -7,18 +6,12 @@ interface ProductEntityBase {
     name: string
     description: string
     category: TOption
+    colour: TOption
     price: {
         initial: string
         discounted: string | null // null means no discount
     }
-    colour: TOption
-    colours: TOption<{ hex: string }>[]
-    sizes: TOption[]
-    images: {
-        id: number
-        url: string
-        order: number
-    }[]
+    avgStars: number
 }
 
 /**
@@ -26,7 +19,9 @@ interface ProductEntityBase {
  */
 export interface UserProductIndexEntity extends ProductEntityBase {
     reviewsCount: number
-    averageStars: number
+    img: {
+        url: string
+    }
 }
 
 export interface UserProductShowEntity extends ProductEntityBase {
@@ -38,8 +33,12 @@ export interface UserProductShowEntity extends ProductEntityBase {
             hex: string
         }
     }[]
-    reviews: TPaginatedData<ReviewEntity[]>
-    averageStars: number
+    availableSizes: TOption[]
+    images: {
+        id: number
+        url: string
+        order: number
+    }[]
 }
 
 export interface AdminProductEntity extends ProductEntityBase {

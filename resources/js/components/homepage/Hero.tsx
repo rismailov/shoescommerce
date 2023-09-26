@@ -1,21 +1,34 @@
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Box, Button, Container, Image, Stack, Title } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 
 export const Hero = () => {
     const { t } = useTranslation()
+    const { locale } = usePage().props
 
     return (
         <Box
             pos="relative"
-            sx={(theme) => ({ background: theme.colors.gray[1] })}
+            sx={(theme) => ({ background: theme.colors.dark[9] })}
         >
             <Container>
                 {/* CTA */}
                 <Stack w="50%" py="xl" justify="center" spacing={0} mih="60vh">
-                    <Title fz={50}>{t("Gifts he'll feel good in")}</Title>
+                    <Title
+                        fz={locale === 'en' ? 50 : 40}
+                        mb="xs"
+                        maw={550}
+                        sx={(theme) => ({ color: theme.colors.gray[0] })}
+                    >
+                        {t("Gifts he'll feel good in")}
+                    </Title>
 
-                    <Title fz={25} weight={400} opacity={0.8}>
+                    <Title
+                        fz={25}
+                        weight={400}
+                        opacity={0.8}
+                        sx={(theme) => ({ color: theme.colors.gray[3] })}
+                    >
                         {t('Confidence looks good on you.')}
                     </Title>
 

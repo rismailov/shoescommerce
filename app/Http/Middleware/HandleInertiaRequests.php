@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\UserResource;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -34,7 +35,13 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'appName' => fn () => config('app.name'),
             'locale'  => fn () => $request->session()->get('locale', 'en'),
-            'user'    => $request->user(),
+            'flash'   => [
+                'success' => fn () => $request->session()->get('success'),
+                'error'   => fn () => $request->session()->get('error'),
+            ],
+            'user' => $request->user()
+                ? UserResource::make($request->user())
+                : null,
         ];
 
         /*

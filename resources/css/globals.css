@@ -2,15 +2,9 @@ body {
     margin: 0 !important;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: scroll;
     background: transparent !important;
 }
-
-/* prevent scrollbar from messing with the layout */
-/* https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page */
-/* html,
-header {
-    margin-right: calc(100% - 100vw);
-} */
 
 .animate-underline-on-hover {
     display: inline-block;
@@ -25,4 +19,17 @@ header {
 .animate-underline-on-hover:hover {
     background-position: 100% 100%;
     background-size: 100% 1.5px;
+}
+
+/*sprites*/
+.sprite {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.75;
+}
+
+/*form*/
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }

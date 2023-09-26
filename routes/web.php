@@ -1,34 +1,26 @@
 <?php
 
-use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductReviewController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('locale/{locale}', function ($locale) {
+    session()->put('locale', $locale);
+})->where('locale', 'en|ru')->name('change_locale');
 
-Route::get('/', function () {
-    return inertia('shop/homepage');
-})->name('homepage');
+Route::inertia('/', 'shop/homepage')->name('homepage');
 
-// store
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products-data', [ProductController::class, 'data'])->name('products.data');
-
-// options for filters
-Route::get('/options/product-property', [OptionsController::class, 'productPropertyOptions'])
-    ->name('options.product-property');
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+// shop
+Route::group([
+    'prefix' => '/shop',
+    'as'     => 'products.',
+], function () {
+    Route::get('/', [ProductController::class,  'index'])->name('index');
+    Route::get('/data', [ProductController::class,  'data'])->name('data');
+    Route::get('/{product:nanoid}', [ProductController::class,  'show'])->name('show');
+    Route::get('/{product}/sizes', [ProductController::class,  'getSizes'])->name('get_sizes');
+    Route::post('/{product}/reviews', [ProductController::class, 'storeReview'])
+        ->name('reviews.store');
+});
 
 require __DIR__.'/auth.php';

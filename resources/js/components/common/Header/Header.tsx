@@ -1,5 +1,6 @@
 // import useCartStore from '@/lib/store/cart.store'
 import {
+    Button,
     Container,
     Divider,
     Group,
@@ -9,20 +10,23 @@ import {
 // import { IconShoppingCart } from '@tabler/icons-react'
 import { Link } from '@inertiajs/react'
 import { Logo } from '../Logo'
+import { AuthDropdown } from './AuthDropdown'
+import { LangSwitcher } from './LangSwitcher'
 import { Menu } from './Menu'
+import { useTranslation } from 'react-i18next'
 // import { usePathname } from 'next/navigation'
-// import { AuthDropdown } from './AuthDropdown'
 // import { Logo } from './Logo'
 // import { Menu } from './Menu'
 
 export const Header = () => {
+    const { t } = useTranslation()
     // const pathname = usePathname() ?? ''
 
     // const items = useCartStore((state) => state.items)
     // const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
 
     return (
-        <MantineHeader fixed height={60}>
+        <MantineHeader fixed height={60} zIndex={100}>
             <Container>
                 <Group
                     position="apart"
@@ -37,14 +41,6 @@ export const Header = () => {
                         <UnstyledButton
                             component={Link}
                             href={route('homepage')}
-                            sx={{
-                                display: 'inline-block',
-                                transition: 'opacity 0.2s ease-out',
-                                ':hover': {
-                                    opacity: 0.8,
-                                    transition: 'opacity 0.2s ease-in',
-                                },
-                            }}
                         >
                             <Logo />
                         </UnstyledButton>
@@ -54,8 +50,24 @@ export const Header = () => {
                         <Menu />
                     </Group>
 
-                    {/* <Group position="right" spacing="xs">
+                    <Group position="right" spacing="xs">
+                        <Button
+                            size="xs"
+                            variant="light"
+                            sx={(theme) => ({
+                                fontSize: theme.fontSizes.sm + ' !important',
+                            })}
+                        >
+                            {t('Admin dashboard')}
+                        </Button>
+
+                        <LangSwitcher />
+
                         <AuthDropdown />
+
+                        {/* <UnstyledButton component={Link} href="/admin/products">
+                            Admin
+                        </UnstyledButton>
 
                         {!pathname.includes('admin') && (
                             <Indicator
@@ -74,8 +86,8 @@ export const Header = () => {
                                     <IconShoppingCart size={18} />
                                 </ActionIcon>
                             </Indicator>
-                        )}
-                    </Group> */}
+                        )} */}
+                    </Group>
                 </Group>
             </Container>
         </MantineHeader>
