@@ -1,5 +1,6 @@
 import { Filters } from '@/components/shop/products/index/Filters'
 import { Products } from '@/components/shop/products/index/Products'
+import { SortProducts } from '@/components/shop/products/index/SortProducts'
 import { TOption } from '@/types'
 import { usePage } from '@inertiajs/react'
 import { Container, Group, Stack, Text, Title } from '@mantine/core'
@@ -35,7 +36,7 @@ export default function ProductsIndex() {
                                 }`}
                             </Text>
 
-                            {/* <SortProducts /> */}
+                            <SortProducts />
                         </Group>
                     </Group>
 

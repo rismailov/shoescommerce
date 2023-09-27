@@ -107,7 +107,11 @@ class ProductController extends Controller
             $request->validated()
         );
 
-        return back()->withSuccess('Review posted.');
+        return back()->withSuccess(
+            __('responses.crud.saved', [
+                'Model' => __('models.reviews.single'),
+            ])
+        );
     }
 
     /**

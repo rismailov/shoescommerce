@@ -104,7 +104,7 @@ export const Products = ({
                         <Center h="50vh">
                             <Title order={3} weight={400}>
                                 <Text inherit color="dimmed">
-                                    {t('No results found...')}
+                                    {t('No results found.')}
                                 </Text>
                             </Title>
                         </Center>

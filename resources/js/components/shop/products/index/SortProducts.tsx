@@ -1,6 +1,7 @@
 import useFiltersStore, { TSortValue } from '@/lib/store/filters.store'
 import { Menu, UnstyledButton } from '@mantine/core'
 import { IconCheck, IconChevronDown } from '@tabler/icons-react'
+import { useTranslation } from 'react-i18next'
 
 const sortOptions: { value: TSortValue; label: string }[] = [
     { value: 'date-desc', label: 'Date: New to old' },
@@ -10,6 +11,8 @@ const sortOptions: { value: TSortValue; label: string }[] = [
 ]
 
 export const SortProducts = () => {
+    const { t } = useTranslation()
+
     const sort = useFiltersStore((s) => s.sort)
     const setSort = useFiltersStore((s) => s.setSort)
 
@@ -19,10 +22,10 @@ export const SortProducts = () => {
             radius="md"
             styles={(theme) => ({
                 dropdown: {
-                    padding: `${theme.spacing.xs}px !important`,
+                    padding: `${theme.spacing.xs} !important`,
                 },
                 item: {
-                    padding: `13px ${theme.spacing.lg}px`,
+                    padding: `13px ${theme.spacing.lg}`,
                 },
             })}
         >
@@ -43,8 +46,8 @@ export const SortProducts = () => {
                         },
                     })}
                 >
-                    Sort
-                    <IconChevronDown />
+                    {t('Sort')}
+                    <IconChevronDown className="sprite sprite--sm" />
                 </UnstyledButton>
             </Menu.Target>
 

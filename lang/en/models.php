@@ -27,7 +27,7 @@ return [
 
     'categories' => [
         CategoryEnum::POLO->value       => 'Polo',
-        CategoryEnum::TALL->value  => 'Tall',
+        CategoryEnum::TALL->value       => 'Tall',
         CategoryEnum::V_NECK->value     => 'V-Neck',
         CategoryEnum::ACTIVEWEAR->value => 'Activewear',
     ],
@@ -54,5 +54,9 @@ return [
     'reviews' => [
         'single'   => 'Review',
         'multiple' => 'Reviews',
+    ],
+
+    'user' => [
+        'profile' => 'Profile information',
     ],
 ];

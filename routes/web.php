@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductReviewController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('locale/{locale}', function ($locale) {
@@ -22,5 +22,9 @@ Route::group([
     Route::post('/{product}/reviews', [ProductController::class, 'storeReview'])
         ->name('reviews.store');
 });
+
+// profile
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 require __DIR__.'/auth.php';

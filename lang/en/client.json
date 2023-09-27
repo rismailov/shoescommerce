@@ -30,7 +30,7 @@
     "Login to enjoy full services.": "Login to enjoy full services.",
     "Join us to get our newsletters, discounts and more!": "Join us to get our newsletters, discounts and more!",
     "Filters": "Filters",
-    "No results found...": "No results found...",
+    "No results found.": "No results found.",
     "Quick add": "Quick add",
     "Select size:": "Select size:",
     "Review": "Review",
@@ -52,5 +52,9 @@
     "Checkout": "Checkout",
     "Total": "Total",
     "Result": "Result",
-    "Results": "Results"
+    "Results": "Results",
+    "Sort": "Sort",
+    "Update": "Update",
+    "Edit profile": "Edit profile",
+    "Profile": "Profile"
 }

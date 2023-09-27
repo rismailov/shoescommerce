@@ -11,12 +11,7 @@ import {
     Text,
     Tooltip,
 } from '@mantine/core'
-import {
-    IconEdit,
-    IconLogout,
-    IconShoppingCart,
-    IconUser,
-} from '@tabler/icons-react'
+import { IconEdit, IconLogout, IconUser } from '@tabler/icons-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -127,12 +122,13 @@ export const AuthDropdown = () => {
                 <Divider />
 
                 {/*Nav*/}
-                <Menu.Item icon={<IconEdit className="sprite" />} mt={10}>
+                <Menu.Item
+                    component={Link}
+                    href={route('profile.edit')}
+                    icon={<IconEdit className="sprite" />}
+                    mt={10}
+                >
                     {t('Account')}
-                </Menu.Item>
-
-                <Menu.Item icon={<IconShoppingCart className="sprite" />}>
-                    {t('Cart')}
                 </Menu.Item>
 
                 {user && (
