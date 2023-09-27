@@ -1,9 +1,5 @@
 import { SIZE_LABELS } from '@/constants'
-import {
-    addCartItemAtom,
-    cartItemsAtom,
-    toggleCartAtom,
-} from '@/lib/store/cart.atom'
+import useCartStore from '@/lib/store/cart.store'
 import { UserProductShowEntity } from '@/types/entities/product.entity'
 import { Link } from '@inertiajs/react'
 import {
@@ -17,7 +13,6 @@ import {
     UnstyledButton,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { useAtomValue, useSetAtom } from 'jotai'
 import { useTranslation } from 'react-i18next'
 import { useStyles } from './AddProductToCartForm.styles'
 
@@ -34,9 +29,9 @@ export const AddProductToCartForm = ({
     const { t } = useTranslation()
     const { classes, cx } = useStyles()
 
-    const items = useAtomValue(cartItemsAtom)
-    const addItemToCart = useSetAtom(addCartItemAtom)
-    const toggleCart = useSetAtom(toggleCartAtom)
+    const items = useCartStore((state) => state.items)
+    const addItem = useCartStore((state) => state.addItem)
+    const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
 
     const form = useForm<AddProductToCartDto>({
         initialValues: {
@@ -49,17 +44,14 @@ export const AddProductToCartForm = ({
     })
 
     const onSubmit = ({ size, colour }: AddProductToCartDto) => {
-        const id = `${product.id}-${size.id}`
-        const thisItem = items.find((item) => item.id === id)
-
-        addItemToCart({
-            id,
+        addItem({
+            id: `${product.id}-${size.id}`,
             imageUrl: product.images[0].url,
             name: product.name,
             size,
             colour,
             price: product.price.discounted ?? product.price.initial,
-            amount: thisItem ? thisItem.amount + 1 : 1,
+            amount: 1,
         })
 
         toggleCart()

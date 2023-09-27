@@ -6,7 +6,6 @@ import { Errors, PageProps } from '@/types/inertia'
 import { sleep } from '@/utils'
 import { router } from '@inertiajs/react'
 import { UseFormReturnType } from '@mantine/form'
-import { useSetAtom } from 'jotai'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useToast } from './useToast'
 

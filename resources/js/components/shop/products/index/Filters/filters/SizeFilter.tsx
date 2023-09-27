@@ -1,17 +1,17 @@
-import { filtersAtom } from '@/lib/store/filters.atom'
+import useFiltersStore from '@/lib/store/filters.store'
 import { TOption } from '@/types'
 import { Checkbox, Stack } from '@mantine/core'
-import { useAtom } from 'jotai'
 import { FilterLayout } from '../layouts/FilterLayout'
 
 export const SizeFilter = ({ options }: { options: TOption[] }) => {
-    const [{ sizes }, setFilters] = useAtom(filtersAtom)
+    const sizes = useFiltersStore((s) => s.sizes)
+    const setSizes = useFiltersStore((s) => s.setSizes)
 
     return (
         <FilterLayout value="size" title="Size">
             <Checkbox.Group
                 value={sizes}
-                onChange={(v) => setFilters((prev) => ({ ...prev, sizes: v }))}
+                onChange={setSizes}
                 size="xs"
                 sx={{
                     '.mantine-Stack-root': {

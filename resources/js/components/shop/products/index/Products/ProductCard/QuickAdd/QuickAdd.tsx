@@ -1,16 +1,15 @@
 import axios from '@/lib/axios'
-import { addCartItemAtom, toggleCartAtom } from '@/lib/store/cart.atom'
+import useCartStore from '@/lib/store/cart.store'
 import { TOption } from '@/types'
 import { UserProductIndexEntity } from '@/types/entities/product.entity'
+import { sleep } from '@/utils'
 import { ActionIcon, Box, Group, Stack, Text } from '@mantine/core'
 import { IconPlus, IconX } from '@tabler/icons-react'
 import { motion } from 'framer-motion'
-import { useSetAtom } from 'jotai'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useStyles } from './QuickAdd.styles'
 import { SelectSizeActionIcon } from './SelectSizeActionIcon'
-import { sleep } from '@/utils'
 
 export const QuickAdd = ({
     product,
@@ -24,8 +23,8 @@ export const QuickAdd = ({
     const { t } = useTranslation()
 
     // store
-    const toggleCart = useSetAtom(toggleCartAtom)
-    const addItemToCart = useSetAtom(addCartItemAtom)
+    const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
+    const addItem = useCartStore((state) => state.addItem)
 
     // available sizes for specific product
     const [availableSizes, setAvailableSizes] = useState<TOption[]>([])
@@ -77,7 +76,7 @@ export const QuickAdd = ({
         setIsLoading(false)
 
         // important part start
-        addItemToCart({
+        addItem({
             id: `${product.id}-${size.value}`,
             imageUrl: product.img.url,
             name: product.name,
@@ -91,11 +90,11 @@ export const QuickAdd = ({
         })
         // important part end
 
-        // toggleSizeSelectorOpened()
+        toggleSizeSelectorOpened()
 
-        // await sleep()
+        await sleep()
 
-        // toggleCart()
+        toggleCart()
     }
 
     return (

@@ -1,7 +1,6 @@
-import { filtersAtom } from '@/lib/store/filters.atom'
+import useFiltersStore from '@/lib/store/filters.store'
 import { TOption } from '@/types'
 import { Checkbox, ColorSwatch, Group, Stack } from '@mantine/core'
-import { useAtom } from 'jotai'
 import { FilterLayout } from '../layouts/FilterLayout'
 
 export const ColourFilter = ({
@@ -9,15 +8,14 @@ export const ColourFilter = ({
 }: {
     options: TOption<{ hex: string }>[]
 }) => {
-    const [{ colours }, setFilters] = useAtom(filtersAtom)
+    const colours = useFiltersStore((s) => s.colours)
+    const setColours = useFiltersStore((s) => s.setColours)
 
     return (
         <FilterLayout value="colour" title="Colour">
             <Checkbox.Group
                 value={colours}
-                onChange={(v) =>
-                    setFilters((prev) => ({ ...prev, colours: v }))
-                }
+                onChange={setColours}
                 size="xs"
                 sx={{
                     '.mantine-Stack-root': {

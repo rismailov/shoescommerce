@@ -1,4 +1,4 @@
-import { UserProductIndexEntity } from '@/types/entities/product.entity'
+import { TOption } from '@/types'
 import { ActionIcon, ActionIconProps } from '@mantine/core'
 import { IconCheck } from '@tabler/icons-react'
 
@@ -11,7 +11,7 @@ export const SelectSizeActionIcon = ({
 }: {
     isLoading: boolean
     isSelected: boolean
-    size: UserProductIndexEntity['sizes'][number]
+    size: TOption
     onAddItem: () => void
     classes: ActionIconProps['className']
 }) => {

@@ -1,9 +1,8 @@
 // import the original type declarations
 import 'i18next'
 // import all namespaces (for the default language, only)
-import en from './../../../lang/en/frontend.json'
-// TODO: add russian
-// import ru from './../../../lang/ru/client/ru.json'
+import en from './../../../lang/en/client.json'
+import ru from './../../../lang/ru/client.json'
 
 declare module 'i18next' {
     // Extend CustomTypeOptions
@@ -13,7 +12,7 @@ declare module 'i18next' {
         // custom resources type
         resources: {
             en: typeof en
-            // ru: typeof ru
+            ru: typeof ru
         }
         // other
     }

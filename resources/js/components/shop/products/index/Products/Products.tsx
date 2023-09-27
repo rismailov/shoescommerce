@@ -1,13 +1,12 @@
 import { LoadMoreButton } from '@/components/shop/products/index/Products/LoadMoreButton'
 import { REACT_QUERY_PRODUCTS_KEY } from '@/constants'
 import axios from '@/lib/axios'
-import { filtersAtom } from '@/lib/store/filters.atom'
+import useFiltersStore from '@/lib/store/filters.store'
 import { TPaginatedData } from '@/types'
 import { UserProductIndexEntity } from '@/types/entities/product.entity'
 import { Center, Skeleton, Stack, Text, Title } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useAtomValue } from 'jotai'
 import { Dispatch, SetStateAction, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProductCard } from './ProductCard'
@@ -20,7 +19,15 @@ export const Products = ({
 }) => {
     const { t } = useTranslation()
     const { classes } = useStyles()
-    const filters = useAtomValue(filtersAtom)
+
+    const filters = useFiltersStore((state) => ({
+        categories: state.categories,
+        sizes: state.sizes,
+        colours: state.colours,
+        price: state.price,
+        sort: state.sort,
+        limit: state.limit,
+    }))
 
     const skeletonCards = useMemo(() => {
         const arr = []

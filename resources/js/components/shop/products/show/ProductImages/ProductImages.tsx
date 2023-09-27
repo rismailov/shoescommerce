@@ -9,7 +9,7 @@ import {
 } from '@mantine/core'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
-import { Navigation, Thumbs } from 'swiper'
+import { Navigation, Thumbs } from 'swiper/modules'
 import 'swiper/css'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'

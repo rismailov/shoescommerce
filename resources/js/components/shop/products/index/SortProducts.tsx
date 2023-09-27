@@ -1,9 +1,8 @@
-import { TSortValues, filtersAtom } from '@/lib/store/filters.atom'
+import useFiltersStore, { TSortValue } from '@/lib/store/filters.store'
 import { Menu, UnstyledButton } from '@mantine/core'
 import { IconCheck, IconChevronDown } from '@tabler/icons-react'
-import { useAtom } from 'jotai'
 
-const sortOptions: { value: TSortValues; label: string }[] = [
+const sortOptions: { value: TSortValue; label: string }[] = [
     { value: 'date-desc', label: 'Date: New to old' },
     { value: 'date-asc', label: 'Date: Old to new' },
     { value: 'price-desc', label: 'Price: High to low' },
@@ -11,7 +10,8 @@ const sortOptions: { value: TSortValues; label: string }[] = [
 ]
 
 export const SortProducts = () => {
-    const [{ sort }, setFilters] = useAtom(filtersAtom)
+    const sort = useFiltersStore((s) => s.sort)
+    const setSort = useFiltersStore((s) => s.setSort)
 
     return (
         <Menu
@@ -52,9 +52,7 @@ export const SortProducts = () => {
                 {sortOptions.map((opt) => (
                     <Menu.Item
                         key={opt.value}
-                        onClick={() =>
-                            setFilters((prev) => ({ ...prev, sort: opt.value }))
-                        }
+                        onClick={() => setSort(opt.value)}
                         data-selected={sort === opt.value}
                         sx={(theme) => ({
                             '&[data-selected="true"]': {

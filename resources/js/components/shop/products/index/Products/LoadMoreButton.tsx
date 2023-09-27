@@ -1,8 +1,7 @@
 import { LOAD_MORE_PRODUCTS_AMOUNT } from '@/constants'
-import { filtersAtom } from '@/lib/store/filters.atom'
+import useFiltersStore from '@/lib/store/filters.store'
 import { Button, Loader } from '@mantine/core'
-import { useAtom } from 'jotai'
-// import { useAnimation, motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 // Framer motion variants
@@ -28,21 +27,21 @@ export const LoadMoreButton = ({
 }: {
     productsCount: number
 }) => {
-    // const buttonControls = useAnimation()
-    const [{ limit }, setFilters] = useAtom(filtersAtom)
+    const buttonControls = useAnimation()
+
+    // store
+    const limit = useFiltersStore((s) => s.limit)
+    const setLimit = useFiltersStore((s) => s.setLimit)
 
     const [isClicked, setIsClicked] = useState(false)
 
     const onClick = async () => {
         // Start loading animation
         setIsClicked(true)
-        // await buttonControls.start('animate')
+        await buttonControls.start('animate')
 
         // load more products
-        setFilters((prev) => ({
-            ...prev,
-            limit: limit + LOAD_MORE_PRODUCTS_AMOUNT,
-        }))
+        setLimit(limit + LOAD_MORE_PRODUCTS_AMOUNT)
     }
 
     // Animate the button back when count of products changes
@@ -50,18 +49,18 @@ export const LoadMoreButton = ({
         ;(async () => {
             setIsClicked(false)
 
-            // await buttonControls.start('initial')
+            await buttonControls.start('initial')
         })()
     }, [productsCount])
 
     return (
         <Button
             onClick={onClick}
-            // component={motion.button}
-            // variants={buttonVariants}
-            // initial="initial"
-            // exit="exit"
-            // animate={buttonControls}
+            component={motion.button}
+            variants={buttonVariants}
+            initial="initial"
+            exit="exit"
+            animate={buttonControls}
             color="orange"
             variant="light"
             p={0}

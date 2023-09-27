@@ -1,12 +1,11 @@
-import { filtersAtom, updatePriceParamAtom } from '@/lib/store/filters.atom'
+import useFiltersStore from '@/lib/store/filters.store'
 import { Checkbox, Group, NumberInput, Stack } from '@mantine/core'
 import { IconCurrencyDollar, IconMinus } from '@tabler/icons-react'
-import { useAtomValue, useSetAtom } from 'jotai'
 import { FilterLayout } from '../layouts/FilterLayout'
 
 export const PriceFilter = () => {
-    const { price } = useAtomValue(filtersAtom)
-    const updatePriceParam = useSetAtom(updatePriceParamAtom)
+    const price = useFiltersStore((s) => s.price)
+    const setPrice = useFiltersStore((s) => s.setPrice)
 
     return (
         <FilterLayout value="price" title="Price">
@@ -14,7 +13,7 @@ export const PriceFilter = () => {
                 <Checkbox
                     checked={!!price.onSale}
                     onChange={(ev) =>
-                        updatePriceParam({ onSale: ev.currentTarget.checked })
+                        setPrice({ ...price, onSale: ev.currentTarget.checked })
                     }
                     size="xs"
                     label="On sale"
@@ -26,7 +25,8 @@ export const PriceFilter = () => {
                     <NumberInput
                         value={price.min === null ? undefined : price.min}
                         onChange={(v) =>
-                            updatePriceParam({
+                            setPrice({
+                                ...price,
                                 min: typeof v === 'number' ? v : null,
                             })
                         }
@@ -47,7 +47,8 @@ export const PriceFilter = () => {
                     <NumberInput
                         value={price.max === null ? undefined : price.max}
                         onChange={(v) =>
-                            updatePriceParam({
+                            setPrice({
+                                ...price,
                                 max: typeof v === 'number' ? v : null,
                             })
                         }

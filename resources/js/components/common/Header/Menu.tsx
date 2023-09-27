@@ -1,12 +1,13 @@
-import { filtersAtom } from '@/lib/store/filters.atom'
+import useFiltersStore from '@/lib/store/filters.store'
 import { router, usePage } from '@inertiajs/react'
 import { Group, UnstyledButton } from '@mantine/core'
-import { useSetAtom } from 'jotai'
 
 export const Menu = () => {
     const { component, props } = usePage()
     const { categories } = props
-    const setFilters = useSetAtom(filtersAtom)
+
+    // store
+    const setCategories = useFiltersStore((s) => s.setCategories)
 
     return (
         <Group
@@ -45,10 +46,7 @@ export const Menu = () => {
                     <UnstyledButton
                         key={value}
                         onClick={() => {
-                            setFilters((prev) => ({
-                                ...prev,
-                                categories: [value],
-                            }))
+                            setCategories([value])
 
                             if (!route().current('products.index')) {
                                 router.visit(route('products.index'))

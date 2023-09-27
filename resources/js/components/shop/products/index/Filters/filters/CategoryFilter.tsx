@@ -1,20 +1,19 @@
-import { filtersAtom } from '@/lib/store/filters.atom'
+import useFiltersStore from '@/lib/store/filters.store'
 import { usePage } from '@inertiajs/react'
 import { Checkbox, Stack } from '@mantine/core'
-import { useAtom } from 'jotai'
 import { FilterLayout } from '../layouts/FilterLayout'
 
 export const CategoryFilter = () => {
     const { categories: categoryOptions } = usePage().props
-    const [filters, setFilters] = useAtom(filtersAtom)
+
+    const categories = useFiltersStore((s) => s.categories)
+    const setCategories = useFiltersStore((s) => s.setCategories)
 
     return (
         <FilterLayout value="category" title="Category">
             <Checkbox.Group
-                value={filters.categories}
-                onChange={(v) =>
-                    setFilters((prev) => ({ ...prev, categories: v }))
-                }
+                value={categories}
+                onChange={setCategories}
                 size="xs"
                 sx={{
                     '.mantine-Stack-root': {
