@@ -6,7 +6,7 @@
 
     "Gifts he'll feel good in": "Gifts he'll feel good in",
     "Confidence looks good on you.": "Confidence looks good on you.",
-    "Shop now": "Shop now",
+    "Shop Now": "Shop Now",
     "Loading...": "Loading...",
     "Men's Tops": "Men's Tops",
     "Something went wrong fetching products...": "Something went wrong fetching products...",
@@ -56,5 +56,8 @@
     "Sort": "Sort",
     "Update": "Update",
     "Edit profile": "Edit profile",
-    "Profile": "Profile"
+    "Profile": "Profile",
+    "Men": "Men",
+    "Women": "Women",
+    "Kids": "Kids"
 }

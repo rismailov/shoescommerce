@@ -101,7 +101,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
 
                         Container: {
                             defaultProps: {
-                                size: 1200,
+                                size: 1300,
                             },
 
                             styles: (theme) => ({

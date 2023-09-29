@@ -37,8 +37,8 @@ export const AuthDropdown = () => {
             })}
         >
             <Menu.Target>
-                <ActionIcon>
-                    <IconUser className="sprite" />
+                <ActionIcon size="lg" radius="xl">
+                    <IconUser className="sprite sprite-lg" />
                 </ActionIcon>
             </Menu.Target>
 

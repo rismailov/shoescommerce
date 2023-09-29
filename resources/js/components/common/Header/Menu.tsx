@@ -1,18 +1,22 @@
+import { CATEGORIES } from '@/constants'
 import useFiltersStore from '@/lib/store/filters.store'
 import { router, usePage } from '@inertiajs/react'
 import { Group, UnstyledButton } from '@mantine/core'
+import { useTranslation } from 'react-i18next'
 
 export const Menu = () => {
-    const { component, props } = usePage()
-    const { categories } = props
+    const { t } = useTranslation()
+    const { component } = usePage()
 
     // store
     const setCategories = useFiltersStore((s) => s.setCategories)
 
     return (
         <Group
+            w="50%"
+            position="center"
             sx={(theme) => ({
-                a: {
+                'a, button': {
                     textTransform: 'uppercase',
                     fontWeight: 600,
                     fontSize: theme.fontSizes.sm,
@@ -42,18 +46,19 @@ export const Menu = () => {
                     </UnstyledButton> */}
                 </>
             ) : (
-                categories!.map(({ value, label }) => (
+                CATEGORIES.map((category) => (
                     <UnstyledButton
-                        key={value}
+                        key={category}
                         onClick={() => {
-                            setCategories([value])
+                            setCategories([category])
 
                             if (!route().current('products.index')) {
                                 router.visit(route('products.index'))
                             }
                         }}
                     >
-                        {label}
+                        {/* @ts-ignore */}
+                        {t(category)}
                     </UnstyledButton>
                 ))
             )}

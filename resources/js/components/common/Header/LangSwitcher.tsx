@@ -41,8 +41,8 @@ export const LangSwitcher = () => {
     return (
         <Menu withinPortal withArrow offset={15} width={200} shadow="xl">
             <Menu.Target>
-                <ActionIcon>
-                    <IconWorld className="sprite" />
+                <ActionIcon size="lg" radius="xl">
+                    <IconWorld className="sprite sprite-lg" />
                 </ActionIcon>
             </Menu.Target>
 
