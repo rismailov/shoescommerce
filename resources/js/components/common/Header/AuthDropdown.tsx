@@ -1,16 +1,18 @@
-import { Link, router, usePage } from '@inertiajs/react'
+import { Button } from '@/components/ui/button'
 import {
-    ActionIcon,
-    Box,
-    Button,
-    Center,
-    Divider,
-    Group,
-    Menu,
-    Stack,
-    Text,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import {
     Tooltip,
-} from '@mantine/core'
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { Link, router, usePage } from '@inertiajs/react'
 import { IconEdit, IconLogout, IconUser } from '@tabler/icons-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -18,131 +20,91 @@ import { useTranslation } from 'react-i18next'
 export const AuthDropdown = () => {
     const { t } = useTranslation()
     const { user } = usePage().props
-    const [opened, setOpened] = useState<boolean>(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Menu
-            opened={opened}
-            onChange={setOpened}
-            withinPortal
-            withArrow
-            width={250}
-            offset={15}
-            shadow="xl"
-            styles={(theme) => ({
-                item: {
-                    paddingTop: theme.spacing.sm,
-                    paddingBottom: theme.spacing.sm,
-                },
-            })}
-        >
-            <Menu.Target>
-                <ActionIcon size="lg" radius="xl">
-                    <IconUser className="sprite sprite-lg" />
-                </ActionIcon>
-            </Menu.Target>
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+            <DropdownMenuTrigger asChild>
+                <Button size="icon" variant="ghost" className="rounded-full">
+                    <IconUser className="sprite sprite-md" />
+                </Button>
+            </DropdownMenuTrigger>
 
-            <Menu.Dropdown>
-                <Box p="sm">
-                    {user ? (
-                        <Group noWrap>
-                            <Center
-                                sx={(theme) => ({
-                                    width: 40,
-                                    height: 40,
-                                    borderRadius: theme.radius.xl,
-                                    overflow: 'hidden',
-                                    background: theme.colors.orange[1],
-                                    color: theme.colors.orange[5],
-                                    fontWeight: 500,
-                                    lineHeight: 1,
-                                })}
-                            >
-                                {user.fullName.initials}
-                            </Center>
+            <DropdownMenuContent className="min-w-[17rem]">
+                {user ? (
+                    <div className="flex items-center py-2 px-2.5 space-x-3 flex-nowrap">
+                        <div className="w-10 h-10 flex items-center justify-center rounded-full overflow-hidden bg-primary/5 text-primary font-medium leading-none pointer-events-none">
+                            {user.fullName.initials}
+                        </div>
 
-                            <Stack spacing={5}>
-                                <Text
-                                    size="sm"
-                                    weight={500}
-                                    color="dark"
-                                    lh={1}
-                                >
-                                    {user.fullName.full}
-                                </Text>
+                        <div className="flex flex-col space-y-[5px]">
+                            <p className="font-medium text-sm leading-none text-secondary-foreground">
+                                {user.fullName.full}
+                            </p>
 
-                                <Tooltip label={user.email.full}>
-                                    <Text
-                                        size="xs"
-                                        color="dimmed"
-                                        lh={1}
-                                        title={user.email.full}
-                                    >
-                                        {user.email.excerpt}
-                                    </Text>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <p className="text-sm text-muted-foreground leading-none">
+                                            {user.email.excerpt}
+                                        </p>
+                                    </TooltipTrigger>
+
+                                    <TooltipContent>
+                                        {user.email.full}
+                                    </TooltipContent>
                                 </Tooltip>
-                            </Stack>
-                        </Group>
-                    ) : (
-                        <Group
-                            grow
-                            spacing="xs"
-                            onClick={() => setOpened(false)}
+                            </TooltipProvider>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="p-3 flex items-center space-x-2">
+                        <Button
+                            asChild
+                            variant="secondary"
+                            className="grow"
+                            onClick={() => setIsOpen(false)}
                         >
-                            <Button
-                                component={Link}
-                                href={route('auth.login.create')}
-                                variant="light"
-                                size="sm"
-                                color="dark"
-                                sx={(theme) => ({
-                                    border: `1px solid ${theme.colors.gray[4]}`,
-                                    color: theme.colors.dark[4],
-                                    background: theme.white,
-                                    ':hover': {
-                                        background: theme.colors.gray[0],
-                                    },
-                                })}
-                            >
+                            <Link href={route('auth.login.create')}>
                                 {t('Log in')}
-                            </Button>
+                            </Link>
+                        </Button>
 
-                            <Button
-                                component={Link}
-                                color="dark"
-                                href="/auth/register"
-                                size="sm"
-                            >
+                        <Button
+                            asChild
+                            className="grow"
+                            variant="accent"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            <Link href={route('auth.register.create')}>
                                 {t('Sign up')}
-                            </Button>
-                        </Group>
-                    )}
-                </Box>
+                            </Link>
+                        </Button>
+                    </div>
+                )}
 
-                <Divider />
+                <DropdownMenuSeparator />
 
-                {/*Nav*/}
-                <Menu.Item
-                    component={Link}
-                    href={route('profile.edit')}
-                    icon={<IconEdit className="sprite" />}
-                    mt={10}
-                >
-                    {t('Account')}
-                </Menu.Item>
+                {/* navigation */}
+                <DropdownMenuItem asChild>
+                    <Link href={route('profile.edit')}>
+                        {t('Account')}
+
+                        <IconEdit className="ml-auto sprite sprite-md" />
+                    </Link>
+                </DropdownMenuItem>
 
                 {user && (
-                    <Menu.Item
-                        onClick={() => {
-                            router.post(route('auth.logout'))
-                        }}
-                        icon={<IconLogout className="sprite" />}
-                        color="red"
+                    <DropdownMenuItem
+                        onClick={() => router.post(route('auth.logout'))}
+                        className="w-full text-destructive focus:text-destructive focus:bg-destructive/5"
                     >
                         {t('Logout')}
-                    </Menu.Item>
+
+                        <IconLogout className="ml-auto sprite sprite-md" />
+                    </DropdownMenuItem>
                 )}
-            </Menu.Dropdown>
-        </Menu>
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
 }

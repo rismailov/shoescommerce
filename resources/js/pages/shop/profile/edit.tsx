@@ -1,4 +1,4 @@
-import { useSubmit } from '@/hooks/useSubmit'
+// import { useSubmit } from '@/hooks/useSubmit'
 import { Head, usePage } from '@inertiajs/react'
 import { Button, Container, Stack, TextInput, Title } from '@mantine/core'
 import { useForm } from '@mantine/form'
@@ -12,23 +12,28 @@ type TFormValues = {
     email: string
 }
 
+const isLoading = false
+
 export default function EditProfile() {
     const { t } = useTranslation()
     const { profileData } = usePage<{ profileData: TFormValues }>().props
     const ref = useFocusTrap()
 
-    const { submit, isLoading } = useSubmit()
+    // const { submit, isLoading } = useSubmit()
     const form = useForm<TFormValues>({
         initialValues: profileData,
     })
 
-    const onSubmit = async (data: TFormValues) =>
-        await submit({
-            form,
-            method: 'patch',
-            url: route('profile.update'),
-            data,
-        })
+    const onSubmit = async (data: TFormValues) => {
+        console.log(data)
+
+        // await submit({
+        //     form,
+        //     method: 'patch',
+        //     url: route('profile.update'),
+        //     data,
+        // })
+    }
 
     return (
         <Container>

@@ -1,11 +1,17 @@
+import { Button } from '@/components/ui/button'
+import {
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { router, usePage } from '@inertiajs/react'
-import { ActionIcon, Group, Menu, Stack, Text } from '@mantine/core'
-import { IconCheck, IconWorld } from '@tabler/icons-react'
+import { IconWorld } from '@tabler/icons-react'
 
 const LangOption = ({ value, label }: { value: string; label: string }) => {
     const { locale } = usePage().props
 
-    function onLocaleChange() {
+    function onLocaleChange(value: string) {
         router.get(
             route('change_locale', { locale: value }),
             {},
@@ -17,41 +23,28 @@ const LangOption = ({ value, label }: { value: string; label: string }) => {
     }
 
     return (
-        <Menu.Item
-            onClick={onLocaleChange}
-            // color="orange"
-            sx={(theme) => ({
-                ...(locale === value && {
-                    background: theme.fn.rgba(theme.fn.primaryColor(), 0.1),
-                    color: theme.fn.primaryColor(),
-                    pointerEvents: 'none',
-                }),
-            })}
+        <DropdownMenuCheckboxItem
+            onClick={() => onLocaleChange(value)}
+            checked={locale === value}
         >
-            <Group spacing="sm" position="apart">
-                {label}
-
-                {locale === value && <IconCheck size={18} className="sprite" />}
-            </Group>
-        </Menu.Item>
+            {label}
+        </DropdownMenuCheckboxItem>
     )
 }
 
 export const LangSwitcher = () => {
     return (
-        <Menu withinPortal withArrow offset={15} width={200} shadow="xl">
-            <Menu.Target>
-                <ActionIcon size="lg" radius="xl">
-                    <IconWorld className="sprite sprite-lg" />
-                </ActionIcon>
-            </Menu.Target>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button size="icon" variant="ghost" className="rounded-full">
+                    <IconWorld className="sprite sprite-md" />
+                </Button>
+            </DropdownMenuTrigger>
 
-            <Menu.Dropdown>
-                <Stack spacing={3}>
-                    <LangOption value="en" label="English" />
-                    <LangOption value="ru" label="Русский" />
-                </Stack>
-            </Menu.Dropdown>
-        </Menu>
+            <DropdownMenuContent>
+                <LangOption value="en" label="English" />
+                <LangOption value="ru" label="Русский" />
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
 }

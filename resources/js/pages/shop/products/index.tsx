@@ -1,6 +1,6 @@
-import { Filters } from '@/components/shop/products/index/Filters'
-import { Products } from '@/components/shop/products/index/Products'
-import { SortProducts } from '@/components/shop/products/index/SortProducts'
+// import { Filters } from '@/components/shop/products/index/Filters'
+// import { Products } from '@/components/shop/products/index/Products'
+// import { SortProducts } from '@/components/shop/products/index/SortProducts'
 import { TOption } from '@/types'
 import { usePage } from '@inertiajs/react'
 import { Container, Group, Stack, Text, Title } from '@mantine/core'
@@ -19,12 +19,12 @@ export default function ProductsIndex() {
 
     return (
         <Container>
-            <Group pos="relative" align="start" spacing="xl">
+            <Group pos="relative" align="start" gap="xl">
                 {/* filter options are gonna be fetched in this component */}
-                <Filters options={filterOptions} />
+                {/* <Filters options={filterOptions} /> */}
 
-                <Stack pos="relative" sx={{ flex: 1 }}>
-                    <Group position="apart">
+                <Stack pos="relative" style={{ flex: 1 }}>
+                    <Group justify="space-between">
                         <Title order={2}>{t("Men's Tops")}</Title>
 
                         <Group>
@@ -36,12 +36,12 @@ export default function ProductsIndex() {
                                 }`}
                             </Text>
 
-                            <SortProducts />
+                            {/* <SortProducts /> */}
                         </Group>
                     </Group>
 
                     {/* products are gonna be fetched in this component */}
-                    <Products setTotalProductsCount={setTotalProductsCount} />
+                    {/* <Products setTotalProductsCount={setTotalProductsCount} /> */}
                 </Stack>
             </Group>
         </Container>

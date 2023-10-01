@@ -1,16 +1,7 @@
 export const AbstractLines = () => {
     return (
         <svg
-            style={{
-                width: '100%',
-                position: 'absolute',
-                right: 0,
-                bottom: 0,
-                top: 0,
-                stroke: 'yellow',
-                opacity: 0.05,
-                transform: 'rotate(180deg)',
-            }}
+            className="pointer-events-none w-full absolute top-0 right-0 bottom-0 stroke-yellow-500/[0.05] rotate-180"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 6541 3307"
             fill="none"

@@ -1,7 +1,7 @@
-import { CustomerReviews } from '@/components/shop/products/show/CustomerReviews/CustomerReviews'
-import { ProductDescription } from '@/components/shop/products/show/ProductDescription'
-import { ProductImages } from '@/components/shop/products/show/ProductImages'
-import { WriteReviewModal } from '@/components/shop/products/show/WriteReviewModal'
+// import { CustomerReviews } from '@/components/shop/products/show/CustomerReviews/CustomerReviews'
+// import { ProductDescription } from '@/components/shop/products/show/ProductDescription'
+// import { ProductImages } from '@/components/shop/products/show/ProductImages'
+// import { WriteReviewModal } from '@/components/shop/products/show/WriteReviewModal'
 import { TPaginatedData } from '@/types'
 import { UserProductShowEntity } from '@/types/entities/product.entity'
 import { ReviewEntity } from '@/types/entities/review.entity'
@@ -19,26 +19,26 @@ export default function ShowProduct() {
 
     return (
         <>
-            <WriteReviewModal
+            {/* <WriteReviewModal
                 productID={product.id}
                 opened={isReviewModalOpened}
                 onClose={close}
-            />
+            /> */}
 
             <Container pt="xl">
-                <Stack spacing={50}>
-                    <Group noWrap align="start" spacing={50}>
-                        <ProductImages product={product} />
+                <Stack gap={50}>
+                    <Group wrap="nowrap" align="start" gap={50}>
+                        {/* <ProductImages product={product} />
 
                         <ProductDescription
                             product={product}
                             reviewsCount={reviews.meta.total}
-                        />
+                        /> */}
                     </Group>
 
                     <Divider />
 
-                    <CustomerReviews reviews={reviews} openReviewModal={open} />
+                    {/* <CustomerReviews reviews={reviews} openReviewModal={open} /> */}
                 </Stack>
             </Container>
         </>

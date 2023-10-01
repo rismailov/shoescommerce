@@ -1,5 +1,5 @@
+import { Button } from '@/components/ui/button'
 import useCartStore from '@/lib/store/cart.store'
-import { ActionIcon, Indicator } from '@mantine/core'
 import { IconShoppingCart } from '@tabler/icons-react'
 
 export const CartTrigger = () => {
@@ -7,21 +7,19 @@ export const CartTrigger = () => {
     const toggleCart = useCartStore((s) => s.toggleIsCartOpened)
 
     return (
-        <Indicator
-            label={items.reduce((prev, cur) => prev + cur.amount, 0)}
-            size={18}
-            offset={3}
-            disabled={!items.length}
-            styles={{
-                indicator: {
-                    fontWeight: 600,
-                    pointerEvents: 'none',
-                },
-            }}
+        <Button
+            size="icon"
+            variant="ghost"
+            onClick={toggleCart}
+            className="rounded-full relative"
         >
-            <ActionIcon size="lg" onClick={toggleCart} radius="xl">
-                <IconShoppingCart className="sprite sprite-lg" />
-            </ActionIcon>
-        </Indicator>
+            <IconShoppingCart className="sprite sprite-md" />
+
+            {!!items.length && (
+                <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-medium text-primary-foreground bg-primary border-2 border-border rounded-full -top-2 -right-2">
+                    {items.reduce((prev, cur) => prev + cur.amount, 0)}
+                </div>
+            )}
+        </Button>
     )
 }

@@ -23,6 +23,7 @@
     "First name": "First name",
     "Last name": "Last name",
     "Confirm password": "Confirm password",
+    "Password confirmation": "Password confirmation",
     "Register": "Register",
     "or": "or",
     "create a free account": "create a free account",
@@ -59,5 +60,8 @@
     "Profile": "Profile",
     "Men": "Men",
     "Women": "Women",
-    "Kids": "Kids"
+    "Kids": "Kids",
+    "Shop": "Shop",
+    "Products": "Products",
+    "Colours": "Colours"
 }

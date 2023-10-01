@@ -1,6 +1,6 @@
-import { Cart } from '@/components/shop/Cart'
+// import { Cart } from '@/components/shop/Cart'
 import { usePage } from '@inertiajs/react'
-import { Box } from '@mantine/core'
+import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 import AppLayout from './AppLayout'
 
@@ -10,11 +10,13 @@ export default function ShopLayout({ children }: PropsWithChildren) {
     return (
         <AppLayout>
             <>
-                <Cart />
+                {/* <Cart /> */}
 
-                <Box mt={60} pt={url === '/' ? 0 : 30} pb={50}>
+                <div
+                    className={clsx(['pb-[50px]', url === '/' && 'pt-[30px]'])}
+                >
                     {children}
-                </Box>
+                </div>
             </>
         </AppLayout>
     )

@@ -1,122 +1,182 @@
-import { useSubmit } from '@/hooks/useSubmit'
-import { Head } from '@inertiajs/react'
+import { Button } from '@/components/ui/button'
 import {
-    Button,
-    LoadingOverlay,
-    PasswordInput,
-    Stack,
-    TextInput,
-} from '@mantine/core'
-import { useForm } from '@mantine/form'
-import { useFocusTrap } from '@mantine/hooks'
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useSubmit } from '@/hooks/use-submit'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Head } from '@inertiajs/react'
+import clsx from 'clsx'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-
-type TFormValues = {
-    fname: string
-    lname: string
-    email: string
-    password: string
-    password_confirmation: string
-}
+import { z } from 'zod'
 
 export default function Register() {
     const { t } = useTranslation()
-    const ref = useFocusTrap()
-
     const { submit, isLoading } = useSubmit()
-    const form = useForm<TFormValues>({
-        initialValues: {
+
+    const schema = z.object({
+        fname: z
+            .string()
+            .min(2, t('validation.min', { label: t('First name'), count: 2 })),
+        lname: z
+            .string()
+            .min(2, t('validation.min', { label: t('Last name'), count: 2 })),
+        email: z.string().email(t('validation.email_invalid')),
+        password: z
+            .string()
+            .min(8, t('validation.min', { label: t('Password'), count: 8 })),
+        password_confirmation: z.string().min(
+            8,
+            t('validation.min', {
+                label: t('Password confirmation'),
+                count: 8,
+            }),
+        ),
+    })
+
+    const form = useForm<z.infer<typeof schema>>({
+        resolver: zodResolver(schema),
+        defaultValues: {
             fname: '',
             lname: '',
             email: '',
             password: '',
             password_confirmation: '',
         },
-        validate: {
-            fname: (value) =>
-                value.length < 2
-                    ? t('validation.min', {
-                          label: t('First name'),
-                          count: 2,
-                      })
-                    : null,
-            lname: (value) =>
-                value.length < 2
-                    ? t('validation.min', {
-                          label: t('Last name'),
-                          count: 2,
-                      })
-                    : null,
-            email: (value) =>
-                /^\S+@\S+$/.test(value) ? null : t('validation.email_invalid'),
-        },
     })
 
-    const onSubmit = async (data: TFormValues) =>
+    const { setFocus } = form
+    useEffect(() => {
+        setFocus('fname')
+    }, [setFocus])
+
+    const onSubmit = async (data: z.infer<typeof schema>) =>
         await submit({
-            form,
+            setError: form.setError,
+            reset: form.reset,
             method: 'post',
             url: route('auth.register.store'),
             data,
+            stopLoadingOnSuccess: false,
         })
 
     return (
-        <form onSubmit={form.onSubmit(onSubmit)}>
-            {isLoading && <LoadingOverlay visible={true} />}
-
+        <Form {...form}>
             <Head title={t('Register')} />
 
-            <Stack>
-                <TextInput
-                    required
-                    ref={ref}
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className={clsx(['space-y-4', isLoading && 'disabled'])}
+            >
+                <FormField
+                    control={form.control}
                     name="fname"
-                    placeholder={t('First name')}
-                    size="md"
-                    {...form.getInputProps('fname')}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input
+                                    required
+                                    placeholder={t('First name')}
+                                    {...field}
+                                />
+                            </FormControl>
+
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
 
-                <TextInput
-                    required
+                <FormField
+                    control={form.control}
                     name="lname"
-                    placeholder={t('Last name')}
-                    size="md"
-                    {...form.getInputProps('lname')}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input
+                                    required
+                                    placeholder={t('Last name')}
+                                    {...field}
+                                />
+                            </FormControl>
+
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
 
-                <TextInput
-                    required
-                    type="email"
-                    placeholder={t('E-mail')}
-                    size="md"
-                    {...form.getInputProps('email')}
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input
+                                    required
+                                    type="email"
+                                    placeholder={t('E-mail')}
+                                    {...field}
+                                />
+                            </FormControl>
+
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
 
-                <PasswordInput
-                    required
-                    placeholder={t('Password')}
-                    size="md"
-                    {...form.getInputProps('password')}
+                <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input
+                                    required
+                                    type="password"
+                                    placeholder={t('Password')}
+                                    {...field}
+                                />
+                            </FormControl>
+
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
 
-                <PasswordInput
-                    required
-                    placeholder={t('Confirm password')}
-                    size="md"
-                    {...form.getInputProps('password_confirmation')}
+                <FormField
+                    control={form.control}
+                    name="password_confirmation"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input
+                                    required
+                                    type="password"
+                                    placeholder={t('Confirm password')}
+                                    {...field}
+                                />
+                            </FormControl>
+
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
 
                 <Button
                     type="submit"
-                    color="dark"
-                    h={50}
-                    size="md"
-                    disabled={Object.values(form.values).some((v) => v === '')}
-                    fullWidth
+                    className="w-full h-12"
+                    variant="accent"
+                    size="lg"
+                    loading={isLoading}
                 >
                     {t('Register')}
                 </Button>
-            </Stack>
-        </form>
+            </form>
+        </Form>
     )
 }
