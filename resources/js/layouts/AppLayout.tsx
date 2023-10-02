@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { PropsWithChildren, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MobileMenu } from './MobileMenu'
+import { Toaster } from '@/components/ui/toaster'
 
 export default function AppLayout({ children }: PropsWithChildren) {
     const [queryClient] = useState<QueryClient>(() => new QueryClient())
@@ -24,6 +25,8 @@ export default function AppLayout({ children }: PropsWithChildren) {
     return (
         <MantineProvider>
             <QueryClientProvider client={queryClient}>
+                <Toaster />
+
                 <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
                     <div className="relative h-full min-h-screen flex flex-col justify-between">
                         <Header

@@ -8,6 +8,7 @@ import { createRoot } from 'react-dom/client'
 import AdminLayout from './layouts/AdminLayout'
 import AuthLayout from './layouts/AuthLayout'
 import ShopLayout from './layouts/ShopLayout'
+import SettingsLayout from './layouts/SettingsLayout'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
@@ -29,6 +30,10 @@ const getPageWithLayout = (name: string) => {
     } else if (name.startsWith('admin/')) {
         page.default.layout = (module: ReactNode) => (
             <AdminLayout children={module} />
+        )
+    } else if (name.startsWith('shop/settings')) {
+        page.default.layout = (module: ReactNode) => (
+            <SettingsLayout children={module} />
         )
     } else {
         page.default.layout = (module: ReactNode) => (

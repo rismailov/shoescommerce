@@ -13,7 +13,7 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Link, router, usePage } from '@inertiajs/react'
-import { IconEdit, IconLogout, IconUser } from '@tabler/icons-react'
+import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -87,10 +87,10 @@ export const AuthDropdown = () => {
 
                 {/* navigation */}
                 <DropdownMenuItem asChild>
-                    <Link href={route('profile.edit')}>
-                        {t('Account')}
+                    <Link href={route('settings.profile.edit')}>
+                        {t('Settings')}
 
-                        <IconEdit className="ml-auto sprite sprite-md" />
+                        <IconSettings className="ml-auto sprite sprite-md" />
                     </Link>
                 </DropdownMenuItem>
 

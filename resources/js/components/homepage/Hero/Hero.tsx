@@ -1,13 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { useMediaQuery } from '@/hooks/use-media.query'
+import { Link } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 import { AbstractLines } from './sprites/AbstractLines'
 import { AirMaxTitle } from './sprites/AirMaxTitle'
-import { Link } from '@inertiajs/react'
 
 export const Hero = () => {
     const { t } = useTranslation()
-
     const matches = useMediaQuery('(min-width: 640px)') // tailwind sm screen
 
     return (

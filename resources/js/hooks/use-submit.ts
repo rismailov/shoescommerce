@@ -1,4 +1,5 @@
 // import { setErrorAlertAtom, setSuccessAlertAtom } from '@/store/alert.atom'
+import { useToast } from '@/components/ui/use-toast'
 import { Errors, PageProps } from '@/types/inertia'
 import { sleep } from '@/utils'
 import { router } from '@inertiajs/react'
@@ -72,6 +73,7 @@ export function useSubmit(): UseSubmitReturnType {
     // const setErrorAlert = useSetAtom(setErrorAlertAtom)
 
     // toasts (notifications)
+    const { toast } = useToast()
     // const { showSuccess, showError } = useToast()
 
     async function submit({
@@ -113,8 +115,10 @@ export function useSubmit(): UseSubmitReturnType {
                 // error && !showToastOnError && setErrorAlert(error)
 
                 // toast (use "success" on backend for success toasts)
-                // success && showSuccess(success)
-                // error && showToastOnError && showError(error)
+                success && toast({ variant: 'success', description: success })
+                error &&
+                    showToastOnError &&
+                    toast({ variant: 'error', description: success })
 
                 if (resetFormOnSuccess && reset) {
                     reset()
