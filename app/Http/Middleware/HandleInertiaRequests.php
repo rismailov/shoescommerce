@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Http\Resources\UserResource;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -48,9 +49,9 @@ class HandleInertiaRequests extends Middleware
          * in shop routes, e.g. all routes except admin. Here we're checking
          * if route name has 'admin' in it, and if not, adding categories to payload.
          */
-        // if (! str()->contains($request->route()->getName(), 'admin')) {
-        //     $payload['categories'] = (new ProductService)->getCategoryOptions();
-        // }
+        if (! str()->contains($request->route()->getName(), 'admin')) {
+            $payload['categories'] = (new ProductService)->getCategoryOptions();
+        }
 
         return $payload;
     }

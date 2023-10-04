@@ -9,7 +9,7 @@ export default function ShopLayout({ children }: PropsWithChildren) {
             <>
                 {/* <Cart /> */}
 
-                <div className={clsx(['pb-[50px]', 'pt-8'])}>{children}</div>
+                <div className="py-8">{children}</div>
             </>
         </AppLayout>
     )

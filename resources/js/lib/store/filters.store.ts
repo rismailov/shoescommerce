@@ -5,8 +5,8 @@ import { createWithEqualityFn } from 'zustand/traditional'
 export type TSortValue = 'price-asc' | 'price-desc' | 'date-asc' | 'date-desc'
 
 type TPriceProductFilter = {
-    min: number | null
-    max: number | null
+    min: number | string | null
+    max: number | string | null
     onSale: boolean
 }
 

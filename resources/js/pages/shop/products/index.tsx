@@ -1,4 +1,4 @@
-// import { Filters } from '@/components/shop/products/index/Filters'
+import { Filters } from '@/components/shop/products/index/Filters'
 // import { Products } from '@/components/shop/products/index/Products'
 // import { SortProducts } from '@/components/shop/products/index/SortProducts'
 import { TOption } from '@/types'
@@ -18,12 +18,11 @@ export default function ProductsIndex() {
     const [totalProductsCount, setTotalProductsCount] = useState(0)
 
     return (
-        <Container>
-            <Group pos="relative" align="start" gap="xl">
-                {/* filter options are gonna be fetched in this component */}
-                {/* <Filters options={filterOptions} /> */}
+        <div className="container">
+            <div className="relative items-start space-x-10">
+                <Filters options={filterOptions} />
 
-                <Stack pos="relative" style={{ flex: 1 }}>
+                {/* <Stack pos="relative" style={{ flex: 1 }}>
                     <Group justify="space-between">
                         <Title order={2}>{t("Men's Tops")}</Title>
 
@@ -36,14 +35,13 @@ export default function ProductsIndex() {
                                 }`}
                             </Text>
 
-                            {/* <SortProducts /> */}
+                            <SortProducts />
                         </Group>
                     </Group>
 
-                    {/* products are gonna be fetched in this component */}
-                    {/* <Products setTotalProductsCount={setTotalProductsCount} /> */}
-                </Stack>
-            </Group>
-        </Container>
+                    <Products setTotalProductsCount={setTotalProductsCount} />
+                </Stack> */}
+            </div>
+        </div>
     )
 }

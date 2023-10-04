@@ -106,12 +106,12 @@ export default function Login() {
                             <div className="pt-1 flex items-center space-x-2">
                                 <FormControl>
                                     <Checkbox
+                                        id="remember"
+                                        label={t('Remember me')}
                                         checked={field.value}
                                         onCheckedChange={field.onChange}
                                     />
                                 </FormControl>
-
-                                <FormLabel>{t('Remember me')}</FormLabel>
                             </div>
 
                             <FormMessage />
