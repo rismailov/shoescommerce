@@ -32,7 +32,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
     ]
     return (
         <ShopLayout>
-            <div className="container">
+            <div className="container mt-10">
                 <Head title={t('Settings')} />
 
                 <Card className="lg:p-2">
@@ -71,11 +71,11 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
 
                             <div className="w-full flex flex-col">
                                 {/* title */}
-                                <h1 className="font-medium text-2xl">
+                                <h2>
                                     {routes.find((r) =>
                                         route().current(r.match),
                                     )?.label ?? t('Profile')}
-                                </h1>
+                                </h2>
 
                                 {/* description */}
                                 <p className="text-muted-foreground">

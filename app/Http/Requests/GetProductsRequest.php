@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\CategoryEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class GetProductsRequest extends FormRequest
 {
@@ -16,17 +14,17 @@ class GetProductsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'categories'   => ['array'],
-            'categories.*' => [new Enum(CategoryEnum::class)],
-            'sizes'        => ['array'],
-            'sizes.*'      => ['numeric'],
-            'colours'      => ['array'],
-            'colours.*'    => ['numeric'],
-            'onSale'       => ['boolean'],
-            'minPrice'     => ['numeric', 'min:0.00'],
-            'maxPrice'     => ['numeric'],
-            'limit'        => ['numeric', 'min:1', 'nullable'],
-            'sort'         => [
+            'genders'   => ['array'],
+            'genders.*' => ['in:men,women,kids'],
+            'sizes'     => ['array'],
+            'sizes.*'   => ['numeric'],
+            'colours'   => ['array'],
+            'colours.*' => ['numeric'],
+            'onSale'    => ['boolean'],
+            'minPrice'  => ['numeric', 'min:0.00'],
+            'maxPrice'  => ['numeric'],
+            'limit'     => ['numeric', 'min:1', 'nullable'],
+            'sort'      => [
                 'nullable',
                 'in:price-asc,price-desc,date-asc,date-desc',
             ],

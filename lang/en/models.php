@@ -1,35 +1,31 @@
 <?php
 
-use App\Enums\CategoryEnum;
-
 return [
     'colours' => [
         'single'   => 'Colour',
         'multiple' => 'Colours',
 
         'values' => [
-            'white'          => 'White',
-            'black'          => 'Black',
-            'yellow'         => 'Yellow',
-            'light-gray'     => 'Light gray',
-            'navy'           => 'Navy',
-            'military-beige' => 'Military beige',
-            'raspberry'      => 'Raspberry',
-            'dark-purple'    => 'Dark purple',
-            'dusty-pink'     => 'Dusty pink',
-            'electric-blue'  => 'Electric blue',
-            'emerald'        => 'Emerald',
-            'burgundy'       => 'Burgundy',
-            'sage'           => 'Sage',
-            'gray'           => 'Gray',
+            'black'  => 'Black',
+            'orange' => 'Orange',
+            'blue'   => 'Blue',
+            'brown'  => 'Brown',
+            'green'  => 'Green',
+            'grey'   => 'Grey',
+            'pink'   => 'Pink',
+            'purple' => 'Purple',
+            'red'    => 'Red',
+            'white'  => 'White',
+            'yellow' => 'Yellow',
         ],
     ],
 
-    'categories' => [
-        CategoryEnum::POLO->value       => 'Polo',
-        CategoryEnum::TALL->value       => 'Tall',
-        CategoryEnum::V_NECK->value     => 'V-Neck',
-        CategoryEnum::ACTIVEWEAR->value => 'Activewear',
+    'genders' => [
+        'men'   => 'Men',
+        'women' => 'Women',
+        'kids'  => 'Kids',
+
+        'product_subtitle' => ":Gender's Shoes",
     ],
 
     'sizes' => [

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\CategoryEnum;
+use App\Enums\GenderEnum;
 use App\Models\Colour;
 use App\Models\Product;
 use App\Models\Size;
@@ -26,140 +26,188 @@ class ProductSeeder extends Seeder
         // looks like: [['white' => 1], ['black' => 2], ...]
         $colours = Colour::select(['id', 'value'])->pluck('id', 'value');
 
+        // let's hardcode some products!
         $products = [
-            // Activewear
+            /*
+             * ============================================================
+             * ========================== MEN =============================
+             * ============================================================
+             */
+            // AIR MAX 1'86 OG G
             [
-                'name'        => 'White Active Crew Neck',
-                'description' => 'White Active Crew Neck',
-                'price'       => 30,
-                'category'    => CategoryEnum::ACTIVEWEAR->value,
-                'colour'      => 'white',
-                'sizeIds'     => [
+                'name'          => "Air Max 1'86 OG G",
+                'description'   => "Air Max 1'86 OG G",
+                'price'         => 180,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'yellow',
+                'sizes'         => [
                     $sizes['s'],
                     $sizes['m'],
                     $sizes['xl'],
                     $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/activewear/white',
+                'imagesDir' => '/seeder/products/men/air_max_1-86_og/yellow',
             ],
-
+            // KD 16
             [
-                'name'        => 'Burgundy Active Crew Neck',
-                'description' => 'Burgundy Active Crew Neck',
-                'price'       => 25.50,
-                'category'    => CategoryEnum::ACTIVEWEAR->value,
-                'colour'      => 'burgundy',
-                'sizeIds'     => [
+                'name'          => 'KD 16',
+                'description'   => 'KD 16',
+                'price'         => 160,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'red',
+                'sizes'         => [
                     $sizes['s'],
                     $sizes['m'],
-                    $sizes['l'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/activewear/burgundy',
+                'imagesDir' => '/seeder/products/men/kd16/red',
             ],
-
-            // Polo
             [
-                'name'        => 'Navy Polo',
-                'description' => 'Navy Polo',
-                'price'       => 40.00,
-                'category'    => CategoryEnum::POLO->value,
-                'colour'      => 'navy',
-                'sizeIds'     => [
+                'name'          => 'KD 16',
+                'description'   => 'KD 16',
+                'price'         => 150,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'purple',
+                'sizes'         => [
                     $sizes['s'],
-                    $sizes['l'],
+                    $sizes['m'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/polo/navy',
+                'imagesDir' => '/seeder/products/men/kd16/purple',
             ],
-
+            // killshot 2 leather
             [
-                'name'        => 'Military Beige Polo',
-                'description' => 'Military Beige Polo',
-                'price'       => 35.00,
-                'category'    => CategoryEnum::POLO->value,
-                'colour'      => 'military-beige',
-                'sizeIds'     => [
+                'name'          => 'Killshot 2 Leather',
+                'description'   => 'Killshot 2 Leather',
+                'price'         => 90,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'white',
+                'sizes'         => [
                     $sizes['s'],
-                    $sizes['l'],
+                    $sizes['m'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/polo/military-beige',
+                'imagesDir' => '/seeder/products/men/killshot_2_leather/white',
             ],
-
+            // Lebron NXXT
             [
-                'name'        => 'White Polo',
-                'description' => 'White Polo',
-                'price'       => 30.00,
-                'category'    => CategoryEnum::POLO->value,
-                'colour'      => 'white',
-                'sizeIds'     => [
+                'name'          => 'LeBron NXXT Gen',
+                'description'   => 'LeBron NXXT Gen',
+                'price'         => 160,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'black',
+                'sizes'         => [
                     $sizes['s'],
-                    $sizes['l'],
+                    $sizes['m'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/polo/white',
+                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/black',
             ],
-
             [
-                'name'        => 'Burgundy Polo',
-                'description' => 'Burgundy Polo',
-                'price'       => 30.00,
-                'category'    => CategoryEnum::POLO->value,
-                'colour'      => 'burgundy',
-                'sizeIds'     => [
+                'name'             => 'LeBron NXXT Gen',
+                'description'      => 'LeBron NXXT Gen',
+                'price'            => 160,
+                'is_discounted'    => true,
+                'discount_percent' => 30,
+                'gender'           => GenderEnum::MEN->value,
+                'colour'           => 'green',
+                'sizes'            => [
                     $sizes['s'],
-                    $sizes['l'],
+                    $sizes['m'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/polo/burgundy',
+                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/green',
             ],
-
-            // V-Neck
             [
-                'name'        => 'Black V-Neck T-Shirt',
-                'description' => 'Black V-Neck T-Shirt',
-                'price'       => 25.00,
-                'category'    => CategoryEnum::V_NECK->value,
-                'colour'      => 'black',
-                'sizeIds'     => [
+                'name'          => 'LeBron NXXT Gen',
+                'description'   => 'LeBron NXXT Gen',
+                'price'         => 170,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'purple',
+                'sizes'         => [
                     $sizes['s'],
-                    $sizes['l'],
+                    $sizes['m'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/v-neck/black',
+                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/purple',
             ],
-
             [
-                'name'        => 'White V-Neck T-Shirt',
-                'description' => 'White V-Neck T-Shirt',
-                'price'       => 21.00,
-                'category'    => CategoryEnum::V_NECK->value,
-                'colour'      => 'white',
-                'sizeIds'     => [
+                'name'          => 'LeBron NXXT Gen',
+                'description'   => 'LeBron NXXT Gen',
+                'price'         => 160,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'red',
+                'sizes'         => [
                     $sizes['s'],
-                    $sizes['l'],
+                    $sizes['m'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/v-neck/white',
+                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/red',
             ],
-
+            // Tech Hera
             [
-                'name'        => 'Light Gray V-Neck T-Shirt',
-                'description' => 'Light Gray V-Neck T-Shirt',
-                'price'       => 27.00,
-                'category'    => CategoryEnum::V_NECK->value,
-                'colour'      => 'light-gray',
-                'sizeIds'     => [
+                'name'             => 'Tech Hera',
+                'description'      => 'Tech Hera',
+                'price'            => 110,
+                'is_discounted'    => true,
+                'discount_percent' => 20,
+                'gender'           => GenderEnum::MEN->value,
+                'colour'           => 'brown',
+                'sizes'            => [
                     $sizes['s'],
-                    $sizes['l'],
+                    $sizes['m'],
                     $sizes['xl'],
+                    $sizes['xxl'],
                 ],
-                'imagesDir' => 'seeder/products/v-neck/light-gray',
+                'imagesDir' => '/seeder/products/men/tech_hera/brown',
+            ],
+            [
+                'name'          => 'Tech Hera',
+                'description'   => 'Tech Hera',
+                'price'         => 110,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'grey',
+                'sizes'         => [
+                    $sizes['s'],
+                    $sizes['m'],
+                    $sizes['xl'],
+                    $sizes['xxl'],
+                ],
+                'imagesDir' => '/seeder/products/men/tech_hera/grey',
+            ],
+            [
+                'name'          => 'Tech Hera',
+                'description'   => 'Tech Hera',
+                'price'         => 110,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::MEN->value,
+                'colour'        => 'orange',
+                'sizes'         => [
+                    $sizes['s'],
+                    $sizes['m'],
+                    $sizes['xl'],
+                    $sizes['xxl'],
+                ],
+                'imagesDir' => '/seeder/products/men/tech_hera/orange',
             ],
         ];
 
-        foreach ($products as $idx => $product) {
+        foreach ($products as $product) {
             // skip if specified image directory doesn't exist
             if (! Storage::disk('local')->exists($product['imagesDir'])) {
                 echo 'There are no images for this product (or wrong path): '.$product['name'].PHP_EOL;
@@ -167,44 +215,60 @@ class ProductSeeder extends Seeder
                 continue;
             }
 
-            // skip if specified colour doesn't exist
+            // skip if specified colour doesn't exist (wasn't seeded)
             if (! $colours[$product['colour']]) {
-                echo 'Colour ('.$product['colour'].') does not exists or was not seeded'.PHP_EOL;
+                echo 'Colour ('.$product['colour'].') was not seeded'.PHP_EOL;
 
                 continue;
             }
 
             try {
-                DB::transaction(function () use ($product, $colours, $idx) {
+                DB::transaction(function () use ($product, $colours) {
+                    $date = fake()->dateTimeBetween('-5 days', 'now');
                     $created = Product::create([
-                        'name'        => $product['name'],
-                        'description' => $product['description'],
-                        'price'       => $product['price'],
-                        'category'    => $product['category'],
-                        'created_at'  => now()->addHours($idx),
-                        'updated_at'  => now()->addHours($idx),
+                        'name'             => $product['name'],
+                        'description'      => $product['description'],
+                        'price'            => $product['price'],
+                        'gender'           => $product['gender'],
+                        'is_discounted'    => $product['is_discounted'],
+                        'created_at'       => $date,
+                        'updated_at'       => $date,
+                        'discount_percent' => array_key_exists('discount_percent', $product)
+                            ? $product['discount_percent']
+                            : null,
                     ]);
 
-                    $created->sizes()->sync($product['sizeIds']);
+                    $created->sizes()->sync($product['sizes']);
                     $created->colours()->sync($colours[$product['colour']]);
 
-                    foreach (
-                        File::allFiles(storage_path('app/'.$product['imagesDir']))
-                        as $idx => $file
-                    ) {
-                        $fileName = $file->getFilename();
-                        $path = 'images/products/'.$created->id.'/';
+                    /**
+                     * Save images.
+                     *
+                     * NOTE: because we're seeding images, we will manually copy them over
+                     * to storage's public directory.
+                     */
+                    $path = 'images/products/'.$created->id.'/';
+                    $images_dir_to = storage_path('app/public/'.$path); // destination dir
 
-                        ray(storage_path($path));
+                    if (! file_exists($images_dir_to)) {
+                        // if directory doesn't exist create it
+                        mkdir($images_dir_to, 0777, true);
+                    } else {
+                        // and if it does, delete all images from previous seed so they don't get mixed up
+                        foreach (glob($images_dir_to.'*') as $file) {
+                            is_file($file) && unlink($file);
+                        }
+                    }
+
+                    // copy files and save them to DB
+                    $images_dir_from = storage_path('app/'.$product['imagesDir'].'/'); // from dir
+                    foreach (File::allFiles($images_dir_from) as $file) {
+                        $fileName = $file->getFilename();
 
                         // copy image over
-                        if (! file_exists(storage_path('app/public/'.$path))) {
-                            mkdir(storage_path('app/public/'.$path), 0777, true);
-                        }
-
                         File::copy(
-                            storage_path('app/'.$product['imagesDir'].'/'.$fileName),
-                            storage_path('app/public/'.$path.$fileName)
+                            $images_dir_from.$fileName,
+                            $images_dir_to.$fileName
                         );
 
                         // save image model

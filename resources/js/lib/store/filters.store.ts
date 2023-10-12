@@ -11,8 +11,8 @@ type TPriceProductFilter = {
 }
 
 type FiltersStore = {
-    categories: string[]
-    setCategories: (categories: string[]) => void
+    genders: string[]
+    setGenders: (genders: string[]) => void
 
     sizes: string[]
     setSizes: (sizes: string[]) => void
@@ -32,8 +32,8 @@ type FiltersStore = {
 
 const useFiltersStore = createWithEqualityFn<FiltersStore>(
     (set) => ({
-        categories: [],
-        setCategories: (categories) => set({ categories }),
+        genders: [],
+        setGenders: (genders) => set({ genders }),
 
         sizes: [],
         setSizes: (sizes) => set({ sizes }),

@@ -4,10 +4,11 @@ import { Link } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 import { AbstractLines } from './sprites/AbstractLines'
 import { AirMaxTitle } from './sprites/AirMaxTitle'
+import { screens } from 'tailwindcss/defaultTheme'
 
 export const Hero = () => {
     const { t } = useTranslation()
-    const matches = useMediaQuery('(min-width: 640px)') // tailwind sm screen
+    const matches = useMediaQuery(`(min-width: ${screens.sm})`)
 
     return (
         <div>

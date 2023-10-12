@@ -4,6 +4,16 @@
 
 html {
     font-size: 15px;
+    overflow-x: hidden;
+}
+
+body {
+    @apply !min-w-full;
+}
+
+html,
+header {
+    margin-right: calc(100% - 100vw);
 }
 
 /* https://ui.shadcn.com/themes */
@@ -62,6 +72,14 @@ html {
     body {
         @apply bg-background text-foreground;
     }
+
+    h1 {
+        @apply font-bold text-3xl leading-none;
+    }
+
+    h2 {
+        @apply font-medium text-2xl;
+    }
 }
 
 /* container */
@@ -93,4 +111,13 @@ html {
 .disabled {
     opacity: 0.5;
     pointer-events: none;
+}
+
+/*react rating*/
+.rr--svg {
+    padding: 0 !important;
+}
+
+.rr--box {
+    margin-right: 2px;
 }

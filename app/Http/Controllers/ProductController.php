@@ -37,8 +37,8 @@ class ProductController extends Controller
             'sizes', 'images', 'colours', 'reviews',
         ])
             ->withCount('reviews')
-            ->when($v('categories'), function ($q) use ($v) {
-                $q->whereIn('category', $v('categories'));
+            ->when($v('genders'), function ($q) use ($v) {
+                $q->whereIn('gender', $v('genders'));
             })
             ->when($v('sizes'), function ($q) use ($v) {
                 $q->whereHas('sizes', function ($sub) use ($v) {
@@ -59,9 +59,14 @@ class ProductController extends Controller
             })
             ->when($v('sort'), function ($q) use ($v) {
                 [$key, $value] = explode('-', $v('sort'));
-                $key = $key === 'date' ? 'created_at' : 'price';
 
-                $q->orderBy($key, $value);
+                if ($key === 'date') {
+                    $q->orderBy('created_at', $value);
+                }
+
+                if ($key === 'price') {
+                    $q->orderByRaw("LEAST(price, COALESCE(discount_price, price)) {$value}");
+                }
             })
             ->paginate($v('limit'));
 

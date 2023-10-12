@@ -7,20 +7,20 @@ export const MobileMenu = () => {
     const routes = useRoutes()
 
     // store
-    const setCategories = useFiltersStore((s) => s.setCategories)
+    const setGenders = useFiltersStore((s) => s.setGenders)
 
     return (
         <div className="sm:hidden sm:pointer-events-none w-full h-screen absolute inset-0 pt-[80px] bg-muted z-10">
             <div className="container">
-                {routes.map(({ label, category, href }, idx) => (
+                {routes.map(({ label, gender, href }, idx) => (
                     <div
-                        key={category ?? href}
+                        key={gender ?? href}
                         className="w-full flex flex-col items-center justify-center"
                     >
-                        {category ? (
+                        {gender ? (
                             <button
                                 onClick={() => {
-                                    setCategories([category])
+                                    setGenders([gender])
 
                                     if (!route().current('products.index')) {
                                         router.visit(route('products.index'))

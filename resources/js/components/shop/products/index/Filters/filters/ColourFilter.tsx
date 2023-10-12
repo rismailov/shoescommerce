@@ -33,7 +33,7 @@ export const ColourFilter = ({
             </AccordionTrigger>
 
             <AccordionContent>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="pt-1 grid grid-cols-3 gap-5">
                     {options.map(({ value, label, hex }) => (
                         <button
                             key={value}

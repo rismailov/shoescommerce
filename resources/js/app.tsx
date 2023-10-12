@@ -1,3 +1,4 @@
+import '@smastrom/react-rating/style.css'
 import '../css/globals.css'
 import './bootstrap'
 import './i18n'

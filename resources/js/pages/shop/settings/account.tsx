@@ -14,9 +14,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useToast } from '@/components/ui/use-toast'
-import { Theme, useTheme } from '@/context/theme-provider'
 import { router, usePage } from '@inertiajs/react'
 import { IconCheck, IconSelector } from '@tabler/icons-react'
 import clsx from 'clsx'
@@ -25,7 +23,6 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 type TFormValues = {
-    theme: Theme
     language: 'en' | 'ru'
 }
 
@@ -37,23 +34,17 @@ const LANGUAGES = [
 export default function Account() {
     const { t } = useTranslation()
     const { locale } = usePage().props
-    const { theme, setTheme } = useTheme()
     const { toast } = useToast()
 
     const [isLangDropdownOpen, setLangDropdownOpen] = useState(false)
 
     const form = useForm<TFormValues>({
         defaultValues: {
-            theme,
             language: locale,
         },
     })
 
     const onSubmit = (data: TFormValues) => {
-        if (data.theme !== theme) {
-            setTheme(data.theme)
-        }
-
         if (locale !== data.language) {
             router.get(
                 route('change_locale', { locale: data.language }),
@@ -78,50 +69,6 @@ export default function Account() {
                 className="flex flex-col"
             >
                 <div className="flex flex-col space-y-8">
-                    {/* THEME PREFERENCE */}
-                    <FormField
-                        control={form.control}
-                        name="theme"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{t('Theme')}</FormLabel>
-
-                                <FormDescription>
-                                    {t('Select dashboard theme.')}
-                                </FormDescription>
-
-                                <FormControl>
-                                    <RadioGroup
-                                        onValueChange={field.onChange}
-                                        defaultValue={field.value}
-                                        className="pt-2 flex flex-col space-y-0"
-                                    >
-                                        <FormItem className="flex items-center space-x-2 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="light" />
-                                            </FormControl>
-
-                                            <FormLabel className="font-normal">
-                                                {t('Light')}
-                                            </FormLabel>
-                                        </FormItem>
-
-                                        <FormItem className="flex items-center space-x-2 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value="dark" />
-                                            </FormControl>
-
-                                            <FormLabel className="font-normal">
-                                                {t('Dark')}
-                                            </FormLabel>
-                                        </FormItem>
-                                    </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
                     {/* LANG PREFERENCE */}
                     <FormField
                         control={form.control}

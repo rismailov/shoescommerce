@@ -7,7 +7,6 @@ import { AuthDropdown } from './AuthDropdown'
 import { CartTrigger } from './CartTrigger'
 import { LangSwitcher } from './LangSwitcher'
 import { Menu } from './Menu'
-import { ThemeSwitcher } from './ThemeSwitcher'
 
 export const Header = ({
     isMobileMenuOpen,
@@ -20,7 +19,7 @@ export const Header = ({
     const isAdminDashboard = url.includes('admin')
 
     return (
-        <header className="fixed mih-[60px] w-full z-20 border-b bg-white dark:bg-zinc-950">
+        <header className="h-[60px] w-full z-20 border-b bg-white dark:bg-zinc-950">
             <div className="container">
                 <div className="flex items-center justify-between py-3">
                     {/* left side */}
@@ -35,8 +34,6 @@ export const Header = ({
 
                     {/* right side */}
                     <div className="w-1/2 sm:w-1/4 flex items-center justify-end space-x-2">
-                        <ThemeSwitcher />
-
                         <LangSwitcher />
 
                         <AuthDropdown />

@@ -1,20 +1,46 @@
-import { Group, Rating, RatingProps, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
+import { Rating, Star } from '@smastrom/react-rating'
 
 export const Reviews = ({
-    value,
     reviewsCount,
-}: RatingProps & { reviewsCount: number }) => {
+    avgStars,
+}: {
+    reviewsCount: number
+    avgStars: number
+}) => {
     const { t } = useTranslation()
 
-    return (
-        <Group spacing={5}>
-            <Rating mb={1.5} readOnly size="xs" fractions={10} value={value} />
+    console.log(Star)
 
-            <Text size="xs" weight={600}>
-                {reviewsCount}{' '}
-                {`${reviewsCount === 1 ? t('Review') : t('Reviews')}`}
-            </Text>
-        </Group>
+    return (
+        <div className="flex items-center space-x-2">
+            <Rating
+                readOnly
+                style={{ maxWidth: 80 }}
+                value={avgStars}
+                itemStyles={{
+                    activeFillColor: '#F87315',
+                    inactiveFillColor: '#DEE2E6',
+                    itemShapes: Star,
+                }}
+            />
+
+            {/* <p className="text-muted-foreground text-sm lowercase">
+                {`${reviewsCount} ${
+                    reviewsCount === 1 ? t('Review') : t('Reviews')
+                }`}
+            </p> */}
+        </div>
     )
+
+    // return (
+    //     <Group spacing={5}>
+    //         <Rating mb={1.5} readOnly size="xs" fractions={10} value={value} />
+
+    //         <Text size="xs" weight={600}>
+    //             {reviewsCount}{' '}
+    //             {`${reviewsCount === 1 ? t('Review') : t('Reviews')}`}
+    //         </Text>
+    //     </Group>
+    // )
 }

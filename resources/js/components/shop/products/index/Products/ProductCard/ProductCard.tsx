@@ -1,69 +1,105 @@
-import { Reviews } from '@/components/shop/Reviews'
 import { UserProductIndexEntity } from '@/types/entities/product.entity'
 import { Link } from '@inertiajs/react'
-import {
-    Box,
-    Group,
-    Image,
-    Stack,
-    Text,
-    Title,
-    UnstyledButton,
-} from '@mantine/core'
+import { useMediaQuery } from '@uidotdev/usehooks'
+import clsx from 'clsx'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { useStyles } from './ProductCard.styles'
-import { QuickAdd } from './QuickAdd'
+import { screens } from 'tailwindcss/defaultTheme'
 
 export const ProductCard = ({
     product,
+    showFilters,
 }: {
     product: UserProductIndexEntity
+    showFilters: boolean
 }) => {
     // This is needed to delay animation. Can be safely removed.
     // @note: to understand the purpose of this delay, add product to Cart from "Quick add" button,
     // and then quickly remove the mouse from the product card
     const [isAddingToCart, setIsAddingToCart] = useState(false)
 
-    const { classes } = useStyles({ isAddingToCart })
+    const minWidthLG = useMediaQuery(`(min-width: ${screens.lg})`)
 
     return (
-        <UnstyledButton
-            component={Link}
+        <Link
             href={route('products.show', { product: product.nanoid })}
-            className={classes.cardAnchor}
+            className="w-full inline-flex flex-col"
         >
             {/* Image */}
-            <Box className={classes.imageWrapper}>
-                <Image src={product.img.url} alt={product.name} />
+            <motion.img
+                layout
+                src={product.img.url}
+                alt={product.name}
+                className="w-full rounded-xl object-center object-cover"
+                style={{
+                    height: minWidthLG && !showFilters ? 450 : 350,
+                }}
+            />
 
+            {/* <div className="relative w-full h-full max-h-[300px] overflow-hidden rounded-lg">
                 <QuickAdd
                     product={product}
                     isLoading={isAddingToCart}
                     setIsLoading={setIsAddingToCart}
+
+
+                    QUICK ADD STYLES::::
+                        ['div[data-quick-add-wrapper]']: {
+                            opacity: 0,
+                            transform: 'translateY(5px)',
+                            transition: `opacity 0.2s ${transition} ${
+                                isAddingToCart ? '1.5s' : '0s'
+                            }, transform 0.1s ${transition} ${
+                                isAddingToCart ? '1.5s' : '0s'
+                            }`,
+                        },
+
+                        ':hover': {
+                            ['div[data-quick-add-wrapper]']: {
+                                opacity: 1,
+                                transform: 'translateY(0)',
+                                transition: 'none',
+                            },
+                        },
+                    QUICK ADD STYLES::::
+
                 />
-            </Box>
+            </div> */}
 
             {/* Description */}
-            <Stack spacing={5} p="md">
-                <Reviews
-                    value={product.avgStars}
-                    reviewsCount={product.reviewsCount}
-                />
+            <motion.div
+                layout="position"
+                className="flex flex-col items-start space-y-1.5 py-3"
+            >
+                {/* name */}
+                <p className="text-lg font-medium leading-tight">{`Nike ${product.name}`}</p>
 
-                <Title order={5}>{product.name}</Title>
+                {/* gender, colours count */}
+                <p className="text-muted-foreground leading-tight">
+                    {product.gender}
+                </p>
 
-                <Group spacing="xs">
-                    <Text strikethrough={product.price.discounted !== null}>
-                        {product.price.initial} USD
-                    </Text>
+                <p className="text-muted-foreground leading-tight">5 Colours</p>
 
-                    {product.price.discounted !== null && (
-                        <Text color="orange" weight={500}>
-                            {product.price.discounted} USD
-                        </Text>
+                {/* price */}
+                <div className="flex items-center space-x-2">
+                    <p
+                        className={clsx([
+                            'text-lg font-medium leading-tight',
+                            product.price.discounted &&
+                                'line-through text-muted-foreground',
+                        ])}
+                    >
+                        ${product.price.initial}
+                    </p>
+
+                    {product.price.discounted && (
+                        <p className="text-lg font-medium leading-tight">
+                            ${product.price.discounted}
+                        </p>
                     )}
-                </Group>
-            </Stack>
-        </UnstyledButton>
+                </div>
+            </motion.div>
+        </Link>
     )
 }

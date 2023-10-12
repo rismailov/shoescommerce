@@ -6,16 +6,16 @@ export const Menu = () => {
     const routes = useRoutes()
 
     // store
-    const setCategories = useFiltersStore((s) => s.setCategories)
+    const setGenders = useFiltersStore((s) => s.setGenders)
 
     return (
         <div className="hidden sm:flex sm:w-1/2 items-center justify-center space-x-5">
-            {routes.map(({ label, category, href }) => (
-                <span key={category ?? href}>
-                    {category ? (
+            {routes.map(({ label, gender, href }) => (
+                <span key={gender ?? href}>
+                    {gender ? (
                         <button
                             onClick={() => {
-                                setCategories([category])
+                                setGenders([gender])
 
                                 if (!route().current('products.index')) {
                                     router.visit(route('products.index'))

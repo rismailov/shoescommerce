@@ -62,9 +62,7 @@ export const PriceFilter = () => {
                                 onValueChange={({ value }) =>
                                     setPriceMin(value)
                                 }
-                                decimalScale={2}
-                                // important to use comma because you can input both dot and commas
-                                decimalSeparator=","
+                                decimalScale={0}
                                 customInput={Input}
                                 placeholder={t('min')}
                                 allowNegative={false}
@@ -82,9 +80,7 @@ export const PriceFilter = () => {
                                 onValueChange={({ value }) =>
                                     setPriceMax(value)
                                 }
-                                decimalScale={2}
-                                // important to use comma because you can input both dot and commas
-                                decimalSeparator=","
+                                decimalScale={0}
                                 customInput={Input}
                                 placeholder={t('max')}
                                 allowNegative={false}

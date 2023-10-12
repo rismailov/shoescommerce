@@ -74,41 +74,43 @@ export default function Register() {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className={clsx(['space-y-4', isLoading && 'disabled'])}
             >
-                <FormField
-                    control={form.control}
-                    name="fname"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input
-                                    required
-                                    placeholder={t('First name')}
-                                    {...field}
-                                />
-                            </FormControl>
+                <div className="flex items-stretch space-x-3">
+                    <FormField
+                        control={form.control}
+                        name="fname"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input
+                                        required
+                                        placeholder={t('First name')}
+                                        {...field}
+                                    />
+                                </FormControl>
 
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
-                <FormField
-                    control={form.control}
-                    name="lname"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input
-                                    required
-                                    placeholder={t('Last name')}
-                                    {...field}
-                                />
-                            </FormControl>
+                    <FormField
+                        control={form.control}
+                        name="lname"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input
+                                        required
+                                        placeholder={t('Last name')}
+                                        {...field}
+                                    />
+                                </FormControl>
 
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
 
                 <FormField
                     control={form.control}

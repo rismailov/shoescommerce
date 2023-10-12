@@ -1,4 +1,4 @@
-import { CATEGORIES } from '@/constants'
+import { GENDERS } from '@/constants'
 import { usePage } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 
@@ -6,11 +6,11 @@ type TRoute =
     | {
           label: string
           href: string
-          category?: never
+          gender?: never
       }
     | {
           label: string
-          category: string
+          gender: string
           href?: never
       }
 
@@ -35,9 +35,8 @@ export const useRoutes = (): TRoute[] => {
         ]
     }
 
-    return CATEGORIES.map((category) => ({
-        category: category,
-        // @ts-ignore
-        label: t(category),
+    return GENDERS.map((gender) => ({
+        gender,
+        label: t(gender as any),
     }))
 }

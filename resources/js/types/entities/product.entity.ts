@@ -5,7 +5,7 @@ interface ProductEntityBase {
     nanoid: string
     name: string
     description: string
-    category: TOption
+    gender: string
     colour: TOption
     price: {
         initial: string

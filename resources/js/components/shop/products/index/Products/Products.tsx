@@ -1,26 +1,30 @@
-import { LoadMoreButton } from '@/components/shop/products/index/Products/LoadMoreButton'
+import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { REACT_QUERY_PRODUCTS_KEY } from '@/constants'
 import axios from '@/lib/axios'
 import useFiltersStore from '@/lib/store/filters.store'
 import { TPaginatedData } from '@/types'
 import { UserProductIndexEntity } from '@/types/entities/product.entity'
-import { Center, Skeleton, Stack, Text, Title } from '@mantine/core'
-import { useQuery } from '@tanstack/react-query'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Dispatch, SetStateAction, useMemo } from 'react'
+import { sleep } from '@/utils'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import clsx from 'clsx'
+import { Dispatch, Fragment, SetStateAction, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useInView } from 'react-intersection-observer'
 import { ProductCard } from './ProductCard'
-import classes from './Products.module.css'
 
 export const Products = ({
     setTotalProductsCount,
+    showFilters,
 }: {
     setTotalProductsCount: Dispatch<SetStateAction<number>>
+    showFilters: boolean
 }) => {
     const { t } = useTranslation()
+    const { ref, inView } = useInView()
 
     const filters = useFiltersStore((state) => ({
-        categories: state.categories,
+        genders: state.genders,
         sizes: state.sizes,
         colours: state.colours,
         price: state.price,
@@ -28,119 +32,103 @@ export const Products = ({
         limit: state.limit,
     }))
 
-    const skeletonCards = useMemo(() => {
-        const arr = []
-
-        for (let i = 0; i <= 5; i++) {
-            arr.push(
-                <div key={i}>
-                    <Skeleton height={350} radius="lg" />
-
-                    <Stack mt="md" gap="xs">
-                        <Skeleton height={16} />
-                        <Skeleton height={16} />
-                        <Skeleton height={16} />
-                    </Stack>
-                </div>,
-            )
-        }
-
-        return arr
-    }, [])
-
-    const getProducts = async () => {
-        const resp = await axios.get<
-            any,
-            TPaginatedData<UserProductIndexEntity[]>
-        >(route('products.data'), { params: filters })
-
-        if (resp.meta) {
-            setTotalProductsCount(resp.meta.total)
-        }
-
-        return resp
-    }
-
     const {
-        data: products,
+        data,
         isLoading,
         isError,
-    } = useQuery({
+        fetchNextPage,
+        isFetchingNextPage,
+        hasNextPage,
+    } = useInfiniteQuery({
         queryKey: [REACT_QUERY_PRODUCTS_KEY, filters],
-        queryFn: getProducts,
+        queryFn: async ({ pageParam = 1 }) => {
+            await sleep(250)
+
+            const resp = await axios.get<
+                any,
+                TPaginatedData<UserProductIndexEntity[]>
+            >(route('products.data'), {
+                params: { ...filters, page: pageParam },
+            })
+
+            if (resp.meta) {
+                setTotalProductsCount(resp.meta.total)
+            }
+
+            return resp
+        },
         refetchOnWindowFocus: false,
-        keepPreviousData: true,
+        getNextPageParam: (lastPage) =>
+            lastPage.meta.current_page < lastPage.meta.last_page
+                ? lastPage.meta.current_page + 1
+                : undefined,
     })
 
-    // Only show skeletons on initial load
-    if (isLoading) {
-        return <div className={classes.gridWrapper}>{skeletonCards}</div>
-    }
+    useEffect(() => {
+        if (inView) {
+            fetchNextPage()
+        }
+    }, [inView])
 
-    if (isError) {
+    if (!isLoading && (isError || !data?.pages[0].meta.total)) {
         return (
-            <Text color="red">
-                {t('Something went wrong fetching products...')}
-            </Text>
-        )
-    }
+            <div className="flex-1 h-[300px] flex items-center justify-center text-lg">
+                {isError && (
+                    <p className="text-destructive">
+                        {t('Something went wrong fetching products...')}
+                    </p>
+                )}
 
-    if (!products.meta.total) {
-        return (
-            <Center
-            // sx={{
-            //     flex: 1,
-            //     height: 'calc(100vh - 100px) !important',
-            // }}
-            >
-                <AnimatePresence>
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        <Center h="50vh">
-                            <Title order={3} fw={400}>
-                                <Text inherit c="dimmed">
-                                    {t('No results found.')}
-                                </Text>
-                            </Title>
-                        </Center>
-                    </motion.div>
-                </AnimatePresence>
-            </Center>
+                {!data?.pages[0].meta.total && (
+                    <p className="text-muted-foreground">
+                        {t('No results found.')}
+                    </p>
+                )}
+            </div>
         )
     }
 
     return (
-        <Stack gap="xl">
-            <div className={classes.gridWrapper}>
-                <AnimatePresence mode="popLayout">
-                    {products.data.map((product) => (
-                        <motion.div
-                            layout
-                            key={product.id}
-                            initial={{ opacity: 0 }}
-                            animate={{
-                                opacity: 1,
-                                transition: { duration: 0.2 },
-                            }}
-                            exit={{
-                                opacity: 0,
-                                transition: { duration: 0 },
-                            }}
-                        >
-                            <ProductCard product={product} />
-                        </motion.div>
+        <div className="flex-1 flex flex-col pb-16">
+            <div className="grid xs:grid-cols-2 lg:grid-cols-3 gap-5">
+                {isLoading &&
+                    Array.from({ length: 6 }, (_, i) => (
+                        <div key={i} className="flex flex-col space-y-3 mb-5">
+                            <Skeleton className="w-full h-[350px] rounded-xl" />
+
+                            <Skeleton className="w-full h-[22px]" />
+                            <Skeleton className="w-full h-[22px]" />
+                            <Skeleton className="w-full h-[22px]" />
+                        </div>
                     ))}
-                </AnimatePresence>
+
+                {!isLoading &&
+                    data.pages.map((page) => (
+                        <Fragment key={page.meta.current_page}>
+                            {page.data.map((product) => (
+                                <ProductCard
+                                    key={product.id}
+                                    product={product}
+                                    showFilters={showFilters}
+                                />
+                            ))}
+                        </Fragment>
+                    ))}
             </div>
 
-            {products.meta && products.data.length < products.meta.total && (
-                // Track products length to stop loading spinner animation
-                <LoadMoreButton productsCount={products.data.length} />
-            )}
-        </Stack>
+            <Button
+                ref={ref}
+                onClick={() => fetchNextPage()}
+                loading={isFetchingNextPage}
+                disabled={!hasNextPage || isFetchingNextPage}
+                className={clsx(
+                    'mt-10 self-center',
+                    !isFetchingNextPage && !hasNextPage && 'hidden',
+                )}
+                variant="secondary"
+            >
+                {!isFetchingNextPage && hasNextPage && t('Load More')}
+            </Button>
+        </div>
     )
 }

@@ -2,22 +2,11 @@
 
 namespace App\Services;
 
-use App\Enums\CategoryEnum;
 use App\Models\Colour;
 use App\Models\Size;
 
 class ProductService
 {
-    public function getCategoryOptions()
-    {
-        return array_map(function ($cat) {
-            return [
-                'value' => $cat,
-                'label' => __('models.categories.'.$cat),
-            ];
-        }, array_column(CategoryEnum::cases(), 'value'));
-    }
-
     public function getSizeOptions()
     {
         return Size::select('id', 'value')->get()
@@ -41,5 +30,16 @@ class ProductService
                     'hex'   => $colour->hex_code,
                 ];
             });
+    }
+
+    public static function calculateDiscountPrice(
+        string $initial_price,
+        string $discount_percent
+    ): string {
+        $percent_in_float = bcdiv((string) $discount_percent, '100', 2);
+        $price_difference = bcmul($initial_price, $percent_in_float);
+        $discounted_price = bcsub($initial_price, $price_difference);
+
+        return $discounted_price;
     }
 }

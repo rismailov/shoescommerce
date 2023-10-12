@@ -1,11 +1,10 @@
 import { Filters } from '@/components/shop/products/index/Filters'
-// import { Products } from '@/components/shop/products/index/Products'
-// import { SortProducts } from '@/components/shop/products/index/SortProducts'
+import { Products } from '@/components/shop/products/index/Products'
+import { ProductsHeader } from '@/components/shop/products/index/ProductsHeader'
 import { TOption } from '@/types'
 import { usePage } from '@inertiajs/react'
-import { Container, Group, Stack, Text, Title } from '@mantine/core'
+import { AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export type TFilterOptions = {
     sizes: TOption[]
@@ -13,35 +12,32 @@ export type TFilterOptions = {
 }
 
 export default function ProductsIndex() {
-    const { t } = useTranslation()
     const { filterOptions } = usePage<{ filterOptions: TFilterOptions }>().props
-    const [totalProductsCount, setTotalProductsCount] = useState(0)
+
+    const [showFilters, setShowFilters] = useState<boolean>(true)
+
+    const [totalProductsCount, setTotalProductsCount] = useState<number>(0)
 
     return (
         <div className="container">
-            <div className="relative items-start space-x-10">
-                <Filters options={filterOptions} />
+            {/* header */}
+            <ProductsHeader
+                showFilters={showFilters}
+                setShowFilters={setShowFilters}
+                totalProductsCount={totalProductsCount}
+            />
 
-                {/* <Stack pos="relative" style={{ flex: 1 }}>
-                    <Group justify="space-between">
-                        <Title order={2}>{t("Men's Tops")}</Title>
+            {/* main */}
+            <AnimatePresence initial={false} mode="popLayout">
+                <div className="relative flex">
+                    {showFilters && <Filters options={filterOptions} />}
 
-                        <Group>
-                            <Text color="dimmed" tt="lowercase">
-                                {`${totalProductsCount} ${
-                                    totalProductsCount === 1
-                                        ? t('Result')
-                                        : t('Results')
-                                }`}
-                            </Text>
-
-                            <SortProducts />
-                        </Group>
-                    </Group>
-
-                    <Products setTotalProductsCount={setTotalProductsCount} />
-                </Stack> */}
-            </div>
+                    <Products
+                        setTotalProductsCount={setTotalProductsCount}
+                        showFilters={showFilters}
+                    />
+                </div>
+            </AnimatePresence>
         </div>
     )
 }
