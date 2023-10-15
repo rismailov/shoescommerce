@@ -1,7 +1,6 @@
 import { Header } from '@/components/common/Header/Header'
 import { Toaster } from '@/components/ui/toaster'
 import { usePage } from '@inertiajs/react'
-import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { PropsWithChildren, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -26,25 +25,23 @@ export default function AppLayout({ children }: PropsWithChildren) {
     const { url } = usePage()
 
     return (
-        <MantineProvider>
-            <QueryClientProvider client={queryClient}>
-                <Toaster />
+        <QueryClientProvider client={queryClient}>
+            <Toaster />
 
-                <div className="relative h-full min-h-screen flex flex-col">
-                    <Header
-                        isMobileMenuOpen={isMobileMenuOpen}
-                        setIsMobileMenuOpen={setIsMobileMenuOpen}
-                    />
+            <div className="relative h-full min-h-screen flex flex-col">
+                <Header
+                    isMobileMenuOpen={isMobileMenuOpen}
+                    setIsMobileMenuOpen={setIsMobileMenuOpen}
+                />
 
-                    {isMobileMenuOpen && <MobileMenu />}
+                {isMobileMenuOpen && <MobileMenu />}
 
-                    <main className="flex-1">{children}</main>
+                <main className="flex-1">{children}</main>
 
-                    {!url.includes('/auth') && !url.includes('/admin') && (
-                        <Footer />
-                    )}
-                </div>
-            </QueryClientProvider>
-        </MantineProvider>
+                {!url.includes('/auth') && !url.includes('/admin') && (
+                    <Footer />
+                )}
+            </div>
+        </QueryClientProvider>
     )
 }

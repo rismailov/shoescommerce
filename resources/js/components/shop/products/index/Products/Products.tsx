@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { REACT_QUERY_PRODUCTS_KEY } from '@/constants'
 import axios from '@/lib/axios'
 import useFiltersStore from '@/lib/store/filters.store'
 import { TPaginatedData } from '@/types'
@@ -21,7 +20,7 @@ export const Products = ({
     showFilters: boolean
 }) => {
     const { t } = useTranslation()
-    const { ref, inView } = useInView()
+    const { ref, inView } = useInView({ threshold: 0.01, rootMargin: '0px' })
 
     const filters = useFiltersStore((state) => ({
         genders: state.genders,
@@ -40,7 +39,7 @@ export const Products = ({
         isFetchingNextPage,
         hasNextPage,
     } = useInfiniteQuery({
-        queryKey: [REACT_QUERY_PRODUCTS_KEY, filters],
+        queryKey: ['products', filters],
         queryFn: async ({ pageParam = 1 }) => {
             await sleep(250)
 
@@ -116,19 +115,29 @@ export const Products = ({
                     ))}
             </div>
 
-            <Button
+            <div
                 ref={ref}
-                onClick={() => fetchNextPage()}
-                loading={isFetchingNextPage}
-                disabled={!hasNextPage || isFetchingNextPage}
                 className={clsx(
-                    'mt-10 self-center',
-                    !isFetchingNextPage && !hasNextPage && 'hidden',
+                    'flex items-center justify-center',
+                    // 100vh height is needed so that sticky filters sidebar won't flicker when
+                    // new items are being loaded. Try and comment the line below and observe
+                    // sticky filters sidebar when scrolling to see what i mean
+                    hasNextPage && isFetchingNextPage ? 'h-screen' : 'h-auto',
                 )}
-                variant="secondary"
             >
-                {!isFetchingNextPage && hasNextPage && t('Load More')}
-            </Button>
+                <Button
+                    onClick={() => fetchNextPage()}
+                    loading={isFetchingNextPage}
+                    disabled={!hasNextPage || isFetchingNextPage}
+                    className={clsx(
+                        'mt-10 self-center',
+                        !isFetchingNextPage && !hasNextPage && 'hidden',
+                    )}
+                    variant="secondary"
+                >
+                    {!isFetchingNextPage && hasNextPage && t('Load More')}
+                </Button>
+            </div>
         </div>
     )
 }

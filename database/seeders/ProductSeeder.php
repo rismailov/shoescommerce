@@ -136,7 +136,70 @@ class ProductSeeder extends Seeder
                 'colour'        => 'orange',
                 'imagesDir'     => '/seeder/products/men/tech_hera/orange',
             ],
+            /*
+             * ============================================================
+             * ========================== WOMEN ===========================
+             * ============================================================
+             */
+            // Air Max 90 Futura
+            [
+                'name'          =>'Air Max 90 Futura',
+                'description'   =>'Air Max 90 Futura',
+                'price'         => 150,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::WOMEN->value,
+                'colour'        => 'green',
+                'imagesDir'     => '/seeder/products/women/air_max_90_futura/green',
+            ],
+            [
+                'name'          =>'Air Max 90 Futura',
+                'description'   =>'Air Max 90 Futura',
+                'price'         => 150,
+                'is_discounted'    => true,
+                'discount_percent' => 30,
+                'gender'        => GenderEnum::WOMEN->value,
+                'colour'        => 'pink',
+                'imagesDir'     => '/seeder/products/women/air_max_90_futura/pink',
+            ],
+            [
+                'name'          =>'Air Max 90 Futura',
+                'description'   =>'Air Max 90 Futura',
+                'price'         => 150,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::WOMEN->value,
+                'colour'        => 'white',
+                'imagesDir'     => '/seeder/products/women/air_max_90_futura/white',
+            ],
+            // Air VaporMax Plus
+            [
+                'name'          => 'Air VaporMax Plus',
+                'description'   => 'Air VaporMax Plus',
+                'price'         => 210,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::WOMEN->value,
+                'colour'        => 'black',
+                'imagesDir'     => '/seeder/products/women/air_vapor_max_plus/black',
+            ],
+            [
+                'name'          => 'Air VaporMax Plus',
+                'description'   => 'Air VaporMax Plus',
+                'price'         => 210,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::WOMEN->value,
+                'colour'        => 'pink',
+                'imagesDir'     => '/seeder/products/women/air_vapor_max_plus/pink',
+            ],
+            [
+                'name'          => 'Air VaporMax Plus',
+                'description'   => 'Air VaporMax Plus',
+                'price'         => 210,
+                'is_discounted' => false,
+                'gender'        => GenderEnum::WOMEN->value,
+                'colour'        => 'red',
+                'imagesDir'     => '/seeder/products/women/air_vapor_max_plus/red',
+            ],
         ];
+
 
         foreach ($products as $product) {
             // skip if specified image directory doesn't exist
