@@ -54,7 +54,7 @@ export const Cart = () => {
                                 </p>
                             ) : (
                                 <div className="flex flex-col space-y-5">
-                                    {items.map((item) => (
+                                    {items.map((item, idx) => (
                                         <motion.div
                                             key={item.id}
                                             layout
@@ -75,6 +75,10 @@ export const Cart = () => {
                                             }}
                                         >
                                             <CartItem cartItem={item} />
+
+                                            {idx !== items.length - 1 && (
+                                                <Separator className="mt-5" />
+                                            )}
                                         </motion.div>
                                     ))}
                                 </div>

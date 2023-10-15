@@ -2,9 +2,10 @@ import { Filters } from '@/components/shop/products/index/Filters'
 import { Products } from '@/components/shop/products/index/Products'
 import { ProductsHeader } from '@/components/shop/products/index/ProductsHeader'
 import { TOption } from '@/types'
-import { usePage } from '@inertiajs/react'
+import { Head, usePage } from '@inertiajs/react'
 import { AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export type TFilterOptions = {
     sizes: TOption<{ gender: string }>[]
@@ -12,6 +13,8 @@ export type TFilterOptions = {
 }
 
 export default function ProductsIndex() {
+    const { t } = useTranslation()
+
     const { filterOptions } = usePage<{ filterOptions: TFilterOptions }>().props
 
     const [showFilters, setShowFilters] = useState<boolean>(true)
@@ -20,6 +23,8 @@ export default function ProductsIndex() {
 
     return (
         <div className="container">
+            <Head title={t('Shop')} />
+
             {/* header */}
             <ProductsHeader
                 showFilters={showFilters}

@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Link, usePage } from '@inertiajs/react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
+import clsx from 'clsx'
 import { Dispatch, SetStateAction } from 'react'
 import { Logo } from '../Logo'
 import { AuthDropdown } from './AuthDropdown'
@@ -19,7 +20,7 @@ export const Header = ({
     const isAdminDashboard = url.includes('admin')
 
     return (
-        <header className="h-[60px] w-full z-20 border-b bg-white dark:bg-zinc-950">
+        <header className="h-[60px] w-full z-20 bg-white border-b">
             <div className="container">
                 <div className="flex items-center justify-between py-3">
                     {/* left side */}

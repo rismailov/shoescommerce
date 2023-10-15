@@ -29,15 +29,15 @@ export const CartItem = ({ cartItem }: { cartItem: TCartItem }) => {
     }
 
     return (
-        <section className="h-36 flex items-stretch rounded-lg overflow-hidden border">
+        <div className="h-32 flex items-stretch overflow-hidden space-x-4">
             {/* ITEM IMAGE */}
             <img
                 src={cartItem.imageUrl}
-                className="w-36 h-full object-center object-cover"
+                className="w-32 h-full object-center object-cover"
             />
 
             {/* ITEM INFO */}
-            <div className="py-3 px-4 flex-1 h-full flex flex-col items-start justify-between">
+            <div className="flex-1 h-full flex flex-col items-start justify-between">
                 <div className="w-full flex flex-col">
                     <div className="flex items-center justify-between font-semibold">
                         <h3>{`Nike ${cartItem.name}`}</h3>
@@ -90,12 +90,12 @@ export const CartItem = ({ cartItem }: { cartItem: TCartItem }) => {
                         onClick={() => removeItem(cartItem.id)}
                         variant="link"
                         size="sm"
-                        className="text-sm p-0 font-medium underline hover:text-accent-foreground"
+                        className="text-sm font-medium text-secondary-foreground"
                     >
                         {t('Remove')}
                     </Button>
                 </div>
             </div>
-        </section>
+        </div>
     )
 }

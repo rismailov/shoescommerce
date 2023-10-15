@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/react'
 
 export default function Homepage() {
     return (
-        <div className="py-5 md:py-10">
+        <div className="pb-5 md:pb-10">
             <Head title="Home" />
 
             {/* Sections */}
