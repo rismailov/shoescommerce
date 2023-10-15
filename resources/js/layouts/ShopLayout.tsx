@@ -1,15 +1,13 @@
-// import { Cart } from '@/components/shop/Cart'
+import { Cart } from '@/components/shop/Cart'
 import { PropsWithChildren } from 'react'
 import AppLayout from './AppLayout'
 
 export default function ShopLayout({ children }: PropsWithChildren) {
     return (
         <AppLayout>
-            <>
-                {/* <Cart /> */}
+            <Cart />
 
-                {children}
-            </>
+            {children}
         </AppLayout>
     )
 }

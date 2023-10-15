@@ -1,21 +1,12 @@
-import { SIZE_LABELS } from '@/constants'
+import { Button } from '@/components/ui/button'
 import useCartStore, { TCartItem } from '@/lib/store/cart.store'
-import {
-    ActionIcon,
-    Button,
-    Center,
-    Grid,
-    Group,
-    Image,
-    Stack,
-    Text,
-    Title,
-} from '@mantine/core'
 import { IconMinus, IconPlus } from '@tabler/icons-react'
+import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
 
-const maxAmount = 5
-const minAmount = 1
+const MAX_AMOUNT = 5
+const MIN_AMOUNT = 1
+
 export const CartItem = ({ cartItem }: { cartItem: TCartItem }) => {
     const { t } = useTranslation()
 
@@ -24,122 +15,87 @@ export const CartItem = ({ cartItem }: { cartItem: TCartItem }) => {
 
     const changeAmount = (action: 'inc' | 'dec') => {
         if (
-            (action === 'inc' && cartItem.amount === maxAmount) ||
-            (action === 'dec' && cartItem.amount === minAmount)
+            (action === 'inc' && cartItem.amount === MAX_AMOUNT) ||
+            (action === 'dec' && cartItem.amount === MIN_AMOUNT)
         ) {
             return
         }
 
         updateItemAmount({
-            itemID: `${cartItem.id}-${cartItem.size.id}`,
+            itemID: `${cartItem.id}-${cartItem.size.value}`,
             amount:
                 action === 'inc' ? cartItem.amount + 1 : cartItem.amount - 1,
         })
     }
 
     return (
-        <Grid
-            gutter={0}
-            columns={14}
-            sx={(theme) => ({
-                borderRadius: theme.radius.lg,
-                border: `1px solid ${theme.colors.gray[1]}`,
-                overflow: 'hidden',
-            })}
-        >
-            {/* Image */}
-            <Grid.Col span={4}>
-                <Image
-                    src={cartItem.imageUrl}
-                    height="100%"
-                    styles={{
-                        root: { height: '100%' },
-                        figure: { height: '100%' },
-                        imageWrapper: { height: '100%' },
-                        image: {
-                            borderTopLeftRadius: 8,
-                            borderBottomLeftRadius: 8,
-                        },
-                    }}
-                />
-            </Grid.Col>
+        <section className="h-36 flex items-stretch rounded-lg overflow-hidden border">
+            {/* ITEM IMAGE */}
+            <img
+                src={cartItem.imageUrl}
+                className="w-36 h-full object-center object-cover"
+            />
 
-            {/* Info */}
-            <Grid.Col span={10} p="md">
-                <Stack h="100%" justify="space-between" spacing="sm">
-                    <Stack spacing={5}>
-                        {/* Title and price */}
-                        <Group position="apart" noWrap align="start">
-                            <Title order={5} weight={600} lh="1.2">
-                                {cartItem.name}
-                            </Title>
+            {/* ITEM INFO */}
+            <div className="py-3 px-4 flex-1 h-full flex flex-col items-start justify-between">
+                <div className="w-full flex flex-col">
+                    <div className="flex items-center justify-between font-semibold">
+                        <h3>{`Nike ${cartItem.name}`}</h3>
+                        <h3>${cartItem.price}</h3>
+                    </div>
 
-                            <Title order={5} weight={600} lh="1.2">
-                                $
-                                {(
-                                    parseFloat(cartItem.price) * cartItem.amount
-                                ).toFixed(2)}
-                            </Title>
-                        </Group>
+                    <p className="text-muted-foreground">
+                        {t(cartItem.gender as any)}
+                    </p>
 
-                        {/* Product properties */}
-                        <Stack spacing={2} sx={{ fontSize: 14 }}>
-                            <Text color="dimmed">
-                                {SIZE_LABELS[cartItem.size.name]}
-                            </Text>
-                        </Stack>
-                    </Stack>
+                    <p className="text-muted-foreground">{`${t('Size')} - ${
+                        cartItem.size.label
+                    }`}</p>
+                </div>
 
-                    <Group position="apart">
-                        {/* Counter */}
-                        <Group>
-                            <ActionIcon
-                                size="md"
-                                onClick={() => changeAmount('dec')}
-                                sx={
-                                    cartItem.amount === minAmount
-                                        ? {
-                                              opacity: 0.3,
-                                              pointerEvents: 'none',
-                                          }
-                                        : {}
-                                }
-                            >
-                                <IconMinus size={17} strokeWidth="1" />
-                            </ActionIcon>
-
-                            <Center w={15} sx={{ userSelect: 'none' }}>
-                                <Text size="sm">{cartItem.amount}</Text>
-                            </Center>
-
-                            <ActionIcon
-                                size="md"
-                                onClick={() => changeAmount('inc')}
-                                sx={
-                                    cartItem.amount === maxAmount
-                                        ? {
-                                              opacity: 0.3,
-                                              pointerEvents: 'none',
-                                          }
-                                        : {}
-                                }
-                            >
-                                <IconPlus size={17} strokeWidth="1" />
-                            </ActionIcon>
-                        </Group>
-
-                        {/* Remove button */}
+                <div className="w-full flex items-center justify-between">
+                    {/* COUNTER */}
+                    <div className="flex items-center space-x-3">
                         <Button
-                            onClick={() => removeItem(cartItem.id)}
-                            color="red"
-                            variant="light"
-                            size="xs"
+                            onClick={() => changeAmount('dec')}
+                            size="sm"
+                            variant="ghost"
+                            className={clsx(
+                                'py-1 px-1.5',
+                                cartItem.amount === MIN_AMOUNT &&
+                                    'pointer-events-none opacity-30',
+                            )}
                         >
-                            {t('Remove')}
+                            <IconMinus className="sprite" size={15} />
                         </Button>
-                    </Group>
-                </Stack>
-            </Grid.Col>
-        </Grid>
+
+                        <span className="select-none">{cartItem.amount}</span>
+
+                        <Button
+                            onClick={() => changeAmount('inc')}
+                            size="sm"
+                            variant="ghost"
+                            className={clsx(
+                                'py-1 px-1.5',
+                                cartItem.amount === MAX_AMOUNT &&
+                                    'pointer-events-none opacity-30',
+                            )}
+                        >
+                            <IconPlus className="sprite" size={15} />
+                        </Button>
+                    </div>
+
+                    {/* REMOVE BTN */}
+                    <Button
+                        onClick={() => removeItem(cartItem.id)}
+                        variant="link"
+                        size="sm"
+                        className="text-sm p-0 font-medium underline hover:text-accent-foreground"
+                    >
+                        {t('Remove')}
+                    </Button>
+                </div>
+            </div>
+        </section>
     )
 }

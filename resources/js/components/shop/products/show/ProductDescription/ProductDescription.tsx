@@ -60,11 +60,14 @@ export const ProductDescription = ({
 
             {/* SHIPPING & RETURNS */}
             <div className="flex flex-col space-y-3">
-                <h3 className="text-lg font-semibold">Shipping & Returns</h3>
+                <h3 className="text-lg font-semibold">
+                    {t('Shipping & Returns')}
+                </h3>
 
                 <p>
-                    Free standard shipping on orders $50+ and free 60-day
-                    returns for Nike Members.
+                    {t(
+                        'Free standard shipping on orders $50+ and free 60-day returns for Nike Members.',
+                    )}
                 </p>
             </div>
 

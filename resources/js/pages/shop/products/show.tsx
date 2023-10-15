@@ -13,7 +13,7 @@ export default function ShowProduct() {
 
     return (
         <div className="container py-8">
-            <div className="flex flex-col lg:flex-row items-start space-y-10 lg:space-x-[70px]">
+            <div className="flex flex-col lg:flex-row items-start space-y-10 lg:space-y-0 lg:space-x-[70px]">
                 <ProductImages product={product} />
 
                 <ProductDescription product={product} reviews={reviews} />

@@ -88,10 +88,12 @@
     "kids's": "Kids",
     "shoes": "shoes",
     "and": "and",
-    "Favorite": "Favorite",
     "Write a Review": "Write a Review",
     "Please rate this product": "Please rate this product",
     "stars": "stars",
     "More": "More",
-    "You need to be authorized to write a review.": "You need to be authorized to write a review."
+    "You need to be authorized to write a review.": "You need to be authorized to write a review.",
+    "Shipping & Returns": "Shipping & Returns",
+    "Free standard shipping on orders $50+ and free 60-day returns for Nike Members.": "Free standard shipping on orders $50+ and free 60-day returns for Nike Members.",
+    "This is a demo project.": "This is a demo project."
 }

@@ -28,6 +28,7 @@ export const AddProductToCartForm = ({
             size: selectedSize,
             price: product.price.discounted ?? product.price.initial,
             amount: 1,
+            gender: product.gender,
         })
 
         toggleCart()
@@ -86,23 +87,14 @@ export const AddProductToCartForm = ({
             </div>
 
             {/* add to cart */}
-            <div className="pt-1 flex items-center space-x-3">
+            <div className="pt-1">
                 <Button
                     onClick={onAddItem}
                     variant="accent"
                     size="lg"
-                    className="w-full rounded-full h-12 font-medium"
+                    className="rounded-full h-14 w-3/4 font-medium"
                 >
                     {t('Add to Cart')}
-                </Button>
-
-                <Button
-                    variant="secondary"
-                    size="lg"
-                    className="w-full rounded-full h-12 font-medium border bg-white"
-                >
-                    <span>{t('Favorite')}</span>
-                    <IconHeart className="sprite sprite-md ml-3" />
                 </Button>
             </div>
         </div>

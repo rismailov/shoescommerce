@@ -38,7 +38,9 @@ export const Header = ({
 
                         <AuthDropdown />
 
-                        {!isAdminDashboard && <CartTrigger />}
+                        {!isAdminDashboard && !url.includes('auth') && (
+                            <CartTrigger />
+                        )}
 
                         {/* mobile menu nav */}
                         <Button

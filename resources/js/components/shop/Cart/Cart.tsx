@@ -1,107 +1,60 @@
-import useCartStore from '@/lib/store/cart.store'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
 import {
-    ActionIcon,
-    Box,
-    Button,
-    Center,
-    Divider,
-    Drawer,
-    Group,
-    Stack,
-    Text,
-    Title,
-} from '@mantine/core'
-import { IconBox, IconX } from '@tabler/icons-react'
+    Sheet,
+    SheetContent,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+} from '@/components/ui/sheet'
+import useCartStore from '@/lib/store/cart.store'
+import { IconBox } from '@tabler/icons-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { CartItem } from './CartItem'
+import { useToast } from '@/components/ui/use-toast'
 
 export const Cart = () => {
     const { t } = useTranslation()
+
+    const { toast } = useToast()
 
     const isCartOpened = useCartStore((state) => state.isCartOpened)
     const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
     const items = useCartStore((state) => state.items)
 
     return (
-        <Drawer
-            opened={isCartOpened}
-            onClose={toggleCart}
-            withinPortal
-            position="right"
-            withCloseButton={false}
-            transitionProps={{
-                duration: 300,
-            }}
-            styles={(theme) => ({
-                body: { height: '100%' },
-                content: {
-                    flex: '0 0 30rem !important',
-                },
-                overlay: {
-                    background:
-                        theme.fn.rgba(theme.colors.dark[5], 0.9) +
-                        ' !important',
-                },
-                drawer: {
-                    borderTopLeftRadius: theme.radius.lg,
-                    borderBottomLeftRadius: theme.radius.lg,
-                    overflow: 'hidden',
-                },
-            })}
-        >
-            <Stack h="100%">
-                {/* header */}
-                <Group position="apart" pos="relative" p="xl">
-                    <Group>
-                        <Title order={2}>{t('Cart')}</Title>
+        <Sheet open={isCartOpened} onOpenChange={toggleCart}>
+            <SheetContent className="w-full flex flex-col justify-between xs:max-w-lg sm:max-w-lg md:max-w-xl rounded-tl-xl rounded-bl-xl shadow-none">
+                <SheetHeader className="flex flex-col space-y-5">
+                    <SheetTitle>
+                        <div className="flex items-center">
+                            <h2 className="text-2xl font-bold">{t('Cart')}</h2>
 
-                        <Title order={2} opacity={0.3}>
-                            {items.reduce((prev, cur) => prev + cur.amount, 0)}
-                        </Title>
-                    </Group>
-
-                    <ActionIcon
-                        onClick={toggleCart}
-                        sx={{ borderRadius: '999px' }}
-                    >
-                        <IconX size={20} />
-                    </ActionIcon>
-
-                    <Divider
-                        sx={(theme) => ({
-                            position: 'absolute',
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            margin: `0px ${theme.spacing.xl}`,
-                            opacity: 0.5,
-                        })}
-                    />
-                </Group>
-
-                {/* body */}
-                <Box
-                    sx={{ flex: 1, overflowY: 'auto', height: '100%' }}
-                    px="xl"
-                >
-                    <Stack h="100%" spacing="xl" justify="space-between">
-                        <Stack spacing="lg">
-                            <AnimatePresence mode="popLayout">
-                                {!items.length && (
-                                    <Center mt="lg">
-                                        <Text
-                                            size="lg"
-                                            weight={500}
-                                            color="dimmed"
-                                        >
-                                            {t('Your cart is empty')}.
-                                        </Text>
-                                    </Center>
+                            <Badge variant="secondary" className="ml-3 text-sm">
+                                {items.reduce(
+                                    (prev, cur) => prev + cur.amount,
+                                    0,
                                 )}
+                            </Badge>
+                        </div>
+                    </SheetTitle>
 
-                                {!!items.length &&
-                                    items.map((item) => (
+                    <Separator />
+                </SheetHeader>
+
+                <section className="flex-1 h-full overflow-y-auto">
+                    <ScrollArea className="h-full">
+                        <AnimatePresence mode="popLayout">
+                            {!items.length ? (
+                                <p className="pt-5 text-lg text-center text-muted-foreground">
+                                    {t('Your cart is empty')}
+                                </p>
+                            ) : (
+                                <div className="flex flex-col space-y-5">
+                                    {items.map((item) => (
                                         <motion.div
                                             key={item.id}
                                             layout
@@ -124,54 +77,51 @@ export const Cart = () => {
                                             <CartItem cartItem={item} />
                                         </motion.div>
                                     ))}
-                            </AnimatePresence>
-                        </Stack>
-                    </Stack>
-                </Box>
-
-                {/* footer (checkout) */}
-                <Stack spacing="xs" pos="relative" p="xl">
-                    <Group position="apart">
-                        <Title order={4} weight={600}>
-                            {`${t('Total')}: $`}
-                            {items.reduce<number | string>(
-                                (prev, cur) =>
-                                    (
-                                        +prev +
-                                        parseFloat(cur.price) * cur.amount
-                                    ).toFixed(2),
-                                0.0,
+                                </div>
                             )}
-                        </Title>
+                        </AnimatePresence>
+                    </ScrollArea>
+                </section>
 
-                        <Group spacing="xs" opacity={0.75}>
-                            <Text size="sm">{t('Free shipping')}</Text>
+                <SheetFooter>
+                    <div className="w-full flex flex-col space-y-5">
+                        <Separator />
 
-                            <IconBox size={15} />
-                        </Group>
-                    </Group>
+                        <div className="flex items-center justify-between">
+                            <p className="font-semibold text-lg">
+                                {`${t('Total')}: $`}
+                                {items.reduce<number | string>(
+                                    (prev, cur) =>
+                                        (
+                                            +prev +
+                                            parseFloat(cur.price) * cur.amount
+                                        ).toFixed(2),
+                                    0.0,
+                                )}
+                            </p>
 
-                    <Button
-                        color="dark"
-                        fz="md"
-                        size="lg"
-                        disabled={!items.length}
-                    >
-                        {t('Checkout')}
-                    </Button>
+                            <div className="inline-flex items-center space-x-2 text-muted-foreground">
+                                <IconBox className="sprite sprite-sm" />
 
-                    <Divider
-                        sx={(theme) => ({
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            margin: `0px ${theme.spacing.xl}`,
-                            opacity: 0.5,
-                        })}
-                    />
-                </Stack>
-            </Stack>
-        </Drawer>
+                                <span>{t('Free shipping')}</span>
+                            </div>
+                        </div>
+
+                        <Button
+                            onClick={() =>
+                                toast({
+                                    description: t('This is a demo project.'),
+                                })
+                            }
+                            variant="accent"
+                            size="lg"
+                            className="rounded-lg h-14"
+                        >
+                            {t('Checkout')}
+                        </Button>
+                    </div>
+                </SheetFooter>
+            </SheetContent>
+        </Sheet>
     )
 }
