@@ -64,7 +64,8 @@ export default function AuthLayout({ children }: PropsWithChildren) {
                                                 : 'login'
                                         }.create`,
                                     )}
-                                    className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent"
+                                    className="text-primary"
+                                    // className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent"
                                 >
                                     {url.includes('login')
                                         ? t('create a free account')

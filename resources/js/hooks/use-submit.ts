@@ -7,7 +7,7 @@ import { UseFormReturn } from 'react-hook-form'
 
 interface SubmitFunctionParams {
     // react-hook-form form instance
-    form: UseFormReturn<any>
+    form?: UseFormReturn<any>
 
     // request URL
     url: string
@@ -98,16 +98,18 @@ export function useSubmit(): UseSubmitReturnType {
 
                 success && toast({ variant: 'success', description: success })
 
-                resetFormOnSuccess && form.reset()
+                form && resetFormOnSuccess && form.reset()
 
                 onSuccess && (await onSuccess(props))
 
                 stopLoadingOnSuccess && setIsLoading(false)
             },
             onError: async (errors) => {
-                for (const prop in errors) {
-                    // @ts-ignore
-                    form.setError(prop, { message: errors[prop] })
+                if (form) {
+                    for (const prop in errors) {
+                        // @ts-ignore
+                        form.setError(prop, { message: errors[prop] })
+                    }
                 }
 
                 onError && (await onError(errors))
