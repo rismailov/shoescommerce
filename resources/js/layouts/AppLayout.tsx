@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { PropsWithChildren, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MobileMenu } from './MobileMenu'
+import { Footer } from '@/components/common/Footer'
 
 export default function AppLayout({ children }: PropsWithChildren) {
     const [queryClient] = useState<QueryClient>(() => new QueryClient())
@@ -18,8 +19,11 @@ export default function AppLayout({ children }: PropsWithChildren) {
         i18n.changeLanguage(locale)
     }, [locale])
 
-    /** Mobile menu state */
+    /* Mobile menu state */
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+    /* */
+    const { url } = usePage()
 
     return (
         <MantineProvider>
@@ -34,9 +38,11 @@ export default function AppLayout({ children }: PropsWithChildren) {
 
                     {isMobileMenuOpen && <MobileMenu />}
 
-                    {/* <Notifications color="dark" position="bottom-right" /> */}
+                    <main className="flex-1">{children}</main>
 
-                    <main>{children}</main>
+                    {!url.includes('/auth') && !url.includes('/admin') && (
+                        <Footer />
+                    )}
                 </div>
             </QueryClientProvider>
         </MantineProvider>
