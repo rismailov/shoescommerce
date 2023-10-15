@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Casts\HashCast;
 use App\Casts\NameCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,9 +31,9 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'fname'             => NameCast::class,
-        'lname'             => NameCast::class,
-        'password'          => HashCast::class,
+        'fname'    => NameCast::class,
+        'lname'    => NameCast::class,
+        'password' => HashCast::class,
     ];
 
     /**
@@ -46,4 +45,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

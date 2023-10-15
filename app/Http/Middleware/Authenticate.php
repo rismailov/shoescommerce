@@ -12,6 +12,8 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('auth.login.create');
+        return $request->expectsJson()
+            ? 'You need to authorize to perform this action.'
+            : route('auth.login.create');
     }
 }

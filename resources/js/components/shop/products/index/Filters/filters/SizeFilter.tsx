@@ -5,15 +5,29 @@ import {
 } from '@/components/ui/accordion'
 import { Badge } from '@/components/ui/badge'
 import useFiltersStore from '@/lib/store/filters.store'
-import { TOption } from '@/types'
+import { TFilterOptions } from '@/pages/shop/products'
 import clsx from 'clsx'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export const SizeFilter = ({ options }: { options: TOption[] }) => {
+export const SizeFilter = ({
+    options,
+}: {
+    options: TFilterOptions['sizes']
+}) => {
     const { t } = useTranslation()
 
     const sizes = useFiltersStore((s) => s.sizes)
     const setSizes = useFiltersStore((s) => s.setSizes)
+
+    // Filter sizes by selected gender
+    // if there are 0 or 3 selected genders, it means all genders selected
+    const genders = useFiltersStore((s) => s.genders)
+    const sizeOptionsByGender = useMemo(() => {
+        return genders.length === 0 || genders.length === 3
+            ? options
+            : options.filter((opt) => genders.includes(opt.gender))
+    }, [genders])
 
     return (
         <AccordionItem value="size">
@@ -29,7 +43,7 @@ export const SizeFilter = ({ options }: { options: TOption[] }) => {
 
             <AccordionContent>
                 <div className="grid grid-cols-3 gap-2">
-                    {options.map(({ value, label }) => (
+                    {sizeOptionsByGender.map(({ value, label }) => (
                         <button
                             key={value}
                             onClick={() =>
@@ -44,7 +58,7 @@ export const SizeFilter = ({ options }: { options: TOption[] }) => {
                                 sizes.includes(value) && 'border-primary',
                             ])}
                         >
-                            {label.toUpperCase()}
+                            {label}
                         </button>
                     ))}
                 </div>

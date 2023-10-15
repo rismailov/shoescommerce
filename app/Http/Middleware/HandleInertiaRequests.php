@@ -36,7 +36,6 @@ class HandleInertiaRequests extends Middleware
             'locale'  => fn () => $request->session()->get('locale', 'en'),
             'flash'   => [
                 'success' => fn () => $request->session()->get('success'),
-                'error'   => fn () => $request->session()->get('error'),
             ],
             'user' => $request->user()
                 ? UserResource::make($request->user())

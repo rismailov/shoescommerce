@@ -4,6 +4,7 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -58,8 +59,7 @@ export default function Register() {
 
     const onSubmit = async (data: z.infer<typeof schema>) =>
         await submit({
-            setError: form.setError,
-            reset: form.reset,
+            form,
             method: 'post',
             url: route('auth.register.store'),
             data,
@@ -80,10 +80,12 @@ export default function Register() {
                         name="fname"
                         render={({ field }) => (
                             <FormItem>
+                                <FormLabel>{t('First name')}</FormLabel>
+
                                 <FormControl>
                                     <Input
                                         required
-                                        placeholder={t('First name')}
+                                        placeholder="John"
                                         {...field}
                                     />
                                 </FormControl>
@@ -98,10 +100,12 @@ export default function Register() {
                         name="lname"
                         render={({ field }) => (
                             <FormItem>
+                                <FormLabel>{t('Last name')}</FormLabel>
+
                                 <FormControl>
                                     <Input
                                         required
-                                        placeholder={t('Last name')}
+                                        placeholder="Doe"
                                         {...field}
                                     />
                                 </FormControl>
@@ -117,11 +121,13 @@ export default function Register() {
                     name="email"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel>{t('E-mail')}</FormLabel>
+
                             <FormControl>
                                 <Input
                                     required
                                     type="email"
-                                    placeholder={t('E-mail')}
+                                    placeholder="johndoe@gmail.com"
                                     {...field}
                                 />
                             </FormControl>
@@ -136,11 +142,13 @@ export default function Register() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel>{t('Password')}</FormLabel>
+
                             <FormControl>
                                 <Input
                                     required
                                     type="password"
-                                    placeholder={t('Password')}
+                                    placeholder="********"
                                     {...field}
                                 />
                             </FormControl>
@@ -155,11 +163,13 @@ export default function Register() {
                     name="password_confirmation"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel>{t('Confirm password')}</FormLabel>
+
                             <FormControl>
                                 <Input
                                     required
                                     type="password"
-                                    placeholder={t('Confirm password')}
+                                    placeholder="********"
                                     {...field}
                                 />
                             </FormControl>

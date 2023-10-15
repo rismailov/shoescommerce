@@ -42,7 +42,7 @@ type Link = {
     active: boolean
 }
 
-type TPagination = {
+export type TPagination = {
     meta: {
         current_page: number
         from: number

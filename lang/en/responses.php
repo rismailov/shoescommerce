@@ -13,4 +13,8 @@ return [
     'colours' => [
         'cant_delete' => "Can't delete this colour. It has products attached to it.",
     ],
+
+    'errors' => [
+        'needs_to_authorize' => 'You need to be authorized to perform this action.',
+    ],
 ];

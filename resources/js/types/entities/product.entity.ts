@@ -6,7 +6,6 @@ interface ProductEntityBase {
     name: string
     description: string
     gender: string
-    colour: TOption
     price: {
         initial: string
         discounted: string | null // null means no discount
@@ -27,13 +26,10 @@ export interface UserProductIndexEntity extends ProductEntityBase {
 export interface UserProductShowEntity extends ProductEntityBase {
     availableColours: {
         nanoid: string
-        colour: {
-            value: string
-            label: string
-            hex: string
-        }
+        image: string
     }[]
-    availableSizes: TOption[]
+    colour: string
+    availableSizes: { value: string; label: number }[]
     images: {
         id: number
         url: string

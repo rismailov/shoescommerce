@@ -46,8 +46,7 @@ export default function Login() {
 
     const onSubmit = async (data: z.infer<typeof schema>) =>
         await submit({
-            setError: form.setError,
-            reset: form.reset,
+            form,
             method: 'post',
             url: route('auth.login.store'),
             data,
@@ -67,11 +66,13 @@ export default function Login() {
                     name="email"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel>{t('E-mail')}</FormLabel>
+
                             <FormControl>
                                 <Input
                                     required
                                     type="email"
-                                    placeholder={t('E-mail')}
+                                    placeholder="johndoe@gmail.com"
                                     {...field}
                                 />
                             </FormControl>
@@ -85,11 +86,13 @@ export default function Login() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel>{t('Password')}</FormLabel>
+
                             <FormControl>
                                 <Input
                                     required
                                     type="password"
-                                    placeholder={t('Password')}
+                                    placeholder="********"
                                     {...field}
                                 />
                             </FormControl>

@@ -83,15 +83,14 @@ class ProductController extends Controller
     {
         // available colours on products from the same category.
         // this is needed for user to select a different colour
-        $product->availableColours = Product::with('colours')
-            ->select('id', 'nanoid')
-            ->where('category', $product->getRawOriginal('category'))
+        $product->availableColours = Product::with(['images'])
+            ->whereName($product->name)
+            ->select(['id', 'nanoid'])
             ->get()
             ->map(function ($product) {
                 return [
-                    // nanoid needed for slug on client side
                     'nanoid' => $product->nanoid,
-                    'colour' => $product->colour,
+                    'image'  => $product->images->where('order', 0)->first()->url,
                 ];
             });
 
@@ -108,9 +107,18 @@ class ProductController extends Controller
      */
     public function storeReview(StoreReviewRequest $request, Product $product)
     {
-        $product->reviews()->create(
-            $request->validated()
-        );
+        // checking manually and not using "auth" middleware here because I don't
+        // want the user to be redirected to the "login" page
+        if (! auth()->check()) {
+            return back()->withErrors(
+                __('responses.errors.needs_to_authorize')
+            );
+        }
+
+        $product->reviews()->create([
+            ...$request->validated(),
+            'user_id' => auth()->user()->id ?? 1,
+        ]);
 
         return back()->withSuccess(
             __('responses.crud.saved', [

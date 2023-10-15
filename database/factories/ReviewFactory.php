@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,11 +19,11 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            'title'       => fake()->title(),
-            'text'        => fake()->text(300),
-            'credentials' => fake()->firstName().' '.fake()->lastName(),
-            'stars'       => fake()->numberBetween(4, 5),
-            'product_id'  => Product::all()->random()->id,
+            'title'      => fake()->sentence(),
+            'text'       => fake()->text(300),
+            'stars'      => fake()->numberBetween(4, 5),
+            'product_id' => Product::all()->random()->id,
+            'user_id'    => User::all()->random()->id,
         ];
     }
 }

@@ -7,4 +7,5 @@ export interface ReviewEntity {
     }
     credentials: string
     stars: number
+    date: string
 }

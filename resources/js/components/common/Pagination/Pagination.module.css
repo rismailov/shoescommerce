@@ -1,0 +1,3 @@
+.button {
+    @apply w-9 h-9 inline-flex items-center justify-center border rounded-md cursor-pointer hover:bg-muted select-none;
+}

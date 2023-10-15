@@ -4,8 +4,8 @@ export type TCartItem = {
     id: string // looks like: `${product.id}-${product.size.id}`
     imageUrl: string
     name: string
-    size: { id: string; name: string }
-    colour: { id: string; name: string }
+    size: { value: string; label: number }
+    // colour: { id: string; name: string }
     price: string
     amount: number
 }
@@ -41,7 +41,7 @@ const useCartStore = create<CartStore>((set) => ({
     updateItemAmount: ({ itemID, amount }) =>
         set((state) => ({
             items: state.items.map((item) =>
-                `${item.id}-${item.size.id}` === itemID
+                `${item.id}-${item.size.value}` === itemID
                     ? { ...item, amount }
                     : item,
             ),

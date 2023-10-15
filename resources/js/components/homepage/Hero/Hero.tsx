@@ -37,7 +37,7 @@ export const Hero = () => {
 
                             <div className="pt-3">
                                 <Button
-                                    className="self-start bg-white hover:bg-zinc-50 text-zinc-900"
+                                    className="self-start bg-white hover:bg-zinc-50 text-zinc-900 font-medium"
                                     size={matches ? 'lg' : 'default'}
                                     asChild
                                 >

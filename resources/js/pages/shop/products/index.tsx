@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 
 export type TFilterOptions = {
-    sizes: TOption[]
+    sizes: TOption<{ gender: string }>[]
     colours: TOption<{ hex: string }>[]
 }
 

@@ -1,27 +1,18 @@
+import { Button } from '@/components/ui/button'
 import { UserProductShowEntity } from '@/types/entities/product.entity'
-import {
-    ActionIcon,
-    Box,
-    Group,
-    Image,
-    Stack,
-    UnstyledButton,
-} from '@mantine/core'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
+import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
-import { Navigation, Thumbs } from 'swiper/modules'
 import 'swiper/css'
+import { Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'
-import { useStyles } from './ProductImages.styles'
 
 export const ProductImages = ({
     product,
 }: {
     product: UserProductShowEntity
 }) => {
-    const { classes } = useStyles()
-
     const mainSwiperRef = useRef<SwiperCore>()
     const thumbsSwiperRef = useRef<SwiperCore>()
 
@@ -65,9 +56,10 @@ export const ProductImages = ({
         allowTouchMove: false,
         navigation: true,
         watchSlidesProgress: true,
-        slidesPerView: 4,
-        slidesPerGroup: 4,
+        slidesPerView: 5,
+        slidesPerGroup: 5,
         slideToClickedSlide: true,
+        spaceBetween: 3,
         onInit: (swiper) => {
             thumbsSwiperRef.current = swiper
 
@@ -82,101 +74,85 @@ export const ProductImages = ({
     }
 
     return (
-        <Stack w="40%" align="stretch" spacing="xs">
+        <section className="w-full lg:sticky lg:top-8 lg:bottom-8 lg:w-[45%] flex flex-col items-stretch space-y-2">
             {/* MAIN SLIDER */}
-            <Box sx={{ position: 'relative', width: '100%', height: 525 }}>
-                <ActionIcon
-                    variant="filled"
-                    size="xl"
-                    className={`${classes.mainSliderNavButton} ${classes.mainSliderNavButtonLeft}`}
+            <div className="relative w-full">
+                <Button
+                    size="icon"
+                    variant="secondary"
+                    className="w-[50px] h-[50px] absolute top-[calc(50%-25px)] left-[-22.5px] z-[5] rounded-full bg-white text-muted-foreground border border-muted hover:bg-white disabled:shadow-none"
                     onClick={() => mainSwiperRef.current?.slidePrev()}
                     disabled={mainActiveIndex === 0}
                 >
-                    <IconChevronLeft />
-                </ActionIcon>
+                    <IconChevronLeft className="sprite sprite-lg" />
+                </Button>
 
                 <Swiper {...mainSwiperParams}>
                     {product.images.map((img, idx) => (
                         <SwiperSlide key={`slide_${idx}`}>
-                            <Image
-                                width="100%"
-                                height={525}
-                                radius="md"
+                            <img
                                 src={img.url}
                                 alt={product.name}
+                                className="w-full h-[400px] md:h-[600px] lg:h-[calc(100vh-170px)] object-center object-cover rounded-lg"
                             />
                         </SwiperSlide>
                     ))}
                 </Swiper>
 
-                <ActionIcon
-                    variant="filled"
-                    size="xl"
-                    className={`${classes.mainSliderNavButton} ${classes.mainSliderNavButtonRight}`}
+                <Button
+                    size="icon"
+                    variant="secondary"
+                    className="w-[50px] h-[50px] absolute top-[calc(50%-25px)] right-[-22.5px] z-[5] rounded-full bg-white text-muted-foreground border border-muted hover:bg-white disabled:shadow-none"
                     onClick={() => mainSwiperRef.current?.slideNext()}
                     disabled={mainActiveIndex === product.images.length - 1}
                 >
-                    <IconChevronRight />
-                </ActionIcon>
-            </Box>
+                    <IconChevronRight className="sprite sprite-lg" />
+                </Button>
+            </div>
 
             {/* THUMBS SLIDER */}
-            <Group
-                noWrap
-                spacing="xs"
-                w="100%"
-                align="stretch"
-                sx={{ height: 100 }}
-            >
-                <ActionIcon
+            <div className="w-full h-[100px] flex flex-nowrap items-stretch space-x-2">
+                <Button
+                    size="icon"
+                    variant="secondary"
+                    className="h-full max-w-[30px] mt-px mb-px select-none bg-muted"
                     onClick={() => thumbsSwiperRef.current?.slidePrev()}
-                    variant="subtle"
-                    className={classes.secondSliderNavButton}
                     disabled={isBeginning}
                 >
-                    <IconChevronLeft />
-                </ActionIcon>
+                    <IconChevronLeft className="sprite sprite-lg" />
+                </Button>
 
                 <Swiper {...thumbsSwiperParams}>
                     {product.images.map((img, idx) => (
                         <SwiperSlide key={img.id}>
-                            <UnstyledButton
-                                className={classes.thumb}
-                                sx={(theme) => ({
-                                    border: `1.5px solid ${
-                                        mainActiveIndex === idx
-                                            ? theme.fn.themeColor('yellow')
-                                            : 'transparent'
-                                    }`,
-                                })}
+                            <button
+                                className={clsx([
+                                    'select-none w-full h-full rounded-md overflow-hidden border-[1.5px]',
+                                    mainActiveIndex === idx
+                                        ? 'border-accent-foreground'
+                                        : 'border-transparent',
+                                ])}
                             >
-                                <Image
-                                    height="100%"
+                                <img
                                     src={img.url}
                                     alt={product.name}
-                                    styles={{
-                                        root: {
-                                            height: '100%',
-                                            pointerEvents: 'none',
-                                        },
-                                        figure: { height: '100%' },
-                                        imageWrapper: { height: '100%' },
-                                    }}
+                                    className="w-full h-full pointer-events-none object-center object-cover"
                                 />
-                            </UnstyledButton>
+                            </button>
                         </SwiperSlide>
                     ))}
                 </Swiper>
 
-                <ActionIcon
+                <Button
+                    size="icon"
+                    variant="secondary"
+                    className="h-full max-w-[30px] mt-px mb-px select-none bg-muted"
                     onClick={() => thumbsSwiperRef.current?.slideNext()}
-                    variant="light"
-                    className={classes.secondSliderNavButton}
                     disabled={isEnd}
                 >
-                    <IconChevronRight />
-                </ActionIcon>
-            </Group>
-        </Stack>
+                    <IconChevronRight className="sprite sprite-lg" />
+                </Button>
+            </div>
+        </section>
     )
 }

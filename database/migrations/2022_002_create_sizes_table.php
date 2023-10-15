@@ -14,7 +14,8 @@ return new class() extends Migration {
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
-            $table->string('value');
+            $table->unsignedTinyInteger('value');
+            $table->string('gender');
             $table->timestamps();
         });
     }

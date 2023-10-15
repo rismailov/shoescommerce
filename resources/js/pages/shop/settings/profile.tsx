@@ -38,7 +38,7 @@ export default function EditProfile() {
 
     const onSubmit = async (data: TFormValues) =>
         await submit({
-            setError: form.setError,
+            form,
             method: 'patch',
             url: route('settings.profile.update'),
             data,

@@ -28,15 +28,6 @@ return [
         'product_subtitle' => ":Gender's Shoes",
     ],
 
-    'sizes' => [
-        's'    => 'Small',
-        'm'    => 'Medium',
-        'l'    => 'Large',
-        'xl'   => 'Extra Large',
-        'xxl'  => '2XL',
-        'xxxl' => '3XL',
-    ],
-
     'images' => [
         'single'   => 'Image',
         'multiple' => 'Images',

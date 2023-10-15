@@ -19,8 +19,9 @@ class ShowProductResource extends JsonResource
             'nanoid'           => $this->nanoid,
             'name'             => $this->name,
             'description'      => $this->description,
-            'colour'           => $this->colour,
-            'avgStars'         => $this->reviews->avg('stars'),
+            'gender'           => $this->gender,
+            'colour'           => __('models.colours.values.'.$this->colours->first()->value),
+            'avgStars'         => number_format((float) $this->reviews->avg('stars'), 1, '.'),
             'availableColours' => $this->availableColours,
             'price'            => [
                 'initial'    => $this->price,

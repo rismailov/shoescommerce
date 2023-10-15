@@ -20,9 +20,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        // looks like: [['s' => 1], ['m' => 2], ...]
-        $sizes = Size::select(['id', 'value'])->pluck('id', 'value');
-
         // looks like: [['white' => 1], ['black' => 2], ...]
         $colours = Colour::select(['id', 'value'])->pluck('id', 'value');
 
@@ -41,13 +38,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'yellow',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/air_max_1-86_og/yellow',
+                'imagesDir'     => '/seeder/products/men/air_max_1-86_og/yellow',
             ],
             // KD 16
             [
@@ -57,13 +48,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'red',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/kd16/red',
+                'imagesDir'     => '/seeder/products/men/kd16/red',
             ],
             [
                 'name'          => 'KD 16',
@@ -72,13 +57,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'purple',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/kd16/purple',
+                'imagesDir'     => '/seeder/products/men/kd16/purple',
             ],
             // killshot 2 leather
             [
@@ -88,13 +67,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'white',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/killshot_2_leather/white',
+                'imagesDir'     => '/seeder/products/men/killshot_2_leather/white',
             ],
             // Lebron NXXT
             [
@@ -104,13 +77,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'black',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/black',
+                'imagesDir'     => '/seeder/products/men/lebron_nxxt_gen/black',
             ],
             [
                 'name'             => 'LeBron NXXT Gen',
@@ -120,13 +87,7 @@ class ProductSeeder extends Seeder
                 'discount_percent' => 30,
                 'gender'           => GenderEnum::MEN->value,
                 'colour'           => 'green',
-                'sizes'            => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/green',
+                'imagesDir'        => '/seeder/products/men/lebron_nxxt_gen/green',
             ],
             [
                 'name'          => 'LeBron NXXT Gen',
@@ -135,13 +96,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'purple',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/purple',
+                'imagesDir'     => '/seeder/products/men/lebron_nxxt_gen/purple',
             ],
             [
                 'name'          => 'LeBron NXXT Gen',
@@ -150,13 +105,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'red',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/lebron_nxxt_gen/red',
+                'imagesDir'     => '/seeder/products/men/lebron_nxxt_gen/red',
             ],
             // Tech Hera
             [
@@ -167,13 +116,7 @@ class ProductSeeder extends Seeder
                 'discount_percent' => 20,
                 'gender'           => GenderEnum::MEN->value,
                 'colour'           => 'brown',
-                'sizes'            => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/tech_hera/brown',
+                'imagesDir'        => '/seeder/products/men/tech_hera/brown',
             ],
             [
                 'name'          => 'Tech Hera',
@@ -182,13 +125,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'grey',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/tech_hera/grey',
+                'imagesDir'     => '/seeder/products/men/tech_hera/grey',
             ],
             [
                 'name'          => 'Tech Hera',
@@ -197,13 +134,7 @@ class ProductSeeder extends Seeder
                 'is_discounted' => false,
                 'gender'        => GenderEnum::MEN->value,
                 'colour'        => 'orange',
-                'sizes'         => [
-                    $sizes['s'],
-                    $sizes['m'],
-                    $sizes['xl'],
-                    $sizes['xxl'],
-                ],
-                'imagesDir' => '/seeder/products/men/tech_hera/orange',
+                'imagesDir'     => '/seeder/products/men/tech_hera/orange',
             ],
         ];
 
@@ -238,7 +169,17 @@ class ProductSeeder extends Seeder
                             : null,
                     ]);
 
-                    $created->sizes()->sync($product['sizes']);
+                    // attach sizes (pick 3 to 5 random sizes from the same gender)
+                    $sizes = Size::select(['id', 'value', 'gender'])
+                        ->whereGender($created->gender)
+                        ->inRandomOrder()
+                        ->limit(rand(3, 5))
+                        ->pluck('id')
+                        ->toArray();
+
+                    $created->sizes()->sync($sizes);
+
+                    // attach colours
                     $created->colours()->sync($colours[$product['colour']]);
 
                     /**

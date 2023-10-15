@@ -9,14 +9,15 @@ class ProductService
 {
     public function getSizeOptions()
     {
-        return Size::select('id', 'value')->get()
+        return Size::select(['id', 'value', 'gender'])->get()
             ->map(function ($size) {
                 return [
                     // ID's have to be in string format because of the Mantine UI library
-                    'value' => (string) $size['id'],
-                    'label' => $size['value'],
+                    'value'  => (string) $size['id'],
+                    'label'  => $size['value'],
+                    'gender' => $size['gender'],
                 ];
-            }, Size::select('id', 'value')->get()->toArray());
+            });
     }
 
     public function getColourOptions()

@@ -23,7 +23,6 @@ class IndexProductResource extends JsonResource
             'nanoid'       => $this->nanoid,
             'name'         => $this->name,
             'description'  => $this->description,
-            'colour'       => $this->colour,
             'reviewsCount' => $this->reviews_count,
             'avgStars'     => $this->reviews->avg('stars'),
             'img'          => $this->images->where('order', 0)->first(),

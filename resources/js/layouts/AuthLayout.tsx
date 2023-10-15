@@ -64,7 +64,7 @@ export default function AuthLayout({ children }: PropsWithChildren) {
                                                 : 'login'
                                         }.create`,
                                     )}
-                                    className="bg-gradient-to-r from-primary to-red-500 bg-clip-text text-transparent"
+                                    className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent"
                                 >
                                     {url.includes('login')
                                         ? t('create a free account')
@@ -72,7 +72,7 @@ export default function AuthLayout({ children }: PropsWithChildren) {
                                 </Link>
                             </p>
 
-                            <div className="pt-3 w-full">{children}</div>
+                            <div className="pt-3 px-5 w-full">{children}</div>
                         </div>
                     </div>
                 </div>

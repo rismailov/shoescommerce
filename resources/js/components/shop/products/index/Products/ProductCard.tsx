@@ -3,7 +3,6 @@ import { Link } from '@inertiajs/react'
 import { useMediaQuery } from '@uidotdev/usehooks'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { screens } from 'tailwindcss/defaultTheme'
 
 export const ProductCard = ({
@@ -13,11 +12,6 @@ export const ProductCard = ({
     product: UserProductIndexEntity
     showFilters: boolean
 }) => {
-    // This is needed to delay animation. Can be safely removed.
-    // @note: to understand the purpose of this delay, add product to Cart from "Quick add" button,
-    // and then quickly remove the mouse from the product card
-    const [isAddingToCart, setIsAddingToCart] = useState(false)
-
     const minWidthLG = useMediaQuery(`(min-width: ${screens.lg})`)
 
     return (
@@ -36,36 +30,6 @@ export const ProductCard = ({
                 }}
             />
 
-            {/* <div className="relative w-full h-full max-h-[300px] overflow-hidden rounded-lg">
-                <QuickAdd
-                    product={product}
-                    isLoading={isAddingToCart}
-                    setIsLoading={setIsAddingToCart}
-
-
-                    QUICK ADD STYLES::::
-                        ['div[data-quick-add-wrapper]']: {
-                            opacity: 0,
-                            transform: 'translateY(5px)',
-                            transition: `opacity 0.2s ${transition} ${
-                                isAddingToCart ? '1.5s' : '0s'
-                            }, transform 0.1s ${transition} ${
-                                isAddingToCart ? '1.5s' : '0s'
-                            }`,
-                        },
-
-                        ':hover': {
-                            ['div[data-quick-add-wrapper]']: {
-                                opacity: 1,
-                                transform: 'translateY(0)',
-                                transition: 'none',
-                            },
-                        },
-                    QUICK ADD STYLES::::
-
-                />
-            </div> */}
-
             {/* Description */}
             <motion.div
                 layout="position"
@@ -78,8 +42,6 @@ export const ProductCard = ({
                 <p className="text-muted-foreground leading-tight">
                     {product.gender}
                 </p>
-
-                <p className="text-muted-foreground leading-tight">5 Colours</p>
 
                 {/* price */}
                 <div className="flex items-center space-x-2">

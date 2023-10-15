@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         }
 
         if (! DB::table('reviews')->count()) {
+            $callables[] = UserSeeder::class;
             $callables[] = ReviewSeeder::class;
         }
 

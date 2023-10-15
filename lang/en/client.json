@@ -39,10 +39,10 @@
     "Colour": "Colour",
     "Add to Cart": "Add to Cart",
     "Size": "Size",
-    "Your name": "Your name",
     "Review title": "Review title",
+    "Enter review title": "Enter review title",
     "Review text": "Review text",
-    "Please rate this product with stars.": "Please rate this product with stars.",
+    "Enter review text": "Enter review text",
     "Submit": "Submit",
     "Remove": "Remove",
     "Your cart is empty": "Your cart is empty",
@@ -87,5 +87,11 @@
     "women's": "Women's",
     "kids's": "Kids",
     "shoes": "shoes",
-    "and": "and"
+    "and": "and",
+    "Favorite": "Favorite",
+    "Write a Review": "Write a Review",
+    "Please rate this product": "Please rate this product",
+    "stars": "stars",
+    "More": "More",
+    "You need to be authorized to write a review.": "You need to be authorized to write a review."
 }

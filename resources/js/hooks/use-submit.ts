@@ -1,17 +1,13 @@
-// import { setErrorAlertAtom, setSuccessAlertAtom } from '@/store/alert.atom'
 import { useToast } from '@/components/ui/use-toast'
 import { Errors, PageProps } from '@/types/inertia'
 import { sleep } from '@/utils'
 import { router } from '@inertiajs/react'
-// import { useSetAtom } from 'jotai'
 import { Dispatch, SetStateAction, useState } from 'react'
-import { UseFormReset, UseFormSetError } from 'react-hook-form'
-// import { useToast } from './use-toast'
+import { UseFormReturn } from 'react-hook-form'
 
 interface SubmitFunctionParams {
-    // mantine form instance
-    setError?: UseFormSetError<any>
-    reset?: UseFormReset<any>
+    // react-hook-form form instance
+    form: UseFormReturn<any>
 
     // request URL
     url: string
@@ -49,9 +45,6 @@ interface SubmitFunctionParams {
         preserveScroll?: boolean
         preserveState?: boolean
     }
-
-    // notification or toast
-    showToastOnError?: boolean
 }
 
 interface UseSubmitReturnType {
@@ -68,17 +61,11 @@ export function useSubmit(): UseSubmitReturnType {
     const [actionSlug, setSlug] = useState<string | undefined>(undefined)
     const [isLoading, setIsLoading] = useState(false)
 
-    // alerts
-    // const setSuccessAlert = useSetAtom(setSuccessAlertAtom)
-    // const setErrorAlert = useSetAtom(setErrorAlertAtom)
-
     // toasts (notifications)
     const { toast } = useToast()
-    // const { showSuccess, showError } = useToast()
 
     async function submit({
-        setError,
-        reset,
+        form,
         onSuccess,
         onError,
         delay = true,
@@ -89,7 +76,6 @@ export function useSubmit(): UseSubmitReturnType {
         resetFormOnSuccess = false,
         slug,
         options,
-        showToastOnError = false,
     }: SubmitFunctionParams) {
         slug && setSlug(slug)
 
@@ -108,32 +94,20 @@ export function useSubmit(): UseSubmitReturnType {
             ...(options && options),
             // @ts-ignore: Couldn't properly type "onSuccess" callback
             onSuccess: async ({ props }: PageProps) => {
-                const { message, error, success } = props.flash
+                const { success } = props.flash
 
-                // alert (use "message" on backend for success alerts)
-                // message && setSuccessAlert(message)
-                // error && !showToastOnError && setErrorAlert(error)
-
-                // toast (use "success" on backend for success toasts)
                 success && toast({ variant: 'success', description: success })
-                error &&
-                    showToastOnError &&
-                    toast({ variant: 'error', description: success })
 
-                if (resetFormOnSuccess && reset) {
-                    reset()
-                }
+                resetFormOnSuccess && form.reset()
 
                 onSuccess && (await onSuccess(props))
 
                 stopLoadingOnSuccess && setIsLoading(false)
             },
             onError: async (errors) => {
-                if (setError) {
-                    for (const prop in errors) {
-                        // @ts-ignore
-                        setError(prop, { message: errors[prop] })
-                    }
+                for (const prop in errors) {
+                    // @ts-ignore
+                    form.setError(prop, { message: errors[prop] })
                 }
 
                 onError && (await onError(errors))

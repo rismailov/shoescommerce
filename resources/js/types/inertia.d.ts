@@ -19,7 +19,6 @@ export type PageProps<T = {}> = T & {
     } // TODO: move to entity
     flash: {
         success: Nullable<string>
-        error: Nullable<string>
     }
     errors: Errors & ErrorBag
     status: Nullable<string>
