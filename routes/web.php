@@ -20,6 +20,8 @@ Route::prefix('/shop')->as('products.')->group(function () {
         ->name('reviews.store');
 });
 
+Route::inertia('/checkout', 'shop/checkout')->name('checkout');
+
 // profile
 Route::middleware('auth')->prefix('/settings')->as('settings.')->group(function () {
     Route::get('/profile', [SettingsController::class, 'profileEdit'])

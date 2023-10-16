@@ -9,21 +9,25 @@ import {
     SheetHeader,
     SheetTitle,
 } from '@/components/ui/sheet'
+import { useToast } from '@/components/ui/use-toast'
 import useCartStore from '@/lib/store/cart.store'
 import { IconBox } from '@tabler/icons-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { CartItem } from './CartItem'
-import { useToast } from '@/components/ui/use-toast'
+import { sleep } from '@/utils'
+import { router } from '@inertiajs/react'
+import { useState } from 'react'
 
 export const Cart = () => {
     const { t } = useTranslation()
 
-    const { toast } = useToast()
-
     const isCartOpened = useCartStore((state) => state.isCartOpened)
     const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
     const items = useCartStore((state) => state.items)
+
+    // show loader on checkout button; purely cosmetical, safe to remove
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         <Sheet open={isCartOpened} onOpenChange={toggleCart}>
@@ -74,7 +78,10 @@ export const Cart = () => {
                                                 },
                                             }}
                                         >
-                                            <CartItem cartItem={item} />
+                                            <CartItem
+                                                cartItem={item}
+                                                variant="cart"
+                                            />
 
                                             {idx !== items.length - 1 && (
                                                 <Separator className="mt-5" />
@@ -112,14 +119,22 @@ export const Cart = () => {
                         </div>
 
                         <Button
-                            onClick={() =>
-                                toast({
-                                    description: t('This is a demo project.'),
+                            onClick={async () => {
+                                setIsLoading(true)
+                                await sleep()
+
+                                router.visit(route('checkout'), {
+                                    preserveScroll: true,
+                                    preserveState: true,
                                 })
-                            }
+                                toggleCart()
+                                setIsLoading(false)
+                            }}
+                            loading={isLoading}
                             variant="accent"
                             size="lg"
-                            className="rounded-lg h-14"
+                            className="rounded-lg h-14 font-medium"
+                            disabled={!items.length}
                         >
                             {t('Checkout')}
                         </Button>

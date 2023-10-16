@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Link, usePage } from '@inertiajs/react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
-import clsx from 'clsx'
 import { Dispatch, SetStateAction } from 'react'
 import { Logo } from '../Logo'
 import { AuthDropdown } from './AuthDropdown'
@@ -39,9 +38,9 @@ export const Header = ({
 
                         <AuthDropdown />
 
-                        {!isAdminDashboard && !url.includes('auth') && (
-                            <CartTrigger />
-                        )}
+                        {!isAdminDashboard &&
+                            !url.includes('auth') &&
+                            !url.includes('checkout') && <CartTrigger />}
 
                         {/* mobile menu nav */}
                         <Button
