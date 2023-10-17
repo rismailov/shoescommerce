@@ -1,5 +1,4 @@
 import { GENDERS } from '@/constants'
-import { usePage } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 
 type TRoute =
@@ -16,24 +15,6 @@ type TRoute =
 
 export const useRoutes = (): TRoute[] => {
     const { t } = useTranslation()
-    const { component } = usePage()
-
-    if (component.startsWith('admin')) {
-        return [
-            {
-                href: '/shop',
-                label: t('Shop'),
-            },
-            {
-                href: '/admin/products',
-                label: t('Products'),
-            },
-            {
-                href: '/admin/colours',
-                label: t('Colours'),
-            },
-        ]
-    }
 
     return GENDERS.map((gender) => ({
         gender,

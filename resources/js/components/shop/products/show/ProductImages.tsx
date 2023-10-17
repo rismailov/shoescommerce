@@ -3,7 +3,6 @@ import { UserProductShowEntity } from '@/types/entities/product.entity'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
-import 'swiper/css'
 import { Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'
@@ -26,6 +25,7 @@ export const ProductImages = ({
     })
 
     const [mainSwiperParams, setMainSwiperParams] = useState<SwiperProps>({
+        id: 'desktop',
         modules: [Thumbs],
         thumbs: {
             swiper: thumbsSwiperRef.current,
@@ -74,7 +74,7 @@ export const ProductImages = ({
     }
 
     return (
-        <section className="w-full lg:sticky lg:top-8 lg:bottom-8 lg:w-[45%] flex flex-col items-stretch space-y-2">
+        <section className="hidden w-full lg:sticky lg:top-8 lg:bottom-8 lg:w-[45%] lg:flex flex-col items-stretch space-y-2">
             {/* MAIN SLIDER */}
             <div className="relative w-full">
                 <Button

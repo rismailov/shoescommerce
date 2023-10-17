@@ -31,13 +31,16 @@ export const Cart = () => {
 
     return (
         <Sheet open={isCartOpened} onOpenChange={toggleCart}>
-            <SheetContent className="w-full flex flex-col justify-between xs:max-w-lg sm:max-w-lg md:max-w-xl rounded-tl-xl rounded-bl-xl shadow-none">
+            <SheetContent className="w-full flex flex-col justify-between xs:max-w-md sm:max-w-md md:max-w-lg rounded-tl-xl rounded-bl-xl shadow-none">
                 <SheetHeader className="flex flex-col space-y-5">
                     <SheetTitle>
                         <div className="flex items-center">
                             <h2 className="text-2xl font-bold">{t('Cart')}</h2>
 
-                            <Badge variant="secondary" className="ml-3 text-sm">
+                            <Badge
+                                variant="secondary"
+                                className="ml-3 text-base"
+                            >
                                 {items.reduce(
                                     (prev, cur) => prev + cur.amount,
                                     0,

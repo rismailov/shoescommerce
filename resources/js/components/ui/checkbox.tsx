@@ -37,7 +37,9 @@ const Checkbox = React.forwardRef<
             </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
 
-        <Label {...(props.id && { htmlFor: props.id })}>{label}</Label>
+        <Label {...(props.id && { htmlFor: props.id, className: 'text-base' })}>
+            {label}
+        </Label>
     </div>
 ))
 Checkbox.displayName = CheckboxPrimitive.Root.displayName

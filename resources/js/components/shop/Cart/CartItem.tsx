@@ -41,7 +41,7 @@ export const CartItem = ({
                 src={cartItem.imageUrl}
                 className={clsx(
                     'object-center object-cover',
-                    variant === 'cart' ? 'h-32 w-32' : 'h-24 w-24',
+                    variant === 'cart' ? 'w-24' : 'w-24',
                 )}
             />
 

@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import useCartStore from '@/lib/store/cart.store'
 import { UserProductShowEntity } from '@/types/entities/product.entity'
 import { Link } from '@inertiajs/react'
-import { IconHeart } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +13,6 @@ export const AddProductToCartForm = ({
 }) => {
     const { t } = useTranslation()
 
-    const items = useCartStore((state) => state.items)
     const addItem = useCartStore((state) => state.addItem)
     const toggleCart = useCartStore((state) => state.toggleIsCartOpened)
 

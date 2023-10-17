@@ -17,7 +17,6 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    // /shop is HOME for users, for admins this route will be intercepted and authenticated admin will be redirected to admin dashboard
     public const HOME = '/shop';
 
     /**

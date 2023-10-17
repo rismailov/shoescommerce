@@ -33,7 +33,7 @@ export const AuthDropdown = () => {
             <DropdownMenuContent className="min-w-[17rem]">
                 {user ? (
                     <div className="flex items-center py-2 px-2.5 space-x-3 flex-nowrap">
-                        <div className="w-10 h-10 flex items-center justify-center rounded-full overflow-hidden bg-primary/5 text-primary font-medium leading-none pointer-events-none">
+                        <div className="w-10 h-10 flex items-center justify-center rounded-full overflow-hidden bg-primary/5 text-primary text-sm font-medium leading-none pointer-events-none">
                             {user.fullName.initials}
                         </div>
 

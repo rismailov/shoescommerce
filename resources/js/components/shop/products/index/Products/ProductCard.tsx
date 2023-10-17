@@ -22,7 +22,7 @@ export const ProductCard = ({
             {/* Image */}
             <motion.img
                 layout
-                src={product.img.url}
+                src={product.imgUrl}
                 alt={product.name}
                 className="w-full rounded-xl object-center object-cover"
                 style={{

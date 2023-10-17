@@ -16,7 +16,7 @@ export const CartTrigger = () => {
             <IconShoppingCart className="sprite sprite-md" />
 
             {!!items.length && (
-                <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-primary-foreground bg-primary rounded-full -top-2 -right-2">
+                <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-medium text-primary-foreground bg-primary rounded-full -top-[3px] -right-[3px]">
                     {items.reduce((prev, cur) => prev + cur.amount, 0)}
                 </div>
             )}

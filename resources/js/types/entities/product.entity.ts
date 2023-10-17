@@ -1,5 +1,3 @@
-import { TOption } from '..'
-
 interface ProductEntityBase {
     id: number
     nanoid: string
@@ -18,9 +16,7 @@ interface ProductEntityBase {
  */
 export interface UserProductIndexEntity extends ProductEntityBase {
     reviewsCount: number
-    img: {
-        url: string
-    }
+    imgUrl: string
 }
 
 export interface UserProductShowEntity extends ProductEntityBase {
@@ -35,9 +31,4 @@ export interface UserProductShowEntity extends ProductEntityBase {
         url: string
         order: number
     }[]
-}
-
-export interface AdminProductEntity extends ProductEntityBase {
-    createdAt: string
-    discountPercent: number
 }

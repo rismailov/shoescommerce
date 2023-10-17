@@ -162,11 +162,7 @@ export default function Login() {
             >
                 <span>{t('or')}&nbsp;</span>
 
-                <Button
-                    onClick={onLoginAsDemoUser}
-                    variant="link"
-                    className="p-0 inline underline font-medium hover:text-accent-foreground"
-                >
+                <Button onClick={onLoginAsDemoUser} variant="link">
                     {t('Login as demo user')}
                 </Button>
             </div>

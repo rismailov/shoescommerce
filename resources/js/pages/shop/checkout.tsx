@@ -2,6 +2,7 @@ import { CartItem } from '@/components/shop/Cart/CartItem'
 import { StripeCheckoutForm } from '@/components/shop/StripeCheckoutForm'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import useCartStore from '@/lib/store/cart.store'
+import { Head } from '@inertiajs/react'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -17,6 +18,8 @@ export default function Checkout() {
 
     return (
         <div className="container mt-8">
+            <Head title={t('Checkout')} />
+
             <div className="flex flex-col sm:flex-row justify-center space-y-10 sm:space-y-0 sm:space-x-10 md:space-x-16">
                 {/* checkout form */}
                 <div className="w-full sm:max-w-md">

@@ -33,7 +33,7 @@ export const Review = (review: ReviewEntity) => {
                     <Button
                         onClick={() => setShowFullText(true)}
                         variant="link"
-                        className="inline h-auto self-start p-0 ml-2 underline"
+                        className="self-start ml-2"
                     >
                         {t('More')}
                     </Button>

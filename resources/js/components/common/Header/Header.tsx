@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Link, usePage } from '@inertiajs/react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 import { Dispatch, SetStateAction } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Logo } from '../Logo'
 import { AuthDropdown } from './AuthDropdown'
 import { CartTrigger } from './CartTrigger'
@@ -15,8 +16,9 @@ export const Header = ({
     isMobileMenuOpen: boolean
     setIsMobileMenuOpen: Dispatch<SetStateAction<boolean>>
 }) => {
+    const { t } = useTranslation()
+
     const { url } = usePage()
-    const isAdminDashboard = url.includes('admin')
 
     return (
         <header className="h-[60px] w-full z-20 bg-white border-b">
@@ -36,11 +38,11 @@ export const Header = ({
                     <div className="w-1/2 sm:w-1/4 flex items-center justify-end space-x-2">
                         <LangSwitcher />
 
-                        <AuthDropdown />
+                        {!url.includes('auth') && <AuthDropdown />}
 
-                        {!isAdminDashboard &&
-                            !url.includes('auth') &&
-                            !url.includes('checkout') && <CartTrigger />}
+                        {!url.includes('auth') && !url.includes('checkout') && (
+                            <CartTrigger />
+                        )}
 
                         {/* mobile menu nav */}
                         <Button

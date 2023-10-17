@@ -22,7 +22,7 @@ export const ColourFilter = ({
 
     return (
         <AccordionItem value="colour" className="border-none">
-            <AccordionTrigger className="text-lg">
+            <AccordionTrigger className="text-base">
                 <div className="flex items-center space-x-2">
                     <span>{t('Colour')}</span>
 
@@ -48,10 +48,9 @@ export const ColourFilter = ({
                         >
                             {/* color swatch */}
                             <div
-                                className="w-7 h-7 flex items-center justify-center rounded-full border"
+                                className="w-6 h-6 flex items-center justify-center rounded-full border"
                                 style={{ background: hex }}
                             >
-                                {/* checkmark */}
                                 {colours.includes(value) && (
                                     <IconCheck
                                         size={15}

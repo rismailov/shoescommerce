@@ -1,3 +1,4 @@
+import 'swiper/css'
 import { ProductDescription } from '@/components/shop/products/show/ProductDescription'
 import { ProductImages } from '@/components/shop/products/show/ProductImages'
 import { TPaginatedData } from '@/types'
@@ -15,7 +16,7 @@ export default function ShowProduct() {
         <div className="container py-8">
             <Head title={`Nike ${product.name}`} />
 
-            <div className="flex flex-col lg:flex-row items-start space-y-10 lg:space-y-0 lg:space-x-[70px]">
+            <div className="flex flex-col lg:flex-row items-start lg:space-x-[50px]">
                 <ProductImages product={product} />
 
                 <ProductDescription product={product} reviews={reviews} />

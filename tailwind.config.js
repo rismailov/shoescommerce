@@ -16,6 +16,10 @@ module.exports = {
             },
         },
         extend: {
+            fontSize: {
+                sm: '0.93rem',
+            },
+
             screens: {
                 xs: '475px',
             },

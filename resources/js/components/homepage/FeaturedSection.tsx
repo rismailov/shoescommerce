@@ -31,7 +31,7 @@ const FeaturedItem = ({
                 </h2>
 
                 <Button
-                    className="self-start mt-3 bg-accent hover:bg-accent/90 text-accent-foreground rounded-full font-medium px-7 h-10"
+                    className="self-start mt-3 bg-accent hover:bg-accent/90 text-accent-foreground rounded-full font-medium text-base px-7 h-10"
                     asChild
                 >
                     <Link href={route('products.index')}>{t('Shop')}</Link>
@@ -46,7 +46,7 @@ export const FeaturedSection = () => {
 
     return (
         <SectionLayout title={t('Featured')}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <FeaturedItem
                     preTitle="New from Jordan Basketball"
                     title="Featuring the Zion 3"

@@ -103,7 +103,7 @@ export const WriteReviewModal = ({
                             onSubmit={form.handleSubmit(onSubmit)}
                             className={clsx(isLoading && 'disabled')}
                         >
-                            <div className="mt-5 flex flex-col space-y-5">
+                            <div className="flex flex-col space-y-5">
                                 {/* rate with stars */}
                                 <FormField
                                     control={form.control}
@@ -195,11 +195,7 @@ export const WriteReviewModal = ({
                         </p>
 
                         <div className="flex items-center">
-                            <Button
-                                variant="link"
-                                className="h-auto inline p-0"
-                                asChild
-                            >
+                            <Button variant="link" asChild>
                                 <Link href={route('auth.login.create')}>
                                     {t('Login')}
                                 </Link>
@@ -210,11 +206,7 @@ export const WriteReviewModal = ({
                                 className="mx-3"
                             />
 
-                            <Button
-                                variant="link"
-                                className="h-auto inline p-0"
-                                asChild
-                            >
+                            <Button variant="link" asChild>
                                 <Link href={route('auth.register.create')}>
                                     {t('Register')}
                                 </Link>

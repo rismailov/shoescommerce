@@ -35,7 +35,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
             <div className="container mt-10">
                 <Head title={t('Settings')} />
 
-                <Card className="lg:p-2">
+                <Card className="lg:p-2 min-h-[600px]">
                     <CardHeader>
                         <CardTitle>{t('Settings')}</CardTitle>
 
@@ -58,7 +58,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                         variant="ghost"
                                         asChild
                                         className={clsx([
-                                            'justify-start',
+                                            'justify-start text-base',
                                             route().current(match)
                                                 ? 'bg-muted hover:bg-muted'
                                                 : 'hover:bg-transparent hover:underline',

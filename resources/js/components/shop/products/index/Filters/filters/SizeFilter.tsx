@@ -31,7 +31,7 @@ export const SizeFilter = ({
 
     return (
         <AccordionItem value="size">
-            <AccordionTrigger className="text-lg">
+            <AccordionTrigger className="text-base">
                 <div className="flex items-center space-x-2">
                     <span>{t('Size')}</span>
 
@@ -55,7 +55,8 @@ export const SizeFilter = ({
                             }
                             className={clsx([
                                 'p-2 border-[1.5px] rounded-md',
-                                sizes.includes(value) && 'border-primary',
+                                sizes.includes(value) &&
+                                    'border-accent-foreground',
                             ])}
                         >
                             {label}

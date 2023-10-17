@@ -34,7 +34,7 @@ export const PriceFilter = () => {
 
     return (
         <AccordionItem value="price">
-            <AccordionTrigger className="text-lg">
+            <AccordionTrigger className="text-base">
                 {t('Price')}
             </AccordionTrigger>
 

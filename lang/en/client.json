@@ -7,7 +7,6 @@
     "Shop Now": "Shop Now",
     "Loading...": "Loading...",
     "Something went wrong fetching products...": "Something went wrong fetching products...",
-    "Admin dashboard": "Admin dashboard",
     "Log in": "Log in",
     "Login": "Login",
     "Sign up": "Sign up",
@@ -95,11 +94,13 @@
     "You need to be authorized to write a review.": "You need to be authorized to write a review.",
     "Shipping & Returns": "Shipping & Returns",
     "Free standard shipping on orders $50+ and free 60-day returns for Nike Members.": "Free standard shipping on orders $50+ and free 60-day returns for Nike Members.",
-    "This is a demo project.": "This is a demo project.",
     "Login as demo user": "Login as demo user",
     "Trending": "Trending",
     "Featured": "Featured",
     "Shop by": "Shop by",
     "All product images taken from": "All product images taken from",
-    "Pay": "Pay"
+    "Pay": "Pay",
+    "Name": "Name",
+    "Category": "Category",
+    "Created at": "Created at"
 }

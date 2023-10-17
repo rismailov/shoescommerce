@@ -11,7 +11,7 @@ export const HeroSection = () => {
 
             <div className="container">
                 <div className="flex flex-col items-center">
-                    <h1 className="text-3xl md:text-4xl font-extrabold">
+                    <h1 className="text-2xl md:text-3xl font-extrabold">
                         NEW ARRIVALS
                     </h1>
 
@@ -23,7 +23,7 @@ export const HeroSection = () => {
                     <Button
                         size="lg"
                         variant="accent"
-                        className="rounded-full"
+                        className="rounded-full text-base"
                         asChild
                     >
                         <Link href={route('products.index')}>Shop Now</Link>

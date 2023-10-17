@@ -16,7 +16,7 @@ export const GenderFilter = () => {
 
     return (
         <AccordionItem value="gender">
-            <AccordionTrigger className="text-lg pt-0">
+            <AccordionTrigger className="text-base pt-0">
                 {t('Gender')}
             </AccordionTrigger>
 

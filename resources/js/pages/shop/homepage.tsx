@@ -9,7 +9,7 @@ export default function Homepage() {
             <Head title="Home" />
 
             {/* Sections */}
-            <div className="flex flex-col space-y-10 md:space-y-14">
+            <div className="flex flex-col space-y-14">
                 <HeroSection />
                 <FeaturedSection />
                 <TrendingSection />

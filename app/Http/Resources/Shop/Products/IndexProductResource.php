@@ -25,7 +25,7 @@ class IndexProductResource extends JsonResource
             'description'  => $this->description,
             'reviewsCount' => $this->reviews_count,
             'avgStars'     => $this->reviews->avg('stars'),
-            'img'          => $this->images->where('order', 0)->first(),
+            'imgUrl'          => $this->images->where('order', 0)->first()->url,
             'price'        => [
                 'initial'    => $this->price,
                 'discounted' => $this->discount_price,
