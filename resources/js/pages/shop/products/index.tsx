@@ -33,7 +33,7 @@ export default function ProductsIndex() {
             />
 
             {/* main */}
-            <AnimatePresence initial={false} mode="popLayout">
+            <AnimatePresence initial={false} mode="wait">
                 <div className="relative flex">
                     {showFilters && <Filters options={filterOptions} />}
 

@@ -33,8 +33,6 @@ class IndexProductResource extends JsonResource
             'gender' => __('models.genders.product_subtitle', [
                 'Gender' => __('models.genders.'.$this->gender),
             ]),
-            // TODO: move available sizes do a separate route and load them only when user clicks on "Quick add" button
-            'availableSizes' => $this->sizes,
         ];
     }
 }

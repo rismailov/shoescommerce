@@ -21,7 +21,7 @@ export const GenderFilter = () => {
             </AccordionTrigger>
 
             <AccordionContent>
-                <div className="flex flex-col space-y-3">
+                <div className="flex flex-col space-y-1">
                     {GENDERS.map((gender) => (
                         <Checkbox
                             key={gender}

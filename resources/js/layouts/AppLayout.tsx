@@ -36,7 +36,9 @@ export default function AppLayout({ children }: PropsWithChildren) {
                     setIsMobileMenuOpen={setIsMobileMenuOpen}
                 />
 
-                {isMobileMenuOpen && <MobileMenu />}
+                {isMobileMenuOpen && (
+                    <MobileMenu setIsMobileMenuOpen={setIsMobileMenuOpen} />
+                )}
 
                 <main className="flex-1">{children}</main>
 

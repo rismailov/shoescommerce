@@ -39,11 +39,11 @@ export const PriceFilter = () => {
             </AccordionTrigger>
 
             <AccordionContent>
-                <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-3">
                     {/* on sale */}
                     <Checkbox
                         id="sale"
-                        label="On sale"
+                        label={t('On sale')}
                         value="0"
                         checked={price.onSale}
                         onCheckedChange={(checked: boolean) =>

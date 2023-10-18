@@ -21,7 +21,7 @@ export const Header = ({
     const { url } = usePage()
 
     return (
-        <header className="h-[60px] w-full z-20 bg-white border-b">
+        <header className="h-[60px] w-full z-30 bg-white border-b">
             <div className="container">
                 <div className="flex items-center justify-between py-3">
                     {/* left side */}
