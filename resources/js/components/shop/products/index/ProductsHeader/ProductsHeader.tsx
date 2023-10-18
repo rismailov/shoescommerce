@@ -1,9 +1,7 @@
-import { IconArrowsDownUp } from '@tabler/icons-react'
 import { Dispatch, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ProductsHeaderTitle } from './ProductsHeaderTitle'
-import { ToggleFilters } from './ToggleFilters'
 import { SortProducts } from './SortProducts'
+import { ToggleFilters } from './ToggleFilters'
 
 export const ProductsHeader = ({
     totalProductsCount,
@@ -18,7 +16,7 @@ export const ProductsHeader = ({
 
     return (
         <section className="sticky top-[-1px] z-10 bg-white flex items-center justify-between h-[60px]">
-            <ProductsHeaderTitle />
+            <h2 className="font-bold text-xl">{`Nike ${t('Shoes')}`}</h2>
 
             <div className="flex items-center space-x-5">
                 <p className="text-muted-foreground lowercase">

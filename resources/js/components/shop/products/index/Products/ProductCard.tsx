@@ -1,4 +1,4 @@
-import { UserProductIndexEntity } from '@/types/entities/product.entity'
+import { ProductIndexEntity } from '@/types/entities/product.entity'
 import { Link } from '@inertiajs/react'
 import { useMediaQuery } from '@uidotdev/usehooks'
 import clsx from 'clsx'
@@ -9,7 +9,7 @@ export const ProductCard = ({
     product,
     showFilters,
 }: {
-    product: UserProductIndexEntity
+    product: ProductIndexEntity
     showFilters: boolean
 }) => {
     const minWidthLG = useMediaQuery(`(min-width: ${screens.lg})`)

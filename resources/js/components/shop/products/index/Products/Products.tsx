@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import axios from '@/lib/axios'
 import useFiltersStore from '@/lib/store/filters.store'
 import { TPaginatedData } from '@/types'
-import { UserProductIndexEntity } from '@/types/entities/product.entity'
+import { ProductIndexEntity } from '@/types/entities/product.entity'
 import { sleep } from '@/utils'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
@@ -45,7 +45,7 @@ export const Products = ({
 
             const resp = await axios.get<
                 any,
-                TPaginatedData<UserProductIndexEntity[]>
+                TPaginatedData<ProductIndexEntity[]>
             >(route('products.data'), {
                 params: { ...filters, page: pageParam },
             })

@@ -17,7 +17,6 @@ class Product extends Model
         'gender',
         'name',
         'slug',
-        'description',
         'price',
         'is_discounted',
         'discount_percent',

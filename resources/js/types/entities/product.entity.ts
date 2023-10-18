@@ -2,7 +2,6 @@ interface ProductEntityBase {
     id: number
     nanoid: string
     name: string
-    description: string
     gender: string
     price: {
         initial: string
@@ -14,12 +13,12 @@ interface ProductEntityBase {
 /**
  * Slightly modified interfaces for each route action.
  */
-export interface UserProductIndexEntity extends ProductEntityBase {
+export interface ProductIndexEntity extends ProductEntityBase {
     reviewsCount: number
     imgUrl: string
 }
 
-export interface UserProductShowEntity extends ProductEntityBase {
+export interface ProductShowEntity extends ProductEntityBase {
     availableColours: {
         nanoid: string
         image: string

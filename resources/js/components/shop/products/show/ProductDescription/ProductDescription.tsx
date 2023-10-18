@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { TPaginatedData } from '@/types'
-import { UserProductShowEntity } from '@/types/entities/product.entity'
+import { ProductShowEntity } from '@/types/entities/product.entity'
 import { ReviewEntity } from '@/types/entities/review.entity'
 import clsx from 'clsx'
 import { useState } from 'react'
@@ -15,7 +15,7 @@ export const ProductDescription = ({
     product,
     reviews,
 }: {
-    product: UserProductShowEntity
+    product: ProductShowEntity
     reviews: TPaginatedData<ReviewEntity[]>
 }) => {
     const { t } = useTranslation()

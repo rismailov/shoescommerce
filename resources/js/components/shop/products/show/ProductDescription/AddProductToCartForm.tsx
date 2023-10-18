@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import useCartStore from '@/lib/store/cart.store'
-import { UserProductShowEntity } from '@/types/entities/product.entity'
+import { ProductShowEntity } from '@/types/entities/product.entity'
 import { Link } from '@inertiajs/react'
 import clsx from 'clsx'
 import { useState } from 'react'
@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 export const AddProductToCartForm = ({
     product,
 }: {
-    product: UserProductShowEntity
+    product: ProductShowEntity
 }) => {
     const { t } = useTranslation()
 

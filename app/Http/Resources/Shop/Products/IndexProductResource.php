@@ -22,10 +22,9 @@ class IndexProductResource extends JsonResource
             'id'           => $this->id,
             'nanoid'       => $this->nanoid,
             'name'         => $this->name,
-            'description'  => $this->description,
             'reviewsCount' => $this->reviews_count,
             'avgStars'     => $this->reviews->avg('stars'),
-            'imgUrl'          => $this->images->where('order', 0)->first()->url,
+            'imgUrl'       => $this->images->where('order', 0)->first()->url,
             'price'        => [
                 'initial'    => $this->price,
                 'discounted' => $this->discount_price,

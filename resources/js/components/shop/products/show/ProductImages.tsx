@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { UserProductShowEntity } from '@/types/entities/product.entity'
+import { ProductShowEntity } from '@/types/entities/product.entity'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
@@ -7,11 +7,7 @@ import { Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'
 
-export const ProductImages = ({
-    product,
-}: {
-    product: UserProductShowEntity
-}) => {
+export const ProductImages = ({ product }: { product: ProductShowEntity }) => {
     const mainSwiperRef = useRef<SwiperCore>()
     const thumbsSwiperRef = useRef<SwiperCore>()
 

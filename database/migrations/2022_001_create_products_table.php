@@ -17,7 +17,6 @@ return new class() extends Migration {
             $table->string('nanoid')->unique();
             $table->string('name');
             $table->string('slug');
-            $table->text('description');
             $table->string('gender');
             $table->unsignedInteger('price');
             $table->boolean('is_discounted')->default(false);
