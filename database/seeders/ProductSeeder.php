@@ -485,6 +485,6 @@ class ProductSeeder extends Seeder
             }
         }
 
-        echo 'Products successfully seeded!';
+        echo PHP_EOL.'Products successfully seeded!'.PHP_EOL;
     }
 }

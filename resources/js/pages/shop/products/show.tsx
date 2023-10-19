@@ -1,10 +1,10 @@
-import 'swiper/css'
 import { ProductDescription } from '@/components/shop/products/show/ProductDescription'
 import { ProductImages } from '@/components/shop/products/show/ProductImages'
 import { TPaginatedData } from '@/types'
 import { ProductShowEntity } from '@/types/entities/product.entity'
 import { ReviewEntity } from '@/types/entities/review.entity'
 import { Head, usePage } from '@inertiajs/react'
+import 'swiper/css'
 
 export default function ShowProduct() {
     const { product, reviews } = usePage<{

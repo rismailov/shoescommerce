@@ -1,4 +1,4 @@
-import tailwindConfig from './../../../tailwind.config'
+import tailwindConfig from 'tailwind.config.js'
 import resolveConfig from 'tailwindcss/resolveConfig'
 
 export default resolveConfig(tailwindConfig as any)
