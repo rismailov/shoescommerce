@@ -4,10 +4,6 @@ import { useMediaQuery } from '@uidotdev/usehooks'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
 import { screens } from 'tailwindcss/defaultTheme'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import 'react-lazy-load-image-component/src/effects/blur.css'
-
-const MotionImg = motion(LazyLoadImage)
 
 export const ProductCard = ({
     product,
@@ -24,12 +20,12 @@ export const ProductCard = ({
             className="w-full inline-flex flex-col"
         >
             {/* Image */}
-            <MotionImg
+            <motion.img
                 layout
                 src={product.imgUrl}
                 alt={product.name}
                 className="w-full rounded-xl object-center object-cover"
-                effect="blur"
+                loading="lazy"
                 style={{
                     height: minWidthLG && !showFilters ? 450 : 350,
                 }}
