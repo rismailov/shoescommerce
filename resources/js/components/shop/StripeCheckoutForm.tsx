@@ -17,6 +17,7 @@ const CheckoutForm = () => {
 
     const [errorMessage, setErrorMessage] = useState(null)
 
+    // @ts-ignore
     const handleSubmit = async (event) => {
         event.preventDefault()
 
@@ -28,6 +29,7 @@ const CheckoutForm = () => {
         const { error: submitError } = await elements.submit()
         if (submitError) {
             // Show error to your customer
+            // @ts-ignore
             setErrorMessage(submitError.message)
             return
         }
@@ -39,6 +41,7 @@ const CheckoutForm = () => {
 
         const { client_secret: clientSecret } = await res.json()
 
+        // @ts-ignore
         const { error } = await stripe.confirmPayment({
             //`Elements` instance that was used to create the Payment Element
             elements,
@@ -52,6 +55,7 @@ const CheckoutForm = () => {
             // This point will only be reached if there is an immediate error when
             // confirming the payment. Show error to your customer (for example, payment
             // details incomplete)
+            // @ts-ignore
             setErrorMessage(error.message)
         } else {
             // Your customer will be redirected to your `return_url`. For some payment
@@ -90,6 +94,7 @@ const options = {
 
 export const StripeCheckoutForm = () => {
     return (
+        // @ts-ignore
         <Elements stripe={stripePromise} options={options}>
             <CheckoutForm />
         </Elements>
