@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * This is an example "deploy.php" file that you should create in the project root
+ * and update the file according to your needs in order to deploy this website.
+ *
+ * More info: https://deployer.org/
+ */
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -13,12 +20,9 @@ add('shared_dirs', []);
 add('writable_dirs', []);
 
 // Hosts
-host('137.184.42.63')
+host('__YOUR HOSTNAME__')
     ->set('remote_user', 'dev')
-    ->set('deploy_path', '/var/www/shoescommerce')
-    ->setLabels([
-        'env' => 'production',
-    ]);
+    ->set('deploy_path', '__PATH TO PROJECT IN VPS__');
 
 // Tasks
 task('build', function () {
@@ -36,7 +40,7 @@ task('deploy', [
     'artisan:optimize:clear',
     // 'artisan:migrate',
     'deploy:publish',
-])->select('env=production');
+]);
 
 // Hooks
 after('artisan:optimize:clear', 'build');
