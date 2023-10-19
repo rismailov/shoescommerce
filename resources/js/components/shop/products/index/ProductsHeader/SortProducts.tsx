@@ -8,7 +8,7 @@ import useFiltersStore, { TSortValue } from '@/lib/store/filters.store'
 import { IconArrowsDownUp } from '@tabler/icons-react'
 import { useTranslation } from 'react-i18next'
 
-const sortOptions: { value: TSortValue; label: string }[] = [
+export const sortOptions: { value: TSortValue; label: string }[] = [
     { value: 'date-desc', label: 'Date: New to old' },
     { value: 'date-asc', label: 'Date: Old to new' },
     { value: 'price-desc', label: 'Price: High to low' },
@@ -24,7 +24,7 @@ export const SortProducts = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <button className="flex items-center space-x-1 hover:text-muted-foreground">
+                <button className="hidden lg:flex items-center space-x-1 hover:text-muted-foreground">
                     <span>{t('Sort By')}</span>
 
                     <IconArrowsDownUp size={15} />
