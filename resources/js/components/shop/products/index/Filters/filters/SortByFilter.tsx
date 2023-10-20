@@ -16,7 +16,7 @@ export const SortByFilter = () => {
     const setSort = useFiltersStore((s) => s.setSort)
 
     return (
-        <AccordionItem value="sort">
+        <AccordionItem value="sort" className="lg:hidden">
             <AccordionTrigger className="text-base pt-0">
                 <div className="flex items-center space-x-2">
                     <span>{t('Sort By')}</span>
